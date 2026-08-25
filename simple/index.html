@@ -11,13 +11,13 @@
 <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600&f[]=satoshi@400,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/site.css">
 </head>
-<body>
+<body class="is-stage">
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="head">
   <a class="head__name" href="index.html">Uzoma Dunkwu</a>
   <nav class="head__nav" aria-label="Primary">
-    <a href="index.html#about">About</a>
+    <a href="about.html">About</a>
     <div class="drop">
       <span class="drop__label">Portfolio</span>
       <div class="drop__panel">
@@ -34,7 +34,7 @@
       </div>
     </div>
     <a href="https://uzomadunkwu.gumroad.com/l/ethniccharacterdesign" target="_blank" rel="noopener">Products</a>
-    <a href="index.html#contact">Contact</a>
+    <a href="about.html#contact">Contact</a>
   </nav>
   <input class="nav-toggle" type="checkbox" id="nav-toggle">
   <label class="nav-burger" for="nav-toggle" aria-label="Menu"><span></span><span></span></label>
@@ -42,17 +42,27 @@
 
 <main id="main">
 
-<section class="landing">
-  <img src="assets/eow/eow-15-dora.png" alt="Eyes of Wakanda: head-and-shoulders portraits of Shakoo, B'Risa, Koi'Fay, Y'Fett and Le'illa, each with the geometric shape that governs the design drawn beside it." fetchpriority="high">
+<section class="stage" aria-label="Artwork slider — forty-five sheets, controlled">
+  <div class="stage__frame">
+    <img class="stage__img" src="assets/eow/eow-15-dora.png" alt="" fetchpriority="high">
+  </div>
+  <div class="stage__caption">
+    <span class="stage__no">39 / 45</span>
+    <span class="stage__title">Shape language — the Lion team</span>
+    <span class="stage__project">Eyes of Wakanda</span>
+  </div>
+  <div class="stage__controls">
+    <button class="stage__btn" type="button" data-prev aria-label="Previous sheet">
+      <svg viewBox="0 0 24 24"><polyline points="14,5 7,12 14,19"/></svg>
+    </button>
+    <input class="stage__range" type="range" min="0" max="44" value="38" aria-label="Scrub through the sheets">
+    <button class="stage__btn" type="button" data-next aria-label="Next sheet">
+      <svg viewBox="0 0 24 24"><polyline points="10,5 17,12 10,19"/></svg>
+    </button>
+  </div>
 </section>
 
-<section class="intro">
-  <h1 class="intro__title">Uzoma Dunkwu</h1>
-  <p class="intro__line">Emmy &amp; CAA Award-winning Visual Development Artist and Writer/Director in Animation.</p>
-  <p class="facts"><span>Emmy 2026</span><span>CAA Award 2025</span><span>Lagos, Nigeria</span></p>
-</section>
-
-<section class="wall" id="work" aria-label="All work — forty-five sheets. Open any at full size.">
+<div class="slides" hidden aria-hidden="true">
   <button class="wall__tile" type="button" data-full="assets/eow/eow-01-lineup.png" data-title="The sheet" data-no="01">
     <img src="assets/thumbs/eow/eow-01-lineup.jpg" alt="Eyes of Wakanda: five Lion team warriors in gold lion masks and layered violet wraps, standing in a row." loading="lazy" decoding="async">
     <span class="wall__cap"><span class="wall__cap-title">The sheet</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
@@ -233,29 +243,8 @@
     <img src="assets/thumbs/eow/eow-19-crowd-03.jpg" alt="Eyes of Wakanda: four merchants in deep blue and plum robes, one veiled." loading="lazy" decoding="async">
     <span class="wall__cap"><span class="wall__cap-title">Wakandan caravan — merchant tribe</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
   </button>
-</section>
-
-<section class="text" id="about">
-  <h2>About</h2>
-  <p>I am a "self-taught" Nigerian Writer/Director and Visual Development Artist in Animation with over 10 years of experience. My works portraying authentic representation of African characters have gained local and international acclaim.</p>
-  <p>Some of my accolades include a 2026 Primetime Creative Arts Emmy: Outstanding Individual Achievement In Animation, Character Design for <em>Eyes of Wakanda</em> and a 2025 Concept Art Association Award for Animated Series Character Concept – Noni, <em>Eyes of Wakanda</em> at LightBox Expo.</p>
-  <p>The notable mainstream projects in my visual development portfolio are Marvel Animation's <em>Eyes of Wakanda</em> and Lion Forge's <em>Iyanu</em>. Other past studio clients include Netflix Animation, Disney, Laika, Triggerfish, Psyop and Stoopid Buddy Stoodios.</p>
-  <p>In the course of my career, I've trained and mentored about 150 artists of various nationalities around the world. Passing on knowledge from my years of expertise is paramount to me. I hope to impact 1 million artists by 2036.</p>
-  <p>In 2015, I founded Scroll Entertainment—an animation studio based in Lagos, Nigeria. I am currently directing my debut animated short with an Academy Award Winning Producer. The film is inspired by the daily struggle of an artist to create or conform.</p>
-  <p>I love to draw and I do so everyday. So much so that I see my drawing skills atrophy after two weeks of hiatus. Some of the artworks I create are shared on my social media occasionally.</p>
-</section>
+</div>
 </main>
-
-<footer class="foot" id="contact">
-  <a class="foot__mail" href="mailto:hello@uzomadunkwu.com">hello@uzomadunkwu.com</a>
-  <div class="foot__links">
-    <a href="https://www.instagram.com/uzomadunkwu" target="_blank" rel="noopener">Instagram</a>
-    <a href="https://www.linkedin.com/in/uzomadunkwu/" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://www.youtube.com/channel/UCU9rpgl7qDSV2p3UXm0jS4g" target="_blank" rel="noopener">YouTube</a>
-    <a href="https://x.com/UzomaDunkwu" target="_blank" rel="noopener">X</a>
-  </div>
-  <p class="foot__clients">Marvel Animation · Lion Forge · Netflix Animation · Disney · Laika · Triggerfish · Psyop · Stoopid Buddy Stoodios · Scroll Entertainment</p>
-</footer>
 
 <script src="js/site.js"></script>
 </body>

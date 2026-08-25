@@ -24,13 +24,6 @@
   const tiles = Array.from(document.querySelectorAll("[data-full]"));
   if (!tiles.length) return;
 
-  /* the mielgo list shows full-resolution sheets; the markup ships the
-     small thumbs so the page paints fast, then swaps them up */
-  tiles.forEach((t) => {
-    const im = t.querySelector("img");
-    if (im && t.dataset.full) im.src = t.dataset.full;
-  });
-
   const lb = document.createElement("div");
   lb.className = "lb";
   lb.setAttribute("role", "dialog");
@@ -101,4 +94,74 @@
     if (e.key === "ArrowLeft") show(i - 1);
     if (e.key === "ArrowRight") show(i + 1);
   });
+
+  /* ============================== HOME STAGE ============================== */
+  /* The home page is one controlled slider: the art fills the viewport,
+     arrows and the range scrub through the set, a swipe works on touch,
+     and a tap opens the sheet full size. */
+  const stage = document.querySelector(".stage");
+  if (stage) {
+    const img = stage.querySelector(".stage__img");
+    const noEl = stage.querySelector(".stage__no");
+    const titleEl = stage.querySelector(".stage__title");
+    const projEl = stage.querySelector(".stage__project");
+    const range = stage.querySelector(".stage__range");
+    let cur = -1;
+    let pressX = null;
+
+    const go = (n, dir = 0) => {
+      cur = (n + tiles.length) % tiles.length;
+      const s = tiles[cur];
+      const title = s.querySelector(".wall__cap-title")?.textContent || s.dataset.title || "";
+      const proj = s.querySelector(".wall__cap-project")?.textContent || "Work";
+      noEl.textContent = `${s.dataset.no || String(cur + 1).padStart(2, "0")} / ${tiles.length}`;
+      titleEl.textContent = title;
+      projEl.textContent = proj;
+      range.value = String(cur);
+
+      img.classList.remove("is-in");
+      const swap = () => {
+        /* the reveal is load-driven with a timer fallback, so the sheet
+           can never be left blank by a missed event */
+        const reveal = () => img.classList.add("is-in");
+        img.onload = reveal;
+        img.onerror = reveal;
+        setTimeout(reveal, 900);
+        img.src = s.dataset.full;
+        img.alt = (s.querySelector("img") || {}).alt || title;
+      };
+      if (dir) setTimeout(swap, 300);
+      else swap();
+
+      /* warm the neighbours so stepping never waits */
+      [cur - 1, cur + 1].forEach((k) => {
+        const nb = tiles[(k + tiles.length) % tiles.length];
+        if (nb && nb.dataset.full) { const pre = new Image(); pre.src = nb.dataset.full; }
+      });
+    };
+
+    /* open on the sheet the client asked for, then the set follows */
+    const start = Math.max(0, tiles.findIndex((s) => (s.dataset.full || "").includes("eow-15-dora")));
+    go(start);
+
+    stage.querySelector("[data-next]").addEventListener("click", () => go(cur + 1, 1));
+    stage.querySelector("[data-prev]").addEventListener("click", () => go(cur - 1, -1));
+    range.addEventListener("input", () => go(+range.value));
+
+    document.addEventListener("keydown", (e) => {
+      if (lb.classList.contains("is-open")) return;
+      if (e.key === "ArrowRight") go(cur + 1, 1);
+      if (e.key === "ArrowLeft") go(cur - 1, -1);
+    });
+
+    /* swipe to step, tap to open full size */
+    img.addEventListener("pointerdown", (e) => { pressX = e.clientX; });
+    img.addEventListener("pointerup", (e) => {
+      if (pressX === null) return;
+      const dx = e.clientX - pressX;
+      pressX = null;
+      if (Math.abs(dx) > 48) go(cur + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1);
+      else open(cur);
+    });
+  }
 })();
