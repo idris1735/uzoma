@@ -1,0 +1,241 @@
+/* ============================================================
+   uzomadunkwu.com — simple build
+   One stylesheet. No framework, no motion library, no JS.
+
+   The artwork is drawn on white paper. On a dark page every
+   sheet becomes a white slab that needs a frame to survive; on
+   a white page it just sits there. So the page is white.
+   ============================================================ */
+
+:root {
+  --paper: #ffffff;
+  --ink: #111111;
+  --dim: #8a8a8a;
+  --rule: #e6e6e6;
+
+  --gutter: clamp(1.25rem, 5vw, 4rem);
+  --gap: clamp(3rem, 9vw, 8rem);
+
+  --font-display: "Clash Display", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Satoshi", "Helvetica Neue", Arial, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(0.9375rem, 0.9rem + 0.2vw, 1.0625rem);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, video { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+::selection { background: var(--ink); color: var(--paper); }
+
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+.skip {
+  position: absolute;
+  left: var(--gutter);
+  top: -4rem;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 0.75rem 1.25rem;
+  z-index: 10;
+  transition: top 0.2s;
+}
+.skip:focus { top: 1rem; }
+
+/* ---------------------------------------------------------- header ---- */
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  padding: var(--gutter) var(--gutter) 0;
+}
+
+.head__name {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.head__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  font-size: 0.875rem;
+}
+
+.head__nav a { color: var(--dim); }
+.head__nav a:hover,
+.head__nav a[aria-current] { color: var(--ink); }
+
+/* ---------------------------------------------------------- intro ----- */
+
+.intro {
+  padding: var(--gap) var(--gutter) 0;
+  display: grid;
+  gap: 1.25rem;
+  max-width: 60rem;
+}
+
+.intro__title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.75rem, 4.5vw, 3.25rem);
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+}
+
+.intro__line { max-width: 46ch; color: var(--dim); }
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 2rem;
+  font-size: 0.875rem;
+  color: var(--dim);
+}
+
+/* ---------------------------------------------------------- images ---- */
+
+.run {
+  display: grid;
+  justify-items: center;
+  gap: var(--gap);
+  padding: var(--gap) var(--gutter);
+}
+
+/* Portrait sheets would otherwise run past the fold, so every figure is
+   capped by height as well as width. --r is the artwork's own ratio. */
+.plate {
+  width: 100%;
+  max-width: min(72rem, calc(86vh * var(--r, 1.6)));
+}
+
+.plate img { width: 100%; }
+
+.plate figcaption {
+  margin-top: 0.75rem;
+  font-size: 0.8125rem;
+  color: var(--dim);
+}
+
+/* ---------------------------------------------------------- index ----- */
+
+.work {
+  display: grid;
+  gap: var(--gap);
+  padding: var(--gap) var(--gutter);
+  justify-items: center;
+}
+
+.work__item { width: 100%; max-width: min(72rem, calc(86vh * var(--r, 1.6))); }
+
+.work__item img { width: 100%; }
+
+.work__label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1.5rem;
+  margin-top: 0.75rem;
+}
+
+.work__title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1rem, 1.8vw, 1.375rem);
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.work__item:hover .work__title { text-decoration: underline; text-underline-offset: 0.2em; }
+
+.work__meta { font-size: 0.8125rem; color: var(--dim); }
+
+/* ---------------------------------------------------------- text ------ */
+
+.text {
+  padding: var(--gap) var(--gutter);
+  display: grid;
+  gap: 1.25rem;
+  max-width: 42rem;
+}
+
+.text h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+}
+
+.text p em { font-style: italic; }
+
+/* ---------------------------------------------------------- films ----- */
+
+.film { padding: var(--gap) var(--gutter) 0; display: grid; gap: 1.5rem; }
+
+.film__title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.25rem, 3vw, 1.875rem);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.film video { width: 100%; max-width: 72rem; background: #000; }
+
+.frames {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+  gap: 1rem;
+  max-width: 72rem;
+}
+
+/* ---------------------------------------------------------- footer ---- */
+
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  margin-top: var(--gap);
+  padding: 2rem var(--gutter);
+  border-top: 1px solid var(--rule);
+  font-size: 0.875rem;
+}
+
+.foot__mail {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1rem, 2.2vw, 1.375rem);
+  text-transform: uppercase;
+}
+
+.foot__mail:hover { text-decoration: underline; text-underline-offset: 0.15em; }
+
+.foot__links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+.foot__links a { color: var(--dim); }
+.foot__links a:hover { color: var(--ink); }
+
+.foot__clients { width: 100%; color: var(--dim); font-size: 0.8125rem; }
