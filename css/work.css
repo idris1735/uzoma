@@ -1,0 +1,511 @@
+/* ============================================================
+   work.css — case studies, storyboards, and the image viewer.
+   ============================================================ */
+
+/* ==============================================================
+   CASE STUDY HEADER
+   ============================================================== */
+
+.case {
+  position: relative;
+  padding: calc(var(--nav-h) + var(--s-8)) var(--gutter) var(--s-8);
+  background: var(--ink);
+  overflow: clip;
+  display: grid;
+  gap: var(--s-6);
+}
+
+.case__lamp {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  width: min(130vw, 1900px);
+  aspect-ratio: 1.7;
+  background: radial-gradient(closest-side,
+    color-mix(in srgb, var(--vibranium) 52%, transparent),
+    transparent 72%);
+  filter: blur(50px);
+  pointer-events: none;
+}
+
+.case__head {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: var(--s-4);
+  max-width: 1500px;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.case__title {
+  font-size: clamp(3rem, 11vw, 11rem);
+  line-height: 0.82;
+  color: var(--bone);
+}
+
+.case__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-4) var(--s-7);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--edge);
+}
+
+.case__fact { display: grid; gap: var(--s-1); }
+.case__fact dt { font-family: var(--font-mono); font-size: var(--fs-anno); letter-spacing: 0.18em; text-transform: uppercase; color: color-mix(in srgb, var(--construct) 65%, var(--ink)); }
+.case__fact dd { font-size: var(--fs-base); color: var(--bone); }
+
+.case__intro { max-width: 58ch; color: color-mix(in srgb, var(--bone) 76%, var(--ink)); }
+
+.case__sheet {
+  position: relative;
+  z-index: 2;
+  max-width: 1500px;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.case__sheet img { width: 100%; height: auto; }
+
+/* ==============================================================
+   PROCESS SCRUBBER — cross-fades four passes of one artwork
+   ============================================================== */
+
+.scrub {
+  padding: var(--s-10) var(--gutter);
+  background: var(--ink);
+  display: grid;
+  gap: var(--s-6);
+  justify-items: center;
+}
+
+.scrub__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-4);
+  width: min(100%, 1300px);
+}
+
+.scrub__head .display { font-size: var(--fs-large); }
+
+/* No pointer to drag with on touch; there the scrubber is driven by
+   scroll position instead (see work.js). */
+@media (hover: none) {
+  .scrub__hint { display: none; }
+}
+
+.scrub__stage {
+  position: relative;
+  width: min(100%, 1300px);
+  aspect-ratio: var(--stage-ratio, 2560 / 1348);
+  background: var(--paper);
+  box-shadow: 0 0 0 1px var(--edge), 0 2rem 5rem -2rem rgba(0, 0, 0, 0.85);
+  overflow: clip;
+  touch-action: pan-y;
+}
+
+.scrub__pass {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* stacking order: sketch at the bottom, render on top */
+.scrub__pass--1 { z-index: 1; }
+.scrub__pass--2 { z-index: 2; }
+.scrub__pass--3 { z-index: 3; }
+.scrub__pass--4 { z-index: 4; }
+
+.scrub__handle {
+  position: absolute;
+  z-index: 6;
+  top: 0;
+  bottom: 0;
+  /* clamped so the grip is never half off the frame at either end */
+  left: clamp(1.75rem, var(--pos, 50%), calc(100% - 1.75rem));
+  width: 1px;
+  background: var(--construct);
+  pointer-events: none;
+}
+
+.scrub__grip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid var(--construct);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--ink) 55%, transparent);
+  backdrop-filter: blur(6px);
+  display: grid;
+  place-items: center;
+  color: var(--construct);
+}
+
+.scrub__grip svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-width: 1.4; }
+
+/* The actual control. Invisible, but a real range input, so it works
+   from the keyboard and announces correctly. */
+.scrub__input {
+  position: absolute;
+  z-index: 7;
+  inset: auto 0 0 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: ew-resize;
+}
+
+.scrub__input:focus-visible + .scrub__handle .scrub__grip,
+.scrub__stage:focus-within .scrub__grip {
+  outline: 2px solid var(--construct);
+  outline-offset: 3px;
+}
+
+.scrub__pass { transition: none; }
+
+.scrub__stages {
+  display: flex;
+  justify-content: space-between;
+  width: min(100%, 1300px);
+  list-style: none;
+}
+
+.scrub__stage-name {
+  font-family: var(--font-mono);
+  font-size: var(--fs-anno);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--bone) 32%, var(--ink));
+  transition: color 0.3s var(--ease-out);
+}
+
+.scrub__stage-name.is-on { color: var(--construct); }
+
+/* ==============================================================
+   GALLERY GRID
+   ============================================================== */
+
+.plates {
+  padding: var(--s-9) var(--gutter) var(--s-11);
+  background: var(--ink);
+}
+
+.plates__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-5);
+  max-width: 1600px;
+  margin: 0 auto var(--s-7);
+}
+
+.plates__head .display { font-size: var(--fs-large); }
+
+.plates__grid {
+  max-width: 1600px;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(var(--plate-cols, 1), minmax(0, 1fr));
+  align-items: start;
+  gap: var(--s-8) var(--s-6);
+}
+
+.plate {
+  display: grid;
+  gap: var(--s-3);
+  align-content: start;
+}
+
+/* artwork wider than 1.75:1 spans the full grid */
+.plate--wide { grid-column: 1 / -1; }
+
+.plate__btn {
+  display: block;
+  position: relative;
+  width: 100%;
+  padding: 0;
+  background: var(--paper);
+  box-shadow: 0 0 0 1px var(--edge);
+  overflow: clip;
+  transition: box-shadow 0.5s var(--ease-out);
+}
+
+.plate__btn:hover { box-shadow: 0 0 0 1px color-mix(in srgb, var(--construct) 55%, transparent); }
+
+.plate__btn img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.9s var(--ease-out), filter 0.6s var(--ease-out);
+}
+
+.plate__btn:hover img { transform: scale(1.03); }
+
+.plate__cap {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-4);
+}
+
+.plate__no { color: color-mix(in srgb, var(--construct) 70%, var(--ink)); }
+.plate__title { color: color-mix(in srgb, var(--bone) 62%, var(--ink)); }
+
+/* ==============================================================
+   IMAGE VIEWER
+   ============================================================== */
+
+.viewer {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-lightbox);
+  display: grid;
+  /* minmax(0,...) or the row will not shrink below the image's own height */
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  background: color-mix(in srgb, var(--ink) 96%, transparent);
+  backdrop-filter: blur(20px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s var(--ease-out), visibility 0.4s;
+}
+
+.viewer.is-open { opacity: 1; visibility: visible; }
+
+.viewer__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding: var(--s-4) var(--gutter);
+  border-bottom: 1px solid var(--edge);
+}
+
+.viewer__stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Fitted to the stage box rather than relying on max-height: object-fit
+   on a filled box cannot overflow, whatever the image's aspect ratio. */
+.viewer__img {
+  position: absolute;
+  inset: var(--s-5) var(--gutter);
+  width: calc(100% - var(--gutter) * 2);
+  height: calc(100% - var(--s-5) * 2);
+  object-fit: contain;
+  object-position: center;
+}
+
+.viewer__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding: var(--s-4) var(--gutter);
+  border-top: 1px solid var(--edge);
+}
+
+.viewer__nav { display: flex; gap: var(--s-3); }
+
+.viewer__btn {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--edge);
+  color: var(--bone);
+  transition: border-color 0.3s var(--ease-out), color 0.3s var(--ease-out);
+}
+
+.viewer__btn:hover { border-color: var(--construct); color: var(--construct); }
+.viewer__btn svg { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 1.5; }
+
+.viewer__count { font-variant-numeric: tabular-nums; }
+
+/* ==============================================================
+   FILMSTRIP
+   ============================================================== */
+
+.film {
+  position: relative;
+  padding-block: var(--s-9);
+  background: var(--ink);
+  overflow: clip;
+}
+
+.film--alt { background: var(--ash); }
+
+.film__head {
+  display: grid;
+  gap: var(--s-3);
+  padding-inline: var(--gutter);
+  margin-bottom: var(--s-6);
+  max-width: 1600px;
+  margin-inline: auto;
+}
+
+.film__title {
+  font-size: clamp(2.25rem, 7vw, 6rem);
+  letter-spacing: -0.008em;
+  color: var(--bone);
+}
+.film__meta { display: flex; flex-wrap: wrap; gap: var(--s-3) var(--s-6); }
+
+.film__strip {
+  display: flex;
+  gap: var(--s-3);
+  padding-inline: var(--gutter);
+  will-change: transform;
+}
+
+.frame {
+  position: relative;
+  flex: 0 0 auto;
+  width: clamp(15rem, 30vw, 26rem);
+  aspect-ratio: var(--frame-ratio, 16 / 9);
+  background: var(--paper);
+  box-shadow: 0 0 0 1px var(--edge);
+  overflow: clip;
+}
+
+.frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+.frame__no {
+  position: absolute;
+  z-index: 2;
+  left: var(--s-3);
+  top: var(--s-3);
+  padding: 0.15em 0.45em;
+  background: var(--ink);
+  color: var(--construct);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.16em;
+}
+
+/* the animatic plays over the strip when you ask for it */
+.film__player {
+  position: relative;
+  max-width: 1600px;
+  margin: var(--s-7) auto 0;
+  padding-inline: var(--gutter);
+  display: grid;
+  gap: var(--s-4);
+  justify-items: start;
+}
+
+.film__video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--ink);
+  box-shadow: 0 0 0 1px var(--edge), 0 2rem 5rem -2rem rgba(0, 0, 0, 0.85);
+}
+
+.film__play {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  border: 1px solid var(--construct);
+  padding: var(--s-3) var(--s-5);
+  color: var(--construct);
+  transition: background 0.35s var(--ease-out), color 0.35s var(--ease-out);
+}
+
+.film__play:hover { background: var(--construct); color: var(--ink); }
+.film__play svg { width: 0.875rem; height: 0.875rem; fill: currentColor; }
+
+/* ==============================================================
+   NEXT PROJECT
+   ============================================================== */
+
+.next-work {
+  position: relative;
+  display: grid;
+  gap: var(--s-4);
+  padding: var(--s-10) var(--gutter);
+  background: var(--ink);
+  border-top: 1px solid var(--edge);
+  overflow: clip;
+}
+
+.next-work__link { display: grid; gap: var(--s-3); }
+
+.next-work__title {
+  font-size: clamp(2.5rem, 9vw, 8rem);
+  line-height: 0.85;
+  color: var(--bone);
+  transition: color 0.4s var(--ease-out);
+}
+
+.next-work__link:hover .next-work__title { color: var(--vibranium); }
+
+.next-work__peek {
+  position: absolute;
+  right: var(--gutter);
+  top: 50%;
+  translate: 0 -50%;
+  width: min(34vw, 26rem);
+  opacity: 0;
+  transition: opacity 0.5s var(--ease-out), transform 0.7s var(--ease-out);
+  transform: translateX(2rem);
+  pointer-events: none;
+  box-shadow: 0 0 0 1px var(--edge);
+}
+
+.next-work__link:hover ~ .next-work__peek,
+.next-work__link:focus-visible ~ .next-work__peek { opacity: 0.55; transform: translateX(0); }
+
+/* ==============================================================
+   RESPONSIVE
+   ============================================================== */
+
+@media (min-width: 901px) {
+  .plates__grid { --plate-cols: 2; }
+}
+
+@media (max-width: 900px) {
+  .case { padding-block: calc(var(--nav-h) + var(--s-7)) var(--s-6); gap: var(--s-5); }
+  .scrub { padding-block: var(--s-8); gap: var(--s-5); }
+  .plates { padding-block: var(--s-7) var(--s-9); }
+  .plates__head { flex-direction: column; align-items: flex-start; gap: var(--s-2); margin-bottom: var(--s-5); }
+  .film { padding-block: var(--s-7); }
+  .next-work { padding-block: var(--s-8); }
+  .plate--wide { grid-column: auto; }
+  .next-work__peek { display: none; }
+  /* The actual control. Invisible, but a real range input, so it works
+   from the keyboard and announces correctly. */
+.scrub__input {
+  position: absolute;
+  z-index: 7;
+  inset: auto 0 0 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: ew-resize;
+}
+
+.scrub__input:focus-visible + .scrub__handle .scrub__grip,
+.scrub__stage:focus-within .scrub__grip {
+  outline: 2px solid var(--construct);
+  outline-offset: 3px;
+}
+
+.scrub__pass { transition: none; }
+
+.scrub__stages { flex-wrap: wrap; gap: var(--s-3); justify-content: flex-start; }
+  .viewer__foot { flex-direction: column; align-items: flex-start; gap: var(--s-3); }
+}

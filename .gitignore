@@ -1,0 +1,9 @@
+﻿# --- raw source materials (too large for git; processed copies live in /assets) ---
+/Storyboards/
+/Uzoma Website Images/
+
+# --- junk ---
+__pycache__/
+*.pyc
+tmp_*.jpg
+_probe_a.jpg
