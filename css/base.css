@@ -399,15 +399,28 @@ button {
 
 .footer__email:hover { color: var(--vibranium); }
 
+/* the name runs as a ticker, cropped by the bottom edge */
 .footer__name {
+  overflow: hidden;
   font-size: clamp(4rem, 24vw, 30rem);
   line-height: 0.78;
   transform: translateY(16%);
-  white-space: nowrap;
-  text-align: center;
   color: color-mix(in srgb, var(--bone) 12%, var(--ink));
   user-select: none;
   pointer-events: none;
+}
+
+.footer__name-track {
+  display: flex;
+  width: max-content;
+  animation: name-ticker 46s linear infinite;
+  will-change: transform;
+}
+
+.footer__name-track span { padding-right: 0.35em; }
+
+@keyframes name-ticker {
+  to { transform: translateX(-50%); }
 }
 
 @media (max-width: 900px) {

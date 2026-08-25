@@ -304,6 +304,12 @@ window.UZ = (() => {
       if (!plates.length) return;
       opener = from || null;
       show(n);
+      /* the sheet settles in from a beat behind */
+      if (MOTION) {
+        gsap.fromTo(img,
+          { scale: 0.96, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.5, ease: "expo.out", overwrite: "auto" });
+      }
       el.classList.add("is-open");
       document.documentElement.classList.add("is-locked");
       if (lenis) lenis.stop();
