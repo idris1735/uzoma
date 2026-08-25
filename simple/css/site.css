@@ -73,16 +73,58 @@ ul { list-style: none; }
   text-transform: uppercase;
 }
 
+.head {
+  position: relative;
+}
+
 .head__nav {
   display: flex;
   flex-wrap: wrap;
+  align-items: baseline;
   gap: 0.5rem 1.5rem;
   font-size: 0.875rem;
 }
 
-.head__nav a { color: var(--dim); }
-.head__nav a:hover,
+.head__nav > a,
+.drop__label { color: var(--dim); }
+.head__nav > a:hover,
 .head__nav a[aria-current] { color: var(--ink); }
+
+/* dropdowns: hover or focus opens the panel */
+.drop { position: relative; }
+.drop__label { cursor: default; }
+
+.drop__panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: grid;
+  gap: 0.5rem;
+  min-width: 11rem;
+  padding: 0.9rem 1.1rem;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.25rem);
+  transition: opacity 0.2s ease, visibility 0.2s, transform 0.2s ease;
+}
+
+.drop:hover .drop__panel,
+.drop:focus-within .drop__panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.drop__panel a {
+  color: var(--dim);
+  font-size: 0.8125rem;
+  white-space: nowrap;
+}
+
+.drop__panel a:hover,
+.drop__panel a[aria-current] { color: var(--ink); }
 
 /* ---------------------------------------------------------- intro ----- */
 
@@ -340,24 +382,48 @@ ul { list-style: none; }
     transform: translateY(-0.2275rem) rotate(-45deg);
   }
 
+  /* compact panel under the header, top-right — not a takeover */
   .head__nav {
-    position: fixed;
-    inset: 0;
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: var(--gutter);
     z-index: 50;
-    background: var(--paper);
     display: grid;
-    place-content: center;
-    gap: 1.75rem;
-    text-align: center;
-    font-size: 1.125rem;
+    justify-items: start;
+    gap: 0.85rem;
+    min-width: 15rem;
+    padding: 1.1rem 1.25rem;
+    background: var(--paper);
+    border: 1px solid var(--rule);
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.25s ease, visibility 0.25s;
+    transition: opacity 0.2s ease, visibility 0.2s;
   }
 
   .head:has(#nav-toggle:checked) .head__nav {
     opacity: 1;
     visibility: visible;
+  }
+
+  /* sub-links sit under their labels, always visible in the panel */
+  .drop__label {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .drop__panel {
+    position: static;
+    display: grid;
+    gap: 0.55rem;
+    min-width: 0;
+    padding: 0.45rem 0 0 1rem;
+    border: 0;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
   }
 }
 

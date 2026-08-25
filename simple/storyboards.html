@@ -17,11 +17,27 @@
 <header class="head">
   <a class="head__name" href="index.html">Uzoma Dunkwu</a>
   <nav class="head__nav" aria-label="Primary">
-        <a href="index.html#work">Work</a>
-        <a href="storyboards.html" aria-current="page">Storyboards</a>
-        <a href="index.html#about">About</a>
-        <a href="index.html#contact">Contact</a>
+    <a href="index.html#about">About</a>
+    <div class="drop">
+      <span class="drop__label">Portfolio</span>
+      <div class="drop__panel">
+        <a href="work-eyes-of-wakanda.html">Eyes of Wakanda</a>
+        <a href="work-iyanu.html">Iyanu</a>
+        <a href="work-personal.html">Personal</a>
+      </div>
+    </div>
+    <div class="drop">
+      <span class="drop__label">Storyboards</span>
+      <div class="drop__panel">
+        <a href="storyboards.html#coma-toes">Coma Toes</a>
+        <a href="storyboards.html#cash-trapped">Cash Trapped</a>
+      </div>
+    </div>
+    <a href="https://uzomadunkwu.gumroad.com/l/ethniccharacterdesign" target="_blank" rel="noopener">Products</a>
+    <a href="index.html#contact">Contact</a>
   </nav>
+  <input class="nav-toggle" type="checkbox" id="nav-toggle">
+  <label class="nav-burger" for="nav-toggle" aria-label="Menu"><span></span><span></span></label>
 </header>
 
 <main id="main">
@@ -30,7 +46,7 @@
   <p class="facts"><span>Two films</span><span>23 panels</span></p>
 </section>
 
-<section class="film">
+<section class="film" id="coma-toes">
   <h2 class="film__title">Coma Toes</h2>
   <video src="assets/video/coma-toes.mp4" controls muted loop playsinline preload="none"
          poster="assets/thumbs/boards/coma-toes-f04.jpg" aria-label="Coma Toes animatic"></video>
@@ -46,7 +62,7 @@
   </div>
 </section>
 
-<section class="film">
+<section class="film" id="cash-trapped">
   <h2 class="film__title">Cash Trapped, part 1</h2>
   <video src="assets/video/cash-trapped-a.mp4" controls muted loop playsinline preload="none"
          poster="assets/thumbs/boards/cash-trapped-a-f07.jpg" aria-label="Cash Trapped, part 1 animatic"></video>
