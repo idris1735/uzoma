@@ -120,6 +120,7 @@ ul { list-style: none; }
   transition: opacity 0.2s ease, visibility 0.2s, transform 0.2s ease;
 }
 
+.drop.is-open .drop__panel,
 .drop:hover .drop__panel,
 .drop:focus-within .drop__panel {
   opacity: 1;
@@ -445,7 +446,13 @@ body.is-stage { overflow: hidden; height: 100dvh; }
   .stage__frame {
     position: relative;
     grid-row: 1;
-    background: #000;
+    background: var(--paper);
+  }
+
+  .stage__img {
+    /* contain, not cover — cover crops the sheet and takes the artwork's
+       own title banner (the eyes under "Eyes of Wakanda") with it */
+    object-fit: contain;
   }
 
   .stage__caption {
@@ -553,6 +560,7 @@ body.is-stage { overflow: hidden; height: 100dvh; }
     transition: opacity 0.2s ease, visibility 0.2s, transform 0.2s ease;
   }
 
+  .head.is-open .head__nav,
   .head:has(#nav-toggle:checked) .head__nav {
     opacity: 1;
     visibility: visible;

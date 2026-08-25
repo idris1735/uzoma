@@ -19,8 +19,12 @@
   const navToggle = document.getElementById("nav-toggle");
   if (navToggle) {
     const burger = document.querySelector(".nav-burger");
+    const head = document.querySelector(".head");
     const sync = () => {
       if (burger) burger.setAttribute("aria-expanded", navToggle.checked ? "true" : "false");
+      /* the class (not just :has) opens the panel — older mobile
+         browsers don't support :has() and the menu would never open */
+      if (head) head.classList.toggle("is-open", navToggle.checked);
     };
     sync();
     navToggle.addEventListener("change", sync);
@@ -30,7 +34,10 @@
 
     document.addEventListener("click", (e) => {
       if (!navToggle.checked) return;
-      if (e.target.closest(".head__nav, .nav-burger")) return;
+      /* the label forwards a second click whose target is the checkbox
+         itself — treat it as part of the header or the menu is
+         unchecked again in the same tap */
+      if (e.target.closest(".head__nav, .nav-burger, .nav-toggle")) return;
       navToggle.checked = false;
     });
 
@@ -38,6 +45,23 @@
       if (e.key === "Escape" && navToggle.checked) navToggle.checked = false;
     });
   }
+
+  /* dropdowns on touch screens: there is no hover, so a tap on the
+     label toggles the panel */
+  document.querySelectorAll(".drop").forEach((drop) => {
+    const label = drop.querySelector(".drop__label");
+    if (!label) return;
+    label.addEventListener("click", () => {
+      const open = !drop.classList.contains("is-open");
+      document.querySelectorAll(".drop.is-open").forEach((d) => d.classList.remove("is-open"));
+      drop.classList.toggle("is-open", open);
+    });
+  });
+
+  document.addEventListener("click", (e) => {
+    if (e.target.closest(".drop")) return;
+    document.querySelectorAll(".drop.is-open").forEach((d) => d.classList.remove("is-open"));
+  });
 
   const tiles = Array.from(document.querySelectorAll("[data-full]"));
   if (!tiles.length) return;
