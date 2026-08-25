@@ -140,6 +140,11 @@
         img.onload = reveal;
         img.onerror = reveal;
         setTimeout(reveal, 900);
+        /* phones crop the landscape landing sheet onto the first girl */
+        const onPhone = window.matchMedia("(max-width: 640px)").matches;
+        img.style.objectPosition = onPhone && (s.dataset.full || "").includes("eow-15-dora")
+          ? "6% 50%"
+          : "50% 50%";
         img.src = s.dataset.full;
         img.alt = (s.querySelector("img") || {}).alt || title;
       };

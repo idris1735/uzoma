@@ -416,21 +416,26 @@ body.is-stage { overflow: hidden; height: 100dvh; }
   color: var(--dim);
 }
 
-/* the concept-sheet title banner — phones only, directly below the art */
+/* the concept-sheet title banner — phones only, at the very bottom */
 .stage__banner {
   display: none;
 }
 
 @media (max-width: 640px) {
+  /* phones: no caption text, no numbering, no controls — just the art
+     and the banner, exactly like the sheet */
+  .stage .stage__caption { display: none; }
+  .stage .stage__controls { display: none; }
+
   .stage__banner {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 4.55rem;
+    bottom: 0;
     z-index: 3;
     display: grid;
     gap: 0.15rem;
-    padding: 0.8rem var(--gutter);
+    padding: 0.9rem var(--gutter);
     background: #000;
     color: #fff;
     pointer-events: none;
@@ -451,9 +456,6 @@ body.is-stage { overflow: hidden; height: 100dvh; }
     text-transform: uppercase;
     letter-spacing: 0.02em;
   }
-
-  /* the sheet caption moves up above the banner */
-  .stage__caption { bottom: 9.9rem; }
 }
 
 .stage__controls {
