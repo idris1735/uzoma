@@ -493,9 +493,10 @@
   pointer-events: none;
 }
 
-/* desktop: a tall room you pass through, columns drifting in opposition */
+/* desktop: columns fill a scrolling wall whose height the JS sizes from
+   the natural column content, leaving headroom for the drift */
 @media (min-width: 901px) {
-  .wall { height: 220svh; }
+  .wall { min-height: 100svh; }
   .wall__cols {
     position: absolute;
     inset: -18% -2%;

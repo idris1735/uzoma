@@ -307,6 +307,28 @@
     let built = 0;
     let triggers = [];
 
+    /* the wall is a full scrolling gallery: its height comes from the
+       columns' natural content, minus the drift headroom */
+    const sizeWall = () => {
+      const wall = $(".wall");
+      if (!window.matchMedia("(min-width: 901px)").matches) {
+        wall.style.height = "";
+        return;
+      }
+      const colsEls = host.querySelectorAll(".wall__col");
+      if (!colsEls.length) return;
+      const colW = host.clientWidth / colsEls.length;
+      let maxH = 0;
+      colsEls.forEach((c) => {
+        let h = 0;
+        c.querySelectorAll(".wall__tile img").forEach((im) => {
+          h += colW / (parseFloat(im.style.aspectRatio) || 1.5) + 3;
+        });
+        maxH = Math.max(maxH, h);
+      });
+      wall.style.height = `${Math.round(Math.max(maxH * 0.92, window.innerHeight))}px`;
+    };
+
     const build = () => {
       const cols = colCount();
       if (cols === built) return;
@@ -356,6 +378,8 @@
         buckets[i % cols].appendChild(tile);
       });
 
+      sizeWall();
+
       if (!MOTION) return;
 
       /* cold while approaching, warms as the wall fills the viewport */
@@ -395,7 +419,7 @@
     let resizeTimer = 0;
     window.addEventListener("resize", () => {
       clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => { build(); ScrollTrigger.refresh(); }, 220);
+      resizeTimer = setTimeout(() => { build(); sizeWall(); ScrollTrigger.refresh(); }, 220);
     });
   };
 

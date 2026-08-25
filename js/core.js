@@ -398,26 +398,29 @@ window.UZ = (() => {
     const tl = gsap.timeline({
       onComplete: () => {
         gsap.to(pre, {
-          yPercent: -100, duration: 0.75, ease: "expo.inOut",
+          yPercent: -100, duration: 0.55, ease: "expo.inOut",
           onComplete: () => { pre.remove(); done(); },
         });
       },
     });
 
+    /* tap anywhere: skip straight to the reveal */
+    pre.addEventListener("pointerdown", () => tl.progress(1), { once: true });
+
     tl.to(counter, {
-      v: 100, duration: 1.25, ease: "power2.out",
+      v: 100, duration: 0.85, ease: "power2.out",
       onUpdate: () => { pct.textContent = pad3(Math.round(counter.v)); },
     }, 0);
-    tl.to(poly, { attr: { points: TRI }, duration: 0.5, ease: "power2.inOut" }, 0.12);
-    tl.to(poly, { attr: { points: CIR }, duration: 0.5, ease: "power2.inOut" }, 0.66);
-    tl.to(".preload__shape", { scale: 2.2, opacity: 0, duration: 0.4, ease: "power2.in" }, 1.22);
-    tl.to(".preload__line", { opacity: 0, duration: 0.25 }, 1.22);
+    tl.to(poly, { attr: { points: TRI }, duration: 0.32, ease: "power2.inOut" }, 0.08);
+    tl.to(poly, { attr: { points: CIR }, duration: 0.32, ease: "power2.inOut" }, 0.46);
+    tl.to(".preload__shape", { scale: 2.2, opacity: 0, duration: 0.3, ease: "power2.in" }, 0.84);
+    tl.to(".preload__line", { opacity: 0, duration: 0.18 }, 0.84);
     /* glow up, then the silhouettes settle into their hero positions */
-    tl.to(".preload__lamp", { opacity: 1, duration: 0.6, ease: "power2.out" }, 1.18);
+    tl.to(".preload__lamp", { opacity: 1, duration: 0.45, ease: "power2.out" }, 0.82);
     tl.fromTo(sils,
-      { opacity: 0, yPercent: 26, scaleY: 1.12 },
-      { opacity: 1, yPercent: 0, scaleY: 1, duration: 0.75, ease: "expo.out", stagger: 0.055 }, 1.3);
-    tl.to({}, { duration: 0.3 });
+      { opacity: 0, yPercent: 20, scaleY: 1.1 },
+      { opacity: 1, yPercent: 0, scaleY: 1, duration: 0.5, ease: "expo.out", stagger: 0.04 }, 0.88);
+    tl.to({}, { duration: 0.15 });
   };
 
   /* ============================== BOOT ============================== */
