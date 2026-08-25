@@ -1,228 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Iyanu — Uzoma Dunkwu</title>
-  <meta name="description" content="Visual development for Lion Forge Animation's Iyanu by Uzoma Dunkwu.">
-
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B0A0D'/%3E%3Crect x='7.5' y='7.5' width='17' height='17' fill='none' stroke='%23A3FF12' stroke-width='2.5'/%3E%3C/svg%3E">
-
-  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-  <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="css/base.css?v=4">
-  <link rel="stylesheet" href="css/type.css?v=4">
-  <link rel="stylesheet" href="css/work.css?v=4">
-
-  <!-- arriving from another sheet? the curtain is already down -->
-  <script>try{if(sessionStorage.getItem("uz-transit"))document.documentElement.classList.add("is-arriving")}catch(e){}</script>
-
-  <link rel="preload" as="image" href="assets/iyanu/iyanu-01-ideation.jpg" fetchpriority="high">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iyanu — Uzoma Dunkwu</title>
+<meta name="description" content="Visual development for Lion Forge Animation's Iyanu by Uzoma Dunkwu.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fff'/%3E%3Crect x='8' y='8' width='16' height='16' fill='%23111'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600&f[]=satoshi@400,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
 </head>
 <body>
-  <a class="u-skip" href="#plates">Skip to content</a>
-  <div class="grain" aria-hidden="true"></div>
+<a class="skip" href="#main">Skip to content</a>
 
-  <header class="site-head">
-    <a class="site-head__mark" href="index.html" aria-label="Uzoma Dunkwu — home">
-      <span class="anno anno--bone">UZOMA DUNKWU</span>
-      <svg class="site-head__shape" viewBox="0 0 24 24" aria-hidden="true">
-        <rect x="5" y="5" width="14" height="14"/>
-      </svg>
-    </a>
+<header class="head">
+  <a class="head__name" href="index.html">Uzoma Dunkwu</a>
+  <nav class="head__nav" aria-label="Primary">
+        <a href="index.html#work">Work</a>
+        <a href="storyboards.html">Storyboards</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+  </nav>
+</header>
 
-    <input class="nav-toggle" type="checkbox" id="nav-toggle" aria-hidden="true">
-    <label class="nav-toggle-btn" for="nav-toggle" aria-label="Menu">
-      <span class="nav-toggle-btn__bar"></span>
-      <span class="nav-toggle-btn__bar"></span>
-    </label>
+<main id="main">
+<section class="intro">
+  <h1 class="intro__title">Iyanu</h1>
+  <p class="facts"><span>Lion Forge Animation · Visual development</span><span>7 sheets</span></p>
+</section>
 
-    <nav class="site-nav" aria-label="Primary">
-      <ul class="site-nav__list">
-        <li><a class="site-nav__link" href="index.html#about">ABOUT</a></li>
-        <li class="site-nav__drop">
-          <a class="site-nav__link" href="index.html#portfolio">PORTFOLIO</a>
-          <ul class="site-nav__sub">
-            <li><a class="site-nav__link" href="work-eyes-of-wakanda.html">EYES OF WAKANDA</a></li>
-            <li><a class="site-nav__link" aria-current="page" href="work-iyanu.html">IYANU</a></li>
-            <li><a class="site-nav__link" href="work-personal.html">PERSONAL</a></li>
-          </ul>
-        </li>
-        <li><a class="site-nav__link" href="storyboards.html">STORYBOARDS</a></li>
-        <li><a class="site-nav__link" href="index.html#products">PRODUCTS</a></li>
-        <li><a class="site-nav__link" href="index.html#contact">CONTACT</a></li>
-      </ul>
-    </nav>
-  </header>
+<section class="run">
+  <figure class="plate" style="--r: 1.6438">
+    <img src="assets/iyanu/iyanu-01-ideation.jpg" alt="Three young Yoruba characters beside a photograph of a carved Lamidi Fakeye figure.">
+    <figcaption>Ideation</figcaption>
+  </figure>
+  <figure class="plate" style="--r: 2.2872">
+    <img src="assets/iyanu/iyanu-02-exploration.jpg" alt="The three leads beside their line drawings." loading="lazy" decoding="async">
+    <figcaption>Exploration</figcaption>
+  </figure>
+  <figure class="plate" style="--r: 1.6438">
+    <img src="assets/iyanu/iyanu-03-exploration.jpg" alt="A second pass on the same three characters, colour beside line." loading="lazy" decoding="async">
+    <figcaption>Exploration</figcaption>
+  </figure>
+  <figure class="plate" style="--r: 1.3294">
+    <img src="assets/iyanu/iyanu-04-biyi.jpg" alt="Four line studies of Biyi in motion: a high kick, a leap, a low lunge, a running turn." loading="lazy" decoding="async">
+    <figcaption>Biyi</figcaption>
+  </figure>
+  <figure class="plate" style="--r: 1.2">
+    <img src="assets/iyanu/iyanu-05-biyi-02.jpg" alt="Biyi's model sheet: colour front view and line profile on height guides, with a forearm detail." loading="lazy" decoding="async">
+    <figcaption>Biyi</figcaption>
+  </figure>
+  <figure class="plate" style="--r: 1.0632">
+    <img src="assets/iyanu/iyanu-06-0621.jpg" alt="A boy in a red tunic and a bearded man in a green and violet wrapper, against a height chart." loading="lazy" decoding="async">
+    <figcaption>Exploration</figcaption>
+  </figure>
+  <figure class="plate" style="--r: 0.8802">
+    <img src="assets/iyanu/iyanu-07-0621-02.jpg" alt="The archer drawn full length with a blue bow and a quiver." loading="lazy" decoding="async">
+    <figcaption>Exploration</figcaption>
+  </figure>
+</section>
+<section class="intro">
+  <p class="facts">Next</p>
+  <h2 class="intro__title"><a href="work-personal.html">Personal</a></h2>
+</section>
+</main>
 
-  <main>
-    <section class="case" aria-label="Iyanu">
-      <div class="case__lamp" aria-hidden="true"></div>
+<footer class="foot" id="contact">
+  <a class="foot__mail" href="mailto:hello@uzomadunkwu.com">hello@uzomadunkwu.com</a>
+  <div class="foot__links">
+    <a href="https://www.instagram.com/uzomadunkwu" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.linkedin.com/in/uzomadunkwu/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.youtube.com/channel/UCU9rpgl7qDSV2p3UXm0jS4g" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://x.com/UzomaDunkwu" target="_blank" rel="noopener">X</a>
+  </div>
+  <p class="foot__clients">Marvel Animation · Lion Forge · Netflix Animation · Disney · Laika · Triggerfish · Psyop · Stoopid Buddy Stoodios · Scroll Entertainment</p>
+</footer>
 
-      <div class="case__head">
-        <h1 class="case__title display display--optical" data-reveal="lines">IYANU</h1>
-        <dl class="case__facts">
-          <div class="case__fact"><dt>CLIENT</dt><dd>Lion Forge Animation</dd></div>
-          <div class="case__fact"><dt>ROLE</dt><dd>Visual development</dd></div>
-          <div class="case__fact"><dt>SHEETS</dt><dd>7</dd></div>
-        </dl>
-      </div>
-
-      <figure class="case__sheet sheet" data-reveal="plate">
-        <img src="assets/iyanu/iyanu-01-ideation.jpg" alt="Iyanu ideation sheet: three young Yoruba characters — an archer in red, a figure in a green wrapper, a boy in a magenta tunic — beside a photograph of a carved Lamidi Fakeye figure." fetchpriority="high">
-      </figure>
-    </section>
-
-    <section class="scrub" aria-label="Process">
-      <div class="scrub__head">
-        <h2 class="display" data-reveal="lines">PROCESS</h2>
-        <p class="anno anno--dim">IDEATION<span class="scrub__hint">. DRAG, OR USE THE ARROW KEYS.</span></p>
-      </div>
-
-      <div class="scrub__stage" data-scrub style="--stage-ratio: 1.6438">
-        <img class="scrub__pass scrub__pass--1" src="assets/iyanu/iyanu-01-ideation-sketch.jpg" alt="" aria-hidden="true" loading="lazy">
-        <img class="scrub__pass scrub__pass--2" src="assets/iyanu/iyanu-01-ideation-line.jpg" alt="" aria-hidden="true" loading="lazy">
-        <img class="scrub__pass scrub__pass--3" src="assets/iyanu/iyanu-01-ideation-flat.jpg" alt="" aria-hidden="true" loading="lazy">
-        <img class="scrub__pass scrub__pass--4" src="assets/iyanu/iyanu-01-ideation.jpg" alt="" aria-hidden="true" loading="lazy">
-        <span class="scrub__handle" aria-hidden="true">
-          <span class="scrub__grip"><svg viewBox="0 0 24 24"><polyline points="10,7 5,12 10,17"/><polyline points="14,7 19,12 14,17"/></svg></span>
-        </span>
-        <input class="scrub__input" type="range" min="0" max="1000" value="0" step="1"
-               aria-label="Drawing stage: sketch to finished render">
-      </div>
-
-      <ul class="scrub__stages">
-        <li class="scrub__stage-name is-on" data-stage="0">SKETCH</li>
-        <li class="scrub__stage-name" data-stage="1">LINE</li>
-        <li class="scrub__stage-name" data-stage="2">FLATS</li>
-        <li class="scrub__stage-name" data-stage="3">RENDER</li>
-      </ul>
-    </section>
-
-    <section class="plates" id="plates" aria-label="Every sheet">
-      <div class="plates__head">
-        <h2 class="display" data-reveal="lines">SHEETS</h2>
-        <p class="anno anno--dim">7 IN TOTAL</p>
-      </div>
-
-      <div class="plates__grid">
-        <figure class="plate">
-          <button class="plate__btn" type="button" data-plate="assets/iyanu/iyanu-01-ideation.jpg" data-title="Ideation" data-no="01" data-reveal="plate">
-            <img src="assets/thumbs/iyanu/iyanu-01-ideation.jpg" alt="Iyanu ideation sheet: three young Yoruba characters — an archer in red, a figure in a green wrapper, a boy in a magenta tunic — beside a photograph of a carved Lamidi Fakeye figure." loading="lazy" width="900" height="548">
-          </button>
-          <figcaption class="plate__cap">
-            <span class="anno plate__no">01</span>
-            <span class="anno plate__title">Ideation</span>
-          </figcaption>
-        </figure>
-        <figure class="plate plate--wide">
-          <button class="plate__btn" type="button" data-plate="assets/iyanu/iyanu-02-exploration.jpg" data-title="Exploration" data-no="02" data-reveal="plate">
-            <img src="assets/thumbs/iyanu/iyanu-02-exploration.jpg" alt="The three leads beside their line drawings: an archer in red, a figure in a green wrapper, a boy in a magenta tunic." loading="lazy" width="900" height="394">
-          </button>
-          <figcaption class="plate__cap">
-            <span class="anno plate__no">02</span>
-            <span class="anno plate__title">Exploration</span>
-          </figcaption>
-        </figure>
-        <figure class="plate">
-          <button class="plate__btn" type="button" data-plate="assets/iyanu/iyanu-03-exploration.jpg" data-title="Exploration" data-no="03" data-reveal="plate">
-            <img src="assets/thumbs/iyanu/iyanu-03-exploration.jpg" alt="A second pass on the same three characters, colour beside line." loading="lazy" width="900" height="548">
-          </button>
-          <figcaption class="plate__cap">
-            <span class="anno plate__no">03</span>
-            <span class="anno plate__title">Exploration</span>
-          </figcaption>
-        </figure>
-        <figure class="plate">
-          <button class="plate__btn" type="button" data-plate="assets/iyanu/iyanu-04-biyi.jpg" data-title="Biyi" data-no="04" data-reveal="plate">
-            <img src="assets/thumbs/iyanu/iyanu-04-biyi.jpg" alt="Four line studies of Biyi in motion: a high kick, a leap, a low lunge, a running turn." loading="lazy" width="900" height="677">
-          </button>
-          <figcaption class="plate__cap">
-            <span class="anno plate__no">04</span>
-            <span class="anno plate__title">Biyi</span>
-          </figcaption>
-        </figure>
-        <figure class="plate">
-          <button class="plate__btn" type="button" data-plate="assets/iyanu/iyanu-05-biyi-02.jpg" data-title="Biyi" data-no="05" data-reveal="plate">
-            <img src="assets/thumbs/iyanu/iyanu-05-biyi-02.jpg" alt="Biyi's model sheet: colour front view and line profile on height guides, with a forearm detail and a carved Lamidi Fakeye figure as reference." loading="lazy" width="900" height="750">
-          </button>
-          <figcaption class="plate__cap">
-            <span class="anno plate__no">05</span>
-            <span class="anno plate__title">Biyi</span>
-          </figcaption>
-        </figure>
-        <figure class="plate">
-          <button class="plate__btn" type="button" data-plate="assets/iyanu/iyanu-06-0621.jpg" data-title="Exploration" data-no="06" data-reveal="plate">
-            <img src="assets/thumbs/iyanu/iyanu-06-0621.jpg" alt="A boy in a red tunic and a bearded man in a green and violet wrapper, against a numbered height chart." loading="lazy" width="900" height="846">
-          </button>
-          <figcaption class="plate__cap">
-            <span class="anno plate__no">06</span>
-            <span class="anno plate__title">Exploration</span>
-          </figcaption>
-        </figure>
-        <figure class="plate">
-          <button class="plate__btn" type="button" data-plate="assets/iyanu/iyanu-07-0621-02.jpg" data-title="Exploration" data-no="07" data-reveal="plate">
-            <img src="assets/thumbs/iyanu/iyanu-07-0621-02.jpg" alt="The archer drawn full length with a blue bow and a quiver, in a red and orange wrapper." loading="lazy" width="900" height="1023">
-          </button>
-          <figcaption class="plate__cap">
-            <span class="anno plate__no">07</span>
-            <span class="anno plate__title">Exploration</span>
-          </figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <section class="next-work" aria-label="Next project">
-      <a class="next-work__link" href="work-personal.html">
-        <span class="slug">NEXT PROJECT</span>
-        <span class="next-work__title display display--optical">PERSONAL</span>
-        <span class="anno anno--dim">PERSONAL WORK</span>
-      </a>
-      <img class="next-work__peek" src="assets/thumbs/personal/personal-01-afro-ninja.jpg" alt="" aria-hidden="true" loading="lazy">
-    </section>
-  </main>
-
-  <footer class="footer" id="contact" aria-label="Contact">
-    <div class="footer__marquee" aria-hidden="true">
-      <div class="footer__marquee-track">
-        <span>MARVEL ANIMATION · LION FORGE · NETFLIX ANIMATION · DISNEY · LAIKA · TRIGGERFISH · PSYOP · STOOPID BUDDY STOODIOS · SCROLL ENTERTAINMENT ·&nbsp;</span>
-        <span>MARVEL ANIMATION · LION FORGE · NETFLIX ANIMATION · DISNEY · LAIKA · TRIGGERFISH · PSYOP · STOOPID BUDDY STOODIOS · SCROLL ENTERTAINMENT ·&nbsp;</span>
-      </div>
-    </div>
-
-    <div class="footer__body">
-      <div class="footer__socials">
-        <a class="footer__social anno" href="https://www.instagram.com/uzomadunkwu" target="_blank" rel="noopener" data-scramble>INSTAGRAM</a>
-        <a class="footer__social anno" href="https://www.linkedin.com/in/uzomadunkwu/" target="_blank" rel="noopener" data-scramble>LINKEDIN</a>
-        <a class="footer__social anno" href="https://www.youtube.com/channel/UCU9rpgl7qDSV2p3UXm0jS4g" target="_blank" rel="noopener" data-scramble>YOUTUBE</a>
-        <a class="footer__social anno" href="https://x.com/UzomaDunkwu" target="_blank" rel="noopener" data-scramble>X</a>
-      </div>
-      <a class="footer__email display" href="mailto:hello@uzomadunkwu.com" data-scramble>HELLO@UZOMADUNKWU.COM</a>
-    </div>
-
-    <div class="footer__name" aria-hidden="true"><span class="display">UZOMA DUNKWU</span></div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
-          integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
-          integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js"
-          integrity="sha384-RVPQwTb0fPz9kI8s5GwAq1Qioto9fnEQt1aKGSQSm8xV6+DIdBSgcCShoHqfKnhv" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"
-          integrity="sha384-O55L/6rhHr9CFvrxqv5luxOCcmVaBmETbZbJDP+Do8T0pztTACsFBD/IXCNkj7DV" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"
-          integrity="sha384-wQImCCD/id1jPTwSloatzKlEpnEAQ5aH8H2Ud27FnNcJ1lf2+hB75ctoWnWxyD8X" crossorigin="anonymous"></script>
-
-  <script src="js/cursor.js?v=4"></script>
-  <script src="js/transitions.js?v=4"></script>
-  <script src="js/core.js?v=4"></script>
-  <script src="js/work.js?v=4"></script>
 </body>
 </html>

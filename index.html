@@ -1,465 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Uzoma Dunkwu — Visual Development Artist</title>
-  <meta name="description" content="Emmy &amp; CAA Award-winning Visual Development Artist and Writer/Director in Animation. Eyes of Wakanda, Iyanu, and original films.">
-
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B0A0D'/%3E%3Crect x='7.5' y='7.5' width='17' height='17' fill='none' stroke='%23A3FF12' stroke-width='2.5'/%3E%3C/svg%3E">
-
-  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-  <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="css/base.css?v=4">
-  <link rel="stylesheet" href="css/type.css?v=4">
-  <link rel="stylesheet" href="css/sections.css?v=4">
-  <link rel="stylesheet" href="css/work.css?v=4">
-
-  <!-- arriving from another sheet? the curtain is already down -->
-  <script>try{if(sessionStorage.getItem("uz-transit"))document.documentElement.classList.add("is-arriving")}catch(e){}</script>
-
-  <!-- the hero resolves through these four, in this order -->
-  <link rel="preload" as="image" href="assets/hero-eow-lineup-sil.png" fetchpriority="high">
-  <link rel="preload" as="image" href="assets/hero-eow-lineup-line.jpg">
-  <link rel="preload" as="image" href="assets/hero-eow-lineup-flat.jpg">
-  <link rel="preload" as="image" href="assets/hero-eow-lineup-final.jpg">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uzoma Dunkwu — Visual Development Artist</title>
+<meta name="description" content="Emmy and CAA Award-winning Visual Development Artist and Writer/Director in Animation.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fff'/%3E%3Crect x='8' y='8' width='16' height='16' fill='%23111'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600&f[]=satoshi@400,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
 </head>
 <body>
-  <a class="u-skip" href="#about">Skip to content</a>
+<a class="skip" href="#main">Skip to content</a>
 
-  <!-- paper grain — above everything except the cursor -->
-  <div class="grain" aria-hidden="true"></div>
+<header class="head">
+  <a class="head__name" href="index.html">Uzoma Dunkwu</a>
+  <nav class="head__nav" aria-label="Primary">
+        <a href="index.html#work">Work</a>
+        <a href="storyboards.html">Storyboards</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+  </nav>
+</header>
 
-  <!-- ==============================
-       NAV — the sheet index
-       ============================== -->
-  <header class="site-head">
-    <a class="site-head__mark" href="index.html" aria-label="Uzoma Dunkwu — home">
-      <span class="anno anno--bone">UZOMA DUNKWU</span>
-      <svg class="site-head__shape" viewBox="0 0 24 24" aria-hidden="true">
-        <rect x="5" y="5" width="14" height="14"/>
-      </svg>
-    </a>
+<main id="main">
 
-    <input class="nav-toggle" type="checkbox" id="nav-toggle" aria-hidden="true">
-    <label class="nav-toggle-btn" for="nav-toggle" aria-label="Menu">
-      <span class="nav-toggle-btn__bar"></span>
-      <span class="nav-toggle-btn__bar"></span>
-    </label>
+<section class="landing">
+  <img src="assets/eow/eow-15-dora.png" alt="Eyes of Wakanda: head-and-shoulders portraits of Shakoo, B'Risa, Koi'Fay, Y'Fett and Le'illa, each with the geometric shape that governs the design drawn beside it." fetchpriority="high">
+</section>
 
-    <nav class="site-nav" aria-label="Primary">
-      <ul class="site-nav__list">
-        <li><a class="site-nav__link" href="#about">ABOUT</a></li>
-        <li class="site-nav__drop">
-          <a class="site-nav__link" href="#portfolio">PORTFOLIO</a>
-          <ul class="site-nav__sub">
-            <li><a class="site-nav__link" href="work-eyes-of-wakanda.html">EYES OF WAKANDA</a></li>
-            <li><a class="site-nav__link" href="work-iyanu.html">IYANU</a></li>
-            <li><a class="site-nav__link" href="work-personal.html">PERSONAL</a></li>
-          </ul>
-        </li>
-        <li><a class="site-nav__link" href="storyboards.html">STORYBOARDS</a></li>
-        <li><a class="site-nav__link" href="#products">PRODUCTS</a></li>
-        <li><a class="site-nav__link" href="#contact">CONTACT</a></li>
-      </ul>
-    </nav>
-  </header>
+<section class="intro">
+  <h1 class="intro__title">Uzoma Dunkwu</h1>
+  <p class="intro__line">Emmy &amp; CAA Award-winning Visual Development Artist and Writer/Director in Animation.</p>
+  <p class="facts"><span>Emmy 2026</span><span>CAA Award 2025</span><span>Lagos, Nigeria</span></p>
+</section>
 
-  <main>
-    <!-- ==============================
-         HERO — THE RESOLVE
-         One sheet, four passes, scrubbed
-         ============================== -->
-    <section class="hero" id="hero" aria-label="Eyes of Wakanda character lineup — visual development sheet">
+<section class="wall" id="work" aria-label="All work — forty-five sheets. Open any at full size.">
+  <button class="wall__tile" type="button" data-full="assets/eow/eow-01-lineup.png" data-title="The sheet" data-no="01">
+    <img src="assets/thumbs/eow/eow-01-lineup.jpg" alt="Eyes of Wakanda: five Lion team warriors in gold lion masks and layered violet wraps, standing in a row." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">The sheet</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/eow/eow-02-noni.png" data-title="Noni" data-no="02">
+    <img src="assets/thumbs/eow/eow-02-noni.jpg" alt="Eyes of Wakanda: Noni, a portrait bust, a fighting stance in a blue wrap, and three grey action studies." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Noni</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/eow/eow-03-noni-keys.png" data-title="Noni — costume keys" data-no="03">
+    <img src="assets/thumbs/eow/eow-03-noni-keys.jpg" alt="Eyes of Wakanda: five costume passes on Noni." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Noni — costume keys</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/iyanu/iyanu-01-ideation.jpg" data-title="The sheet" data-no="04">
+    <img src="assets/thumbs/iyanu/iyanu-01-ideation.jpg" alt="Iyanu: three young Yoruba characters beside a photograph of a carved Lamidi Fakeye figure." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">The sheet</span><span class="wall__cap-project">Iyanu</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/personal/personal-01-afro-ninja.png" data-title="Afro ninja" data-no="05">
+    <img src="assets/thumbs/personal/personal-01-afro-ninja.jpg" alt="Personal work: a hooded warrior in a blue cape with a forked blade, beside a grey action study." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Afro ninja</span><span class="wall__cap-project">Personal</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/thumbs/boards/coma-toes-f02.jpg" data-title="Coma Toes — panel 2" data-no="06">
+    <img src="assets/thumbs/boards/coma-toes-f02.jpg" alt="Coma Toes: storyboard panel 2." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Coma Toes — panel 2</span><span class="wall__cap-project">Storyboards</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/eow/eow-04-old-noni.png" data-title="Noni, older" data-no="07">
+    <img src="assets/thumbs/eow/eow-04-old-noni.jpg" alt="Eyes of Wakanda: an older Noni in an ochre cloak and violet skirt, with four white construction turnarounds." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Noni, older</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/iyanu/iyanu-02-exploration.jpg" data-title="Exploration — colour and line" data-no="08">
+    <img src="assets/thumbs/iyanu/iyanu-02-exploration.jpg" alt="Iyanu: the three leads beside their line drawings." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Exploration — colour and line</span><span class="wall__cap-project">Iyanu</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/personal/personal-02-pirate.png" data-title="Pirate boy, action poses" data-no="09">
+    <img src="assets/thumbs/personal/personal-02-pirate.jpg" alt="Personal work: pirate boy in action poses." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Pirate boy, action poses</span><span class="wall__cap-project">Personal</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/thumbs/boards/cash-trapped-a-f03.jpg" data-title="Cash Trapped I — panel 3" data-no="10">
+    <img src="assets/thumbs/boards/cash-trapped-a-f03.jpg" alt="Cash Trapped, part 1: storyboard panel 3." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Cash Trapped I — panel 3</span><span class="wall__cap-project">Storyboards</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/eow/eow-05-traveller.png" data-title="The traveller" data-no="11">
+    <img src="assets/thumbs/eow/eow-05-traveller.jpg" alt="Eyes of Wakanda: five travelling-costume variants built on grey mannequins." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">The traveller</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/iyanu/iyanu-03-exploration.jpg" data-title="Exploration — second pass" data-no="12">
+    <img src="assets/thumbs/iyanu/iyanu-03-exploration.jpg" alt="Iyanu: a second pass on the same three characters, colour beside line." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Exploration — second pass</span><span class="wall__cap-project">Iyanu</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/personal/personal-03-vampire.png" data-title="Vampire" data-no="13">
+    <img src="assets/thumbs/personal/personal-03-vampire.jpg" alt="Personal work: a vampire character study." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Vampire</span><span class="wall__cap-project">Personal</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/thumbs/boards/cash-trapped-a-f07.jpg" data-title="Cash Trapped I — panel 7" data-no="14">
+    <img src="assets/thumbs/boards/cash-trapped-a-f07.jpg" alt="Cash Trapped, part 1: storyboard panel 7." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Cash Trapped I — panel 7</span><span class="wall__cap-project">Storyboards</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/eow/eow-06-councilman.png" data-title="High councilman" data-no="15">
+    <img src="assets/thumbs/eow/eow-06-councilman.jpg" alt="Eyes of Wakanda: a high councilman with a mask study and three olive and violet draping variants." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">High councilman</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/iyanu/iyanu-04-biyi.jpg" data-title="Biyi — action" data-no="16">
+    <img src="assets/thumbs/iyanu/iyanu-04-biyi.jpg" alt="Iyanu: four line studies of Biyi in motion." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Biyi — action</span><span class="wall__cap-project">Iyanu</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/personal/personal-04-femme.png" data-title="Femme fatale" data-no="17">
+    <img src="assets/thumbs/personal/personal-04-femme.jpg" alt="Personal work: a femme fatale character design." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Femme fatale</span><span class="wall__cap-project">Personal</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/eow/eow-07-kuda.png" data-title="Kuda" data-no="18">
+    <img src="assets/thumbs/eow/eow-07-kuda.jpg" alt="Eyes of Wakanda: Kuda, a broad man in a red and blue panelled tunic, drawn twice, with a slimmer youth in violet." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Kuda</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/iyanu/iyanu-05-biyi-02.jpg" data-title="Biyi — model sheet" data-no="19">
+    <img src="assets/thumbs/iyanu/iyanu-05-biyi-02.jpg" alt="Iyanu: Biyi model sheet." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Biyi — model sheet</span><span class="wall__cap-project">Iyanu</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/personal/personal-05-hands.png" data-title="Hands" data-no="20">
+    <img src="assets/thumbs/personal/personal-05-hands.jpg" alt="Personal work: hand studies." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Hands</span><span class="wall__cap-project">Personal</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/thumbs/boards/cash-trapped-b-f02.jpg" data-title="Cash Trapped II — panel 2" data-no="21">
+    <img src="assets/thumbs/boards/cash-trapped-b-f02.jpg" alt="Cash Trapped, part 2: storyboard panel 2." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Cash Trapped II — panel 2</span><span class="wall__cap-project">Storyboards</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/eow/eow-08-tafari.png" data-title="Tafari and Kuda" data-no="22">
+    <img src="assets/thumbs/eow/eow-08-tafari.jpg" alt="Eyes of Wakanda: Tafari in violet armour with a metal vambrace, standing with a younger figure." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Tafari and Kuda</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/iyanu/iyanu-06-0621.jpg" data-title="Height chart" data-no="23">
+    <img src="assets/thumbs/iyanu/iyanu-06-0621.jpg" alt="Iyanu: height chart." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Height chart</span><span class="wall__cap-project">Iyanu</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/personal/personal-06-people.png" data-title="People" data-no="24">
+    <img src="assets/thumbs/personal/personal-06-people.jpg" alt="Personal work: studies of people." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">People</span><span class="wall__cap-project">Personal</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/eow/eow-09-lion-guard.png" data-title="Lion guards — faces" data-no="25">
+    <img src="assets/thumbs/eow/eow-09-lion-guard.jpg" alt="Eyes of Wakanda: six lion guard head studies with different hairlines, scars and headbands." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Lion guards — faces</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/iyanu/iyanu-07-0621-02.jpg" data-title="The archer" data-no="26">
+    <img src="assets/thumbs/iyanu/iyanu-07-0621-02.jpg" alt="Iyanu: the archer." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">The archer</span><span class="wall__cap-project">Iyanu</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/personal/personal-07-mammal.png" data-title="Mammal college" data-no="27">
+    <img src="assets/thumbs/personal/personal-07-mammal.jpg" alt="Personal work: mammal college studies." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Mammal college</span><span class="wall__cap-project">Personal</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/thumbs/boards/cash-trapped-b-f05.jpg" data-title="Cash Trapped II — panel 5" data-no="28">
+    <img src="assets/thumbs/boards/cash-trapped-b-f05.jpg" alt="Cash Trapped, part 2: storyboard panel 5." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Cash Trapped II — panel 5</span><span class="wall__cap-project">Storyboards</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/eow/eow-10-chainmakers.png" data-title="Lion chain makers" data-no="29">
+    <img src="assets/thumbs/eow/eow-10-chainmakers.jpg" alt="Eyes of Wakanda: five armoured chain makers in helmets and studded leather, front and back." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Lion chain makers</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/personal/personal-08-gangster.png" data-title="Female gangster" data-no="30">
+    <img src="assets/thumbs/personal/personal-08-gangster.jpg" alt="Personal work: a female gangster character design." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Female gangster</span><span class="wall__cap-project">Personal</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/eow/eow-11-harem.png" data-title="Harem captives" data-no="31">
+    <img src="assets/thumbs/eow/eow-11-harem.jpg" alt="Eyes of Wakanda: four figures in pale blue robes and gold headdresses." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Harem captives</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/personal/personal-09-sketches.jpg" data-title="Character sketches" data-no="32">
+    <img src="assets/thumbs/personal/personal-09-sketches.jpg" alt="Personal work: character sketches." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Character sketches</span><span class="wall__cap-project">Personal</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/eow/eow-12-seamstresses.png" data-title="Seamstresses" data-no="33">
+    <img src="assets/thumbs/eow/eow-12-seamstresses.jpg" alt="Eyes of Wakanda: three seamstresses in teal and gold wraps, of different ages and builds." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Seamstresses</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/personal/personal-10-dump.jpg" data-title="Style dump" data-no="34">
+    <img src="assets/thumbs/personal/personal-10-dump.jpg" alt="Personal work: a style dump sheet." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Style dump</span><span class="wall__cap-project">Personal</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/eow/eow-13-ethiopian.png" data-title="Ethiopian soldiers" data-no="35">
+    <img src="assets/thumbs/eow/eow-13-ethiopian.jpg" alt="Eyes of Wakanda: a shield bearer, a spearman in a grey robe, and a commander with a gold disc shield." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Ethiopian soldiers</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/personal/personal-11-futuristic.png" data-title="Futuristic guy" data-no="36">
+    <img src="assets/thumbs/personal/personal-11-futuristic.jpg" alt="Personal work: a futuristic character design." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Futuristic guy</span><span class="wall__cap-project">Personal</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/eow/eow-14-crowd.png" data-title="River tribe" data-no="37">
+    <img src="assets/thumbs/eow/eow-14-crowd.jpg" alt="Eyes of Wakanda: four river tribe civilians in striped and beaded wraps, one in a wide woven hat." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">River tribe</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/personal/personal-12-sketch.png" data-title="Sketches" data-no="38">
+    <img src="assets/thumbs/personal/personal-12-sketch.jpg" alt="Personal work: sketches." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Sketches</span><span class="wall__cap-project">Personal</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/eow/eow-15-dora.png" data-title="Shape language — the Lion team" data-no="39">
+    <img src="assets/thumbs/eow/eow-15-dora.jpg" alt="Eyes of Wakanda: five torsos labelled Shakoo, B'Risa, Koi'Fay, Y'Fett and Le'illa, each with a geometric primitive and handwritten design notes." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Shape language — the Lion team</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/eow/eow-16-flashback.png" data-title="Flashback — render test" data-no="40">
+    <img src="assets/thumbs/eow/eow-16-flashback.jpg" alt="Eyes of Wakanda: a rendered bald warrior bust in warm light, with the line drawing it came from." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Flashback — render test</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/thumbs/boards/coma-toes-f05.jpg" data-title="Coma Toes — panel 5" data-no="41">
+    <img src="assets/thumbs/boards/coma-toes-f05.jpg" alt="Coma Toes: storyboard panel 5." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Coma Toes — panel 5</span><span class="wall__cap-project">Storyboards</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/eow/eow-17-dora-02.png" data-title="Lion team — in character" data-no="42">
+    <img src="assets/thumbs/eow/eow-17-dora-02.jpg" alt="Eyes of Wakanda: four vignettes of the Lion team together, annotated in red handwriting." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Lion team — in character</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/eow/eow-18-crowd-02.png" data-title="Mining tribe" data-no="43">
+    <img src="assets/thumbs/eow/eow-18-crowd-02.jpg" alt="Eyes of Wakanda: four mining tribe figures in red checked cloth, beads and heavy sandals." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Mining tribe</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/thumbs/boards/coma-toes-f07.jpg" data-title="Coma Toes — panel 7" data-no="44">
+    <img src="assets/thumbs/boards/coma-toes-f07.jpg" alt="Coma Toes: storyboard panel 7." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Coma Toes — panel 7</span><span class="wall__cap-project">Storyboards</span></span>
+  </button>
+  <button class="wall__tile" type="button" data-full="assets/eow/eow-19-crowd-03.png" data-title="Wakandan caravan — merchant tribe" data-no="45">
+    <img src="assets/thumbs/eow/eow-19-crowd-03.jpg" alt="Eyes of Wakanda: four merchants in deep blue and plum robes, one veiled." loading="lazy" decoding="async">
+    <span class="wall__cap"><span class="wall__cap-title">Wakandan caravan — merchant tribe</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
+  </button>
+</section>
 
-      <div class="hero__meta" aria-hidden="true">
-        <span class="anno">EYES OF WAKANDA</span>
-        <span class="anno">MARVEL ANIMATION</span>
-      </div>
+<section class="text" id="about">
+  <h2>About</h2>
+  <p>I am a "self-taught" Nigerian Writer/Director and Visual Development Artist in Animation with over 10 years of experience. My works portraying authentic representation of African characters have gained local and international acclaim.</p>
+  <p>Some of my accolades include a 2026 Primetime Creative Arts Emmy: Outstanding Individual Achievement In Animation, Character Design for <em>Eyes of Wakanda</em> and a 2025 Concept Art Association Award for Animated Series Character Concept – Noni, <em>Eyes of Wakanda</em> at LightBox Expo.</p>
+  <p>The notable mainstream projects in my visual development portfolio are Marvel Animation's <em>Eyes of Wakanda</em> and Lion Forge's <em>Iyanu</em>. Other past studio clients include Netflix Animation, Disney, Laika, Triggerfish, Psyop and Stoopid Buddy Stoodios.</p>
+  <p>In the course of my career, I've trained and mentored about 150 artists of various nationalities around the world. Passing on knowledge from my years of expertise is paramount to me. I hope to impact 1 million artists by 2036.</p>
+  <p>In 2015, I founded Scroll Entertainment—an animation studio based in Lagos, Nigeria. I am currently directing my debut animated short with an Academy Award Winning Producer. The film is inspired by the daily struggle of an artist to create or conform.</p>
+  <p>I love to draw and I do so everyday. So much so that I see my drawing skills atrophy after two weeks of hiatus. Some of the artworks I create are shared on my social media occasionally.</p>
+</section>
+</main>
 
-      <div class="hero__lamp" aria-hidden="true"></div>
+<footer class="foot" id="contact">
+  <a class="foot__mail" href="mailto:hello@uzomadunkwu.com">hello@uzomadunkwu.com</a>
+  <div class="foot__links">
+    <a href="https://www.instagram.com/uzomadunkwu" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.linkedin.com/in/uzomadunkwu/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.youtube.com/channel/UCU9rpgl7qDSV2p3UXm0jS4g" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://x.com/UzomaDunkwu" target="_blank" rel="noopener">X</a>
+  </div>
+  <p class="foot__clients">Marvel Animation · Lion Forge · Netflix Animation · Disney · Laika · Triggerfish · Psyop · Stoopid Buddy Stoodios · Scroll Entertainment</p>
+</footer>
 
-      <div class="hero__frame">
-        <div class="hero__sheet">
-          <div class="hero__paper" aria-hidden="true"></div>
-          <img class="hero__pass hero__pass--sil"   src="assets/hero-eow-lineup-sil.png"   alt="" aria-hidden="true" fetchpriority="high">
-          <img class="hero__pass hero__pass--line"  src="assets/hero-eow-lineup-line.jpg"  alt="" aria-hidden="true">
-          <img class="hero__pass hero__pass--flat"  src="assets/hero-eow-lineup-flat.jpg"  alt="" aria-hidden="true">
-          <img class="hero__pass hero__pass--final" src="assets/hero-eow-lineup-final.jpg"
-               alt="Eyes of Wakanda: character design lineup by Uzoma Dunkwu. Five Lion team warriors — Shakoo, B'Risa, Koi'Fay, Y'Fett and Le'illa — in gold lion masks and layered violet wraps, on an annotated concept sheet.">
-        </div>
-
-        <!-- the pen: a label per figure, hanging from each head -->
-        <div class="hero__annos" aria-hidden="true">
-          <div class="anno-item" data-fig="0">
-            <span class="anno-item__tag">
-              <svg class="anno-shape" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16"/></svg>
-              <span class="anno anno-item__name">SHAKOO</span>
-            </span>
-            <span class="anno-item__leader"></span>
-          </div>
-
-          <div class="anno-item" data-fig="1">
-            <span class="anno-item__tag">
-              <svg class="anno-shape" viewBox="0 0 24 24"><polygon points="12,3 22,20 2,20"/></svg>
-              <span class="anno anno-item__name">B'RISA</span>
-            </span>
-            <span class="anno-item__leader"></span>
-          </div>
-
-          <div class="anno-item" data-fig="2">
-            <span class="anno-item__tag">
-              <svg class="anno-shape" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="12" x2="12" y2="3"/></svg>
-              <span class="anno anno-item__name">KOI'FAY</span>
-            </span>
-            <span class="anno-item__leader"></span>
-          </div>
-
-          <div class="anno-item" data-fig="3">
-            <span class="anno-item__tag">
-              <svg class="anno-shape" viewBox="0 0 24 24"><polygon points="3,4 21,4 16,20 8,20"/></svg>
-              <span class="anno anno-item__name">Y'FETT</span>
-            </span>
-            <span class="anno-item__leader"></span>
-          </div>
-
-          <div class="anno-item" data-fig="4">
-            <span class="anno-item__tag">
-              <svg class="anno-shape" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16"/></svg>
-              <span class="anno anno-item__name">LE'ILLA</span>
-            </span>
-            <span class="anno-item__leader"></span>
-          </div>
-        </div>
-      </div>
-
-      <h1 class="hero__name display display--optical" aria-label="Uzoma Dunkwu">
-        <span class="hero__word" aria-hidden="true"><span>U</span><span>Z</span><span>O</span><span>M</span><span>A</span></span>
-        <span class="hero__word" aria-hidden="true"><span>D</span><span>U</span><span>N</span><span>K</span><span>W</span><span>U</span></span>
-      </h1>
-
-      <div class="hero__base">
-        <p class="hero__oneline anno">
-          Emmy &amp; CAA Award-winning Visual Development Artist and Writer/Director in Animation.
-        </p>
-        <p class="hero__cue anno" aria-hidden="true">
-          <span class="hero__cue-rail"></span>SCROLL
-        </p>
-      </div>
-    </section>
-
-    <!-- ==============================
-         THE WALL — every sheet, mielgo-style.
-         The gallery is the main event; the story
-         continues after it.
-         ============================== -->
-    <section class="wall" id="wall" aria-label="The wall — every finished sheet, open any at full size">
-      <p class="wall__label anno anno--dim">THE WALL — EVERY SHEET, OPEN ANY</p>
-      <div class="wall__cols"></div>
-      <div class="wall__veil" aria-hidden="true"></div>
-    </section>
-
-    <!-- ==============================
-         AWARD — the trophy moment
-         Brass appears here and nowhere else
-         ============================== -->
-    <section class="award" id="award" aria-label="Awards">
-      <img class="award__ghost" src="assets/eow/eow-02-noni-ghost.png" alt="" aria-hidden="true" loading="lazy">
-
-      <div class="award__inner">
-        <figure class="award__trophy">
-          <div class="award__bloom" aria-hidden="true"></div>
-          <img class="award__trophy-img"
-               src="assets/misc/caa-award.png"
-               alt="The 2025 Concept Art Awards trophy — a brass and maple gear engraved for Uzoma Dunkwu — held in the artist's hand."
-               loading="lazy">
-        </figure>
-
-        <div class="award__type">
-          <div class="award__line award__line--1"><span class="display display--optical">EMMY</span></div>
-          <div class="award__line award__line--2"><span class="display display--optical">2026</span></div>
-          <div class="award__line award__line--3">
-            <span class="display">OUTSTANDING INDIVIDUAL ACHIEVEMENT IN ANIMATION, CHARACTER DESIGN</span>
-          </div>
-          <p class="award__caa anno">
-            <span class="anno-tick"></span>2025 CONCEPT ART ASSOCIATION AWARD, ANIMATED SERIES CHARACTER CONCEPT: NONI, <em>EYES OF WAKANDA</em>, LIGHTBOX EXPO
-          </p>
-          <div class="award__rule" aria-hidden="true"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==============================
-         ABOUT — the primitive changes with the argument
-         ============================== -->
-    <section class="about u-ink-section" id="about" aria-label="About Uzoma Dunkwu">
-      <div class="about__sticky">
-        <h2 class="about__title display">ABOUT</h2>
-        <div class="about__shape" aria-hidden="true">
-          <svg class="about__shape-sq" viewBox="0 0 64 64"><rect x="8" y="8" width="48" height="48"/></svg>
-          <svg class="about__shape-tri" viewBox="0 0 64 64"><polygon points="32,6 58,56 6,56"/></svg>
-          <svg class="about__shape-cir" viewBox="0 0 64 64"><circle cx="32" cy="32" r="26"/><line x1="32" y1="32" x2="32" y2="6"/></svg>
-        </div>
-        <p class="about__shape-label anno">SQUARE / RIGID</p>
-      </div>
-
-      <div class="about__flow">
-        <p class="prose">I am a "self-taught" Nigerian Writer/Director and Visual Development Artist in Animation with over <span class="num" data-count="10">10</span> years of experience. My works portraying authentic representation of African characters have gained local and international acclaim.</p>
-
-        <p class="prose">Some of my accolades include a <span class="num" data-count="2026" data-year>2026</span> Primetime Creative Arts Emmy: Outstanding Individual Achievement In Animation, Character Design for <em>Eyes of Wakanda</em> and a 2025 Concept Art Association Award for Animated Series Character Concept – Noni, <em>Eyes of Wakanda</em> at LightBox Expo.</p>
-
-        <p class="prose">The notable mainstream projects in my visual development portfolio are Marvel Animation's <em>Eyes of Wakanda</em> and Lion Forge's <em>Iyanu</em>. Other past studio clients include Netflix Animation, Disney, Laika, Triggerfish, Psyop and Stoopid Buddy Stoodios.</p>
-
-        <p class="prose">In the course of my career, I've trained and mentored about <span class="num" data-count="150">150</span> artists of various nationalities around the world. Passing on knowledge from my years of expertise is paramount to me. I hope to impact <span class="num" data-count="1000000">1,000,000</span> artists by <span class="num" data-count="2036" data-year>2036</span>.</p>
-
-        <p class="prose">In <span class="num" data-count="2015" data-year>2015</span>, I founded Scroll Entertainment—an animation studio based in Lagos, Nigeria. I am currently directing my debut animated short with an Academy Award Winning Producer. The film is inspired by the daily struggle of an artist to create or conform.</p>
-
-        <p class="prose">I love to draw and I do so everyday. So much so that I see my drawing skills atrophy after two weeks of hiatus. Some of the artworks I create are shared on my social media occasionally.</p>
-      </div>
-    </section>
-
-    <!-- ==============================
-         PORTFOLIO — the x-ray gallery
-         ============================== -->
-    <section class="portfolio" id="portfolio" aria-label="Portfolio">
-      <div class="portfolio__head u-wrap">
-        <h2 class="display" data-reveal="lines">PORTFOLIO</h2>
-      </div>
-
-      <div class="portfolio__track">
-        <article class="work-card">
-          <a class="work-card__link" href="work-eyes-of-wakanda.html">
-            <div class="work-card__media" data-reveal="plate">
-              <img class="work-card__img work-card__img--final"
-                   src="assets/eow/eow-01-lineup.png"
-                   alt="Eyes of Wakanda: five Lion team warrior character designs on one annotated concept sheet."
-                   loading="lazy">
-              <img class="work-card__img work-card__img--xray"
-                   src="assets/eow/eow-01-lineup-line.jpg"
-                   alt="" aria-hidden="true" loading="lazy">
-              <span class="work-card__probe" aria-hidden="true"></span>
-            </div>
-            <div class="work-card__meta">
-              <span class="work-card__idx">01</span>
-              <span class="work-card__name display">EYES OF WAKANDA</span>
-              <span class="work-card__studio anno">MARVEL ANIMATION · CHARACTER DESIGN</span>
-            </div>
-          </a>
-        </article>
-
-        <article class="work-card">
-          <a class="work-card__link" href="work-iyanu.html">
-            <div class="work-card__media" data-reveal="plate">
-              <img class="work-card__img work-card__img--final"
-                   src="assets/iyanu/iyanu-01-ideation.jpg"
-                   alt="Iyanu: character ideation sheet — three young Yoruba characters beside a carved Lamidi Fakeye reference."
-                   loading="lazy">
-              <img class="work-card__img work-card__img--xray"
-                   src="assets/iyanu/iyanu-01-ideation-line.jpg"
-                   alt="" aria-hidden="true" loading="lazy">
-              <span class="work-card__probe" aria-hidden="true"></span>
-            </div>
-            <div class="work-card__meta">
-              <span class="work-card__idx">02</span>
-              <span class="work-card__name display">IYANU</span>
-              <span class="work-card__studio anno">LION FORGE · VISUAL DEVELOPMENT</span>
-            </div>
-          </a>
-        </article>
-
-        <article class="work-card">
-          <a class="work-card__link" href="work-personal.html">
-            <div class="work-card__media" data-reveal="plate">
-              <img class="work-card__img work-card__img--final"
-                   src="assets/personal/personal-01-afro-ninja.png"
-                   alt="Personal work: a hooded warrior in a blue cape with a forked blade, drawn beside a grey action study."
-                   loading="lazy">
-              <img class="work-card__img work-card__img--xray"
-                   src="assets/personal/personal-01-afro-ninja-line.jpg"
-                   alt="" aria-hidden="true" loading="lazy">
-              <span class="work-card__probe" aria-hidden="true"></span>
-            </div>
-            <div class="work-card__meta">
-              <span class="work-card__idx">03</span>
-              <span class="work-card__name display">PERSONAL</span>
-              <span class="work-card__studio anno">PERSONAL WORK</span>
-            </div>
-          </a>
-        </article>
-      </div>
-    </section>
-
-    <!-- ==============================
-         BOARDS — the animatics
-         ============================== -->
-    <section class="boards" aria-label="Storyboards">
-      <div class="boards__head">
-        <h2 class="display" data-reveal="lines">STORYBOARDS</h2>
-        <a class="anno" href="storyboards.html" data-magnet="0.2">SEE ALL<span class="anno-tick" style="margin:0 0 0 .6em"></span></a>
-      </div>
-
-      <div class="boards__row">
-        <a class="board-tile" href="storyboards.html#coma-toes">
-          <img src="assets/thumbs/boards/coma-toes-f04.jpg" alt="Coma Toes: storyboard frame." loading="lazy">
-          <video muted loop playsinline preload="none" aria-hidden="true">
-            <source src="assets/video/coma-toes.mp4" type="video/mp4">
-            <source src="assets/video/coma-toes.webm" type="video/webm">
-          </video>
-          <span class="board-tile__label">
-            <span class="anno anno--bone">COMA TOES</span>
-            <span class="anno anno--dim">08 PANELS</span>
-          </span>
-        </a>
-
-        <a class="board-tile" href="storyboards.html#cash-trapped">
-          <img src="assets/thumbs/boards/cash-trapped-a-f07.jpg" alt="Cash Trapped, part 1: storyboard frame." loading="lazy">
-          <video muted loop playsinline preload="none" aria-hidden="true">
-            <source src="assets/video/cash-trapped-a.mp4" type="video/mp4">
-            <source src="assets/video/cash-trapped-a.webm" type="video/webm">
-          </video>
-          <span class="board-tile__label">
-            <span class="anno anno--bone">CASH TRAPPED, PART 1</span>
-            <span class="anno anno--dim">08 PANELS</span>
-          </span>
-        </a>
-
-        <a class="board-tile" href="storyboards.html#cash-trapped-two">
-          <img src="assets/thumbs/boards/cash-trapped-b-f05.jpg" alt="Cash Trapped, part 2: storyboard frame." loading="lazy">
-          <video muted loop playsinline preload="none" aria-hidden="true">
-            <source src="assets/video/cash-trapped-b.mp4" type="video/mp4">
-            <source src="assets/video/cash-trapped-b.webm" type="video/webm">
-          </video>
-          <span class="board-tile__label">
-            <span class="anno anno--bone">CASH TRAPPED, PART 2</span>
-            <span class="anno anno--dim">07 PANELS</span>
-          </span>
-        </a>
-      </div>
-    </section>
-
-    <!-- ==============================
-         CREATE / CONFORM — the page takes the test
-         ============================== -->
-    <section class="conform" id="conform" aria-label="Create or conform">
-      <!-- the sheet the test is run on: his own shape-language study -->
-      <img class="conform__art" src="assets/eow/eow-15-dora.png" alt="" aria-hidden="true" loading="lazy">
-      <div class="conform__scrim" aria-hidden="true"></div>
-
-      <div class="conform__side conform__side--left" aria-hidden="true"><span class="display">CONFORM</span></div>
-      <div class="conform__side conform__side--right" aria-hidden="true"><span class="display">CREATE</span></div>
-
-      <div class="conform__marks" aria-hidden="true">
-        <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16"/></svg>
-        <svg viewBox="0 0 24 24"><polygon points="12,3 22,20 2,20"/></svg>
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg>
-        <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16"/></svg>
-        <svg viewBox="0 0 24 24"><polygon points="12,3 22,20 2,20"/></svg>
-      </div>
-
-      <div class="conform__tint" aria-hidden="true"></div>
-
-      <div class="conform__centre">
-        <p class="conform__line anno">THE FILM IS INSPIRED BY THE DAILY STRUGGLE OF AN ARTIST TO CREATE OR CONFORM.</p>
-        <p class="conform__sub anno anno--dim">DEBUT ANIMATED SHORT. DIRECTED BY UZOMA DUNKWU.</p>
-      </div>
-    </section>
-
-    <!-- ==============================
-         TEACHING — the light is on
-         ============================== -->
-    <section class="teaching u-sheet-section" id="teaching" aria-label="Teaching">
-      <p class="teaching__count display" data-reveal>
-        <span class="teaching__num" data-count="150">150</span>
-        <span class="teaching__word">ARTISTS TRAINED</span>
-      </p>
-
-      <div class="teaching__rule" aria-hidden="true"></div>
-
-      <p class="teaching__count teaching__count--goal display" data-reveal>
-        <span class="teaching__num" data-count="1000000">1,000,000</span>
-        <span class="teaching__word">BY 2036</span>
-      </p>
-    </section>
-
-    <!-- ==============================
-         PRODUCTS — one sheet, one action
-         ============================== -->
-    <section class="products u-ink-section" id="products" aria-label="Products">
-      <div class="products__inner">
-        <figure class="products__visual" data-reveal aria-hidden="true">
-          <svg viewBox="0 0 240 240">
-            <circle cx="120" cy="112" r="74"/>
-            <line x1="120" y1="38" x2="120" y2="186"/>
-            <line x1="46" y1="112" x2="194" y2="112"/>
-            <rect x="82" y="74" width="76" height="26"/>
-            <polygon points="120,94 134,138 106,138"/>
-            <circle cx="96" cy="112" r="7"/>
-            <circle cx="144" cy="112" r="7"/>
-          </svg>
-        </figure>
-
-        <div class="products__info">
-          <h2 class="display" data-reveal="lines">ETHNIC CHARACTER DESIGN</h2>
-          <p class="products__tag anno">GUMROAD</p>
-          <a class="products__cta" href="https://uzomadunkwu.gumroad.com/l/ethniccharacterdesign" target="_blank" rel="noopener" data-magnet="0.25">
-            <span class="products__cta-label anno">GET THE PACK</span>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="6,3 20,3 20,17"/><line x1="20" y1="3" x2="6" y2="17"/></svg>
-          </a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- ==============================
-       FOOTER — the name, cropped by the edge
-       ============================== -->
-  <footer class="footer" id="contact" aria-label="Contact">
-    <div class="footer__marquee" aria-hidden="true">
-      <div class="footer__marquee-track">
-        <span>MARVEL ANIMATION · LION FORGE · NETFLIX ANIMATION · DISNEY · LAIKA · TRIGGERFISH · PSYOP · STOOPID BUDDY STOODIOS · SCROLL ENTERTAINMENT ·&nbsp;</span>
-        <span>MARVEL ANIMATION · LION FORGE · NETFLIX ANIMATION · DISNEY · LAIKA · TRIGGERFISH · PSYOP · STOOPID BUDDY STOODIOS · SCROLL ENTERTAINMENT ·&nbsp;</span>
-      </div>
-    </div>
-
-    <div class="footer__body">
-      <div class="footer__socials">
-        <a class="footer__social anno" href="https://www.instagram.com/uzomadunkwu" target="_blank" rel="noopener" data-scramble>INSTAGRAM</a>
-        <a class="footer__social anno" href="https://www.linkedin.com/in/uzomadunkwu/" target="_blank" rel="noopener" data-scramble>LINKEDIN</a>
-        <a class="footer__social anno" href="https://www.youtube.com/channel/UCU9rpgl7qDSV2p3UXm0jS4g" target="_blank" rel="noopener" data-scramble>YOUTUBE</a>
-        <a class="footer__social anno" href="https://x.com/UzomaDunkwu" target="_blank" rel="noopener" data-scramble>X</a>
-      </div>
-      <a class="footer__email display" href="mailto:hello@uzomadunkwu.com" data-scramble>HELLO@UZOMADUNKWU.COM</a>
-    </div>
-
-    <div class="footer__name" aria-hidden="true">
-      <div class="footer__name-track">
-        <span class="display">UZOMA DUNKWU —&nbsp;</span>
-        <span class="display">UZOMA DUNKWU —&nbsp;</span>
-      </div>
-    </div>
-  </footer>
-
-  <!-- motion stack: GSAP + ScrollTrigger + ScrollToPlugin, Lenis, SplitType -->
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
-          integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
-          integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js"
-          integrity="sha384-RVPQwTb0fPz9kI8s5GwAq1Qioto9fnEQt1aKGSQSm8xV6+DIdBSgcCShoHqfKnhv" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"
-          integrity="sha384-O55L/6rhHr9CFvrxqv5luxOCcmVaBmETbZbJDP+Do8T0pztTACsFBD/IXCNkj7DV" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"
-          integrity="sha384-wQImCCD/id1jPTwSloatzKlEpnEAQ5aH8H2Ud27FnNcJ1lf2+hB75ctoWnWxyD8X" crossorigin="anonymous"></script>
-
-  <script src="js/cursor.js?v=4"></script>
-  <script src="js/transitions.js?v=4"></script>
-  <script src="js/core.js?v=4"></script>
-  <script src="js/home.js?v=4"></script>
+<script src="js/site.js"></script>
 </body>
 </html>
