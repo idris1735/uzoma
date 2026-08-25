@@ -416,6 +416,29 @@ body.is-stage { overflow: hidden; height: 100dvh; }
   color: var(--dim);
 }
 
+/* Eyes of Wakanda wordmark — phones only, bottom-left corner */
+.stage__brand {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .stage__brand {
+    position: absolute;
+    left: var(--gutter);
+    bottom: 4.75rem;
+    z-index: 3;
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    pointer-events: none;
+  }
+}
+
 .stage__controls {
   position: absolute;
   left: 0;

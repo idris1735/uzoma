@@ -163,5 +163,27 @@
       if (Math.abs(dx) > 48) go(cur + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1);
       else open(cur);
     });
+
+    /* ===== mobile autoplay: the landing fills itself ===== */
+    /* the set cycles on its own until a finger lands on it; after a
+       quiet spell it starts drifting again. Never under reduced motion. */
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const autoEligible = !reduced &&
+      (window.matchMedia("(max-width: 640px)").matches ||
+       window.matchMedia("(hover: none)").matches);
+    if (autoEligible) {
+      let auto = 0;
+      const arm = () => {
+        clearTimeout(auto);
+        auto = setTimeout(() => { go(cur + 1, 1); arm(); }, 4600);
+      };
+      const pause = (resumeIn = 8000) => {
+        clearTimeout(auto);
+        auto = setTimeout(arm, resumeIn);
+      };
+      arm();
+      stage.addEventListener("pointerdown", () => pause(), { passive: true });
+      range.addEventListener("input", () => pause());
+    }
   }
 })();
