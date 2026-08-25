@@ -285,12 +285,11 @@ window.UZ = (() => {
     const show = (n, dir = 0) => {
       i = (n + plates.length) % plates.length;
       const p = plates[i];
-      const swap = () => {
-        img.src = p.full;
-        img.alt = p.alt;
-        title.textContent = p.title;
-        count.textContent = `${String(i + 1).padStart(2, "0")} / ${String(plates.length).padStart(2, "0")}`;
-      };
+      /* metadata lands instantly — the fade only dresses the image swap */
+      title.textContent = p.title;
+      count.textContent = `${p.no || String(i + 1).padStart(2, "0")} / ${plates.length}`;
+      img.alt = p.alt;
+      const swap = () => { img.src = p.full; };
       if (!MOTION || !dir) { swap(); return; }
       gsap.timeline()
         .to(img, { xPercent: -6 * dir, opacity: 0, duration: 0.18, ease: "power2.in" })
@@ -304,8 +303,13 @@ window.UZ = (() => {
       if (!plates.length) return;
       opener = from || null;
       show(n);
-      /* the sheet settles in from a beat behind */
+      /* the sheet settles in from a beat behind, and the neighbours
+         warm up so next/prev never wait on the network */
       if (MOTION) {
+        [i - 1, i + 1].forEach((k) => {
+          const nb = plates[(k + plates.length) % plates.length];
+          if (nb && nb.full) { const pre = new Image(); pre.src = nb.full; }
+        });
         gsap.fromTo(img,
           { scale: 0.96, opacity: 0 },
           { scale: 1, opacity: 1, duration: 0.5, ease: "expo.out", overwrite: "auto" });
