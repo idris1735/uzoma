@@ -8,8 +8,28 @@
 "use strict";
 
 (() => {
+  /* file:// never fires loading="lazy" in Chromium — strip it so the
+     site works when opened straight off the disk */
+  if (location.protocol === "file:") {
+    document.querySelectorAll("img[loading]").forEach((im) => im.removeAttribute("loading"));
+  }
+
+  /* the mobile menu closes itself when a link is chosen */
+  const navToggle = document.getElementById("nav-toggle");
+  if (navToggle) {
+    document.querySelectorAll(".head__nav a").forEach((a) =>
+      a.addEventListener("click", () => { navToggle.checked = false; }));
+  }
+
   const tiles = Array.from(document.querySelectorAll("[data-full]"));
   if (!tiles.length) return;
+
+  /* the mielgo list shows full-resolution sheets; the markup ships the
+     small thumbs so the page paints fast, then swaps them up */
+  tiles.forEach((t) => {
+    const im = t.querySelector("img");
+    if (im && t.dataset.full) im.src = t.dataset.full;
+  });
 
   const lb = document.createElement("div");
   lb.className = "lb";
