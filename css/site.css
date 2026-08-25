@@ -416,27 +416,44 @@ body.is-stage { overflow: hidden; height: 100dvh; }
   color: var(--dim);
 }
 
-/* Eyes of Wakanda wordmark — phones only, bottom-left corner */
-.stage__brand {
+/* the concept-sheet title banner — phones only, directly below the art */
+.stage__banner {
   display: none;
 }
 
 @media (max-width: 640px) {
-  .stage__brand {
+  .stage__banner {
     position: absolute;
-    left: var(--gutter);
-    bottom: 4.75rem;
+    left: 0;
+    right: 0;
+    bottom: 4.55rem;
     z-index: 3;
-    display: block;
-    font-family: var(--font-display);
-    font-weight: 500;
-    font-size: 0.8125rem;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
+    display: grid;
+    gap: 0.15rem;
+    padding: 0.8rem var(--gutter);
+    background: #000;
     color: #fff;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
     pointer-events: none;
   }
+
+  .stage__banner-studio {
+    font-size: 0.6875rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+
+  .stage__banner-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  /* the sheet caption moves up above the banner */
+  .stage__caption { bottom: 9.9rem; }
 }
 
 .stage__controls {

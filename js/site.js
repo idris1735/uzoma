@@ -105,9 +105,18 @@
     const noEl = stage.querySelector(".stage__no");
     const titleEl = stage.querySelector(".stage__title");
     const projEl = stage.querySelector(".stage__project");
+    const banner = stage.querySelector(".stage__banner");
     const range = stage.querySelector(".stage__range");
     let cur = -1;
     let pressX = null;
+
+    /* the banner reads like the sheet's own title block */
+    const studioFor = (proj) => ({
+      "Eyes of Wakanda": "Marvel Animation",
+      "Iyanu": "Lion Forge",
+      "Personal": "Uzoma Dunkwu",
+      "Storyboards": "Uzoma Dunkwu",
+    }[proj] || "Uzoma Dunkwu");
 
     const go = (n, dir = 0) => {
       cur = (n + tiles.length) % tiles.length;
@@ -117,6 +126,10 @@
       noEl.textContent = `${s.dataset.no || String(cur + 1).padStart(2, "0")} / ${tiles.length}`;
       titleEl.textContent = title;
       projEl.textContent = proj;
+      if (banner) {
+        banner.querySelector(".stage__banner-studio").textContent = studioFor(proj);
+        banner.querySelector(".stage__banner-title").textContent = proj;
+      }
       range.value = String(cur);
 
       img.classList.remove("is-in");
