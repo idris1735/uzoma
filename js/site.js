@@ -14,11 +14,29 @@
     document.querySelectorAll("img[loading]").forEach((im) => im.removeAttribute("loading"));
   }
 
-  /* the mobile menu closes itself when a link is chosen */
+  /* ---- the menu: closes on a chosen link, on Escape, on an outside
+     tap, and keeps its expanded state honest ---- */
   const navToggle = document.getElementById("nav-toggle");
   if (navToggle) {
+    const burger = document.querySelector(".nav-burger");
+    const sync = () => {
+      if (burger) burger.setAttribute("aria-expanded", navToggle.checked ? "true" : "false");
+    };
+    sync();
+    navToggle.addEventListener("change", sync);
+
     document.querySelectorAll(".head__nav a").forEach((a) =>
       a.addEventListener("click", () => { navToggle.checked = false; }));
+
+    document.addEventListener("click", (e) => {
+      if (!navToggle.checked) return;
+      if (e.target.closest(".head__nav, .nav-burger")) return;
+      navToggle.checked = false;
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && navToggle.checked) navToggle.checked = false;
+    });
   }
 
   const tiles = Array.from(document.querySelectorAll("[data-full]"));
@@ -105,18 +123,9 @@
     const noEl = stage.querySelector(".stage__no");
     const titleEl = stage.querySelector(".stage__title");
     const projEl = stage.querySelector(".stage__project");
-    const banner = stage.querySelector(".stage__banner");
     const range = stage.querySelector(".stage__range");
     let cur = -1;
     let pressX = null;
-
-    /* the banner reads like the sheet's own title block */
-    const studioFor = (proj) => ({
-      "Eyes of Wakanda": "Marvel Animation",
-      "Iyanu": "Lion Forge",
-      "Personal": "Uzoma Dunkwu",
-      "Storyboards": "Uzoma Dunkwu",
-    }[proj] || "Uzoma Dunkwu");
 
     const go = (n, dir = 0) => {
       cur = (n + tiles.length) % tiles.length;
@@ -126,10 +135,6 @@
       noEl.textContent = `${s.dataset.no || String(cur + 1).padStart(2, "0")} / ${tiles.length}`;
       titleEl.textContent = title;
       projEl.textContent = proj;
-      if (banner) {
-        banner.querySelector(".stage__banner-studio").textContent = studioFor(proj);
-        banner.querySelector(".stage__banner-title").textContent = proj;
-      }
       range.value = String(cur);
 
       img.classList.remove("is-in");
@@ -183,19 +188,21 @@
     });
 
     /* ===== mobile autoplay: the landing fills itself ===== */
-    /* the set cycles on its own until a finger lands on it; after a
-       quiet spell it starts drifting again. Never under reduced motion. */
+    /* the set drifts on its own, one sheet every ~20s; a finger on it
+       pauses the drift, which resumes after another quiet stretch.
+       Manual steps, swipes and taps always win. Never reduced motion. */
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const autoEligible = !reduced &&
       (window.matchMedia("(max-width: 640px)").matches ||
        window.matchMedia("(hover: none)").matches);
     if (autoEligible) {
+      const AUTO_MS = 20000;
       let auto = 0;
       const arm = () => {
         clearTimeout(auto);
-        auto = setTimeout(() => { go(cur + 1, 1); arm(); }, 4600);
+        auto = setTimeout(() => { go(cur + 1, 1); arm(); }, AUTO_MS);
       };
-      const pause = (resumeIn = 8000) => {
+      const pause = (resumeIn = AUTO_MS) => {
         clearTimeout(auto);
         auto = setTimeout(arm, resumeIn);
       };
