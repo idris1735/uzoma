@@ -75,6 +75,9 @@ ul { list-style: none; }
 
 .head {
   position: relative;
+  /* above the fixed landing stage — without this, the stage image
+     swallows every tap on the header and the menu never opens */
+  z-index: 55;
 }
 
 .head__nav {
@@ -428,6 +431,35 @@ body.is-stage { overflow: hidden; height: 100dvh; }
 @media (max-width: 640px) {
   .stage .stage__caption { display: none; }
   .stage .stage__controls { display: none; }
+}
+
+/* desktop: frame, caption and controls stack instead of overlapping,
+   so the sheet's own title banner at its bottom edge stays visible */
+@media (min-width: 641px) {
+  .stage {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto auto;
+    background: var(--paper);
+  }
+
+  .stage__frame {
+    position: relative;
+    grid-row: 1;
+    background: #000;
+  }
+
+  .stage__caption {
+    position: static;
+    grid-row: 2;
+    padding: 0.75rem var(--gutter) 0;
+    background: var(--paper);
+  }
+
+  .stage__controls {
+    position: static;
+    grid-row: 3;
+    background: var(--paper);
+  }
 }
 
 .stage__controls {
