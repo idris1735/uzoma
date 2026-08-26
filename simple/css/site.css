@@ -254,17 +254,9 @@ body.is-hero {
 
 /* upright — a phone narrower than the tall file, or a tablet stood up on
    the wide one. Either way the frame is held left so the Eyes of Wakanda
-   logo stays in it and the trim comes off the far edge.
-
-   There is no empty ground in an upright crop: the logo sits in the only
-   dark band there is. So the artwork stops short of the bottom and the
-   tagline takes the strip below it. The page is already the sheet's own
-   grey, so the strip reads as the sheet's margin rather than a bar. */
+   logo stays in it and the trim comes off the far edge. */
 @media (max-aspect-ratio: 1/1) {
-  .hero__img {
-    object-position: 0% 50%;
-    height: calc(100% - 6rem);
-  }
+  .hero__img { object-position: 0% 50%; }
 }
 
 @keyframes hero-in { from { opacity: 0; } to { opacity: 1; } }
@@ -282,62 +274,47 @@ body.is-hero {
 
 /* ---- the opening line ---- */
 
-/* The tagline stays. It sits low, where the sheet's own black bar runs
-   almost empty between the logo and the rights mark, so white type lands
-   on the one part of the picture that has nothing drawn on it and needs
-   nothing laid over it — no veil, no scrim, no shading the artwork. It
-   is a link to the about page, and it brightens under the cursor to say
-   so. */
+/* The tagline stays put in the middle of the sheet and fades in once.
+   Nothing is laid over the artwork to carry it — no veil, no panel, no
+   shading. The type carries its own edge instead, a soft dark halo on
+   the glyphs themselves, which is enough over the sheet's mid grey and
+   over the figures alike. It is a link to the about page, and it
+   brightens under the cursor to say so. */
 
 .titlecard {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   z-index: 5;
   display: grid;
-  justify-items: center;
-  padding: 0 var(--gutter) clamp(1.25rem, 8vh, 4rem);
+  place-items: center;
+  padding: 6rem var(--gutter) 5rem;
   text-align: center;
   pointer-events: none;
 }
 
 .titlecard__line {
   pointer-events: auto;
-  display: inline-block;
-  max-width: 46ch;
+  max-width: 24ch;
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: clamp(0.9375rem, 1.9vw, 1.625rem);
-  line-height: 1.25;
-  letter-spacing: -0.005em;
+  font-size: clamp(1.25rem, 3.6vw, 2.625rem);
+  line-height: 1.16;
+  letter-spacing: -0.01em;
   text-wrap: balance;
-  color: rgba(255, 255, 255, 0.86);
-  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.6);
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45), 0 2px 26px rgba(0, 0, 0, 0.55);
+  animation: line-in 1.4s ease 0.35s both;
   transition: color 0.25s ease, text-shadow 0.25s ease;
-}
-
-@media (max-aspect-ratio: 1/1) {
-  .titlecard { padding-bottom: 1.1rem; }
-  .titlecard__line { color: rgba(255, 255, 255, 0.92); text-shadow: none; }
 }
 
 .titlecard__line:hover,
 .titlecard__line:focus-visible {
   color: #fff;
-  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.6), 0 0 28px rgba(255, 255, 255, 0.45);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45), 0 2px 26px rgba(0, 0, 0, 0.55),
+               0 0 30px rgba(255, 255, 255, 0.5);
 }
 
-.titlecard__line .w {
-  display: inline-block;
-  animation: word-in 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: calc(0.4s + var(--i) * 55ms);
-}
-
-@keyframes word-in {
-  from { opacity: 0; transform: translateY(0.5em); }
-  to { opacity: 1; transform: none; }
-}
+@keyframes line-in { from { opacity: 0; } to { opacity: 1; } }
 
 /* ---- the header stands on the artwork, in white ---- */
 
@@ -707,5 +684,5 @@ body.is-deck > main {
   .wall__cap { transition: none; }
   .lb { transition: none; }
   .hero__img { animation: none; }
-  .titlecard__line .w { animation: none; }
+  .titlecard__line { animation-duration: 0.01ms; }
 }
