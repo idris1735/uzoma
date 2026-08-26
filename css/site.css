@@ -287,22 +287,24 @@ body.is-hero {
   z-index: 5;
   display: grid;
   place-items: center;
-  padding: 6rem var(--gutter) 5rem;
+  padding: 6rem var(--gutter) 4rem;
   text-align: center;
   pointer-events: none;
 }
 
 .titlecard__line {
   pointer-events: auto;
-  max-width: 24ch;
+  max-width: 19ch;
   font-family: var(--font-display);
-  font-weight: 500;
-  font-size: clamp(1.25rem, 3.6vw, 2.625rem);
-  line-height: 1.16;
-  letter-spacing: -0.01em;
+  font-weight: 600;
+  /* off the smaller axis, so it grows and shrinks with the artwork
+     behind it rather than running off a short window */
+  font-size: clamp(1.875rem, min(7.2vw, 12vh), 5.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
   text-wrap: balance;
   color: rgba(255, 255, 255, 0.9);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45), 0 2px 26px rgba(0, 0, 0, 0.55);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4), 0 4px 40px rgba(0, 0, 0, 0.5);
   animation: line-in 1.4s ease 0.35s both;
   transition: color 0.25s ease, text-shadow 0.25s ease;
 }
@@ -310,8 +312,8 @@ body.is-hero {
 .titlecard__line:hover,
 .titlecard__line:focus-visible {
   color: #fff;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45), 0 2px 26px rgba(0, 0, 0, 0.55),
-               0 0 30px rgba(255, 255, 255, 0.5);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4), 0 4px 40px rgba(0, 0, 0, 0.5),
+               0 0 34px rgba(255, 255, 255, 0.45);
 }
 
 @keyframes line-in { from { opacity: 0; } to { opacity: 1; } }
@@ -555,6 +557,122 @@ body.is-deck > main {
 @media (max-width: 640px) {
   .deck__btn { width: 2.75rem; height: 2.75rem; }
   .deck__dot { width: 0.75rem; }
+}
+
+/* ---------------------------------------------------------- show ------ */
+
+/* The storyboard pages hold two kinds of thing: a board to page through
+   and an animatic on YouTube. A tab for each, one on screen at a time,
+   nothing scrolling.
+
+   The boards are the PDFs the client sent, rendered a page at a time by
+   tools/prep_boards.py. Serving pages rather than the file means there
+   is no 74 MB download to offer, and a reader waits for one page rather
+   than the whole board. */
+
+.show {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: clamp(0.6rem, 1.6vw, 1rem);
+  padding: clamp(0.5rem, 1.5vw, 1rem) var(--gutter) clamp(1rem, 2.5vw, 1.75rem);
+}
+
+.show__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+}
+
+.show__title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.125rem, 2.4vw, 1.75rem);
+  letter-spacing: -0.01em;
+}
+
+.show__tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+.show__tab {
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  color: var(--dim);
+  font: inherit;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.show__tab:hover { border-color: var(--ink); color: var(--ink); }
+
+.show__tab[aria-selected="true"] {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.view {
+  grid-row: 2;
+  grid-column: 1;
+  min-height: 0;
+  display: none;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 0.75rem;
+}
+
+.view.is-on { display: grid; }
+
+.view__frame { position: relative; min-height: 0; }
+
+.view__page {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  /* the board is to be read here, not collected: there is no file to
+     take, and the page itself does not invite saving */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* The player keeps 16:9 and centres in whatever room is left. An iframe
+   has no object-fit, so the width is capped against the window height
+   less the chrome above it — a little conservative, which costs a few
+   pixels and guarantees the player never overflows its frame. */
+.view__film {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: min(100%, calc((100dvh - 13.5rem) * 16 / 9));
+  max-height: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.view__film iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+.view__bar {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(0.75rem, 2.5vw, 1.5rem);
+  max-width: 46rem;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.view__scrub {
+  width: 100%;
+  accent-color: var(--ink);
+  cursor: pointer;
 }
 
 /* ---------------------------------------------------------- contact -- */

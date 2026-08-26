@@ -41,54 +41,32 @@
 </header>
 
 <main id="main">
-<section class="deck" data-deck>
-  <h1 class="deck__title">Coma Toes</h1>
-  <div class="deck__stage">
-    <figure class="slide">
-      <div class="slide__frame"><video src="assets/video/coma-toes.mp4" poster="assets/thumbs/boards/coma-toes-f04.jpg" controls muted loop playsinline preload="none" aria-label="Coma Toes animatic"></video></div>
-      <figcaption>Coma Toes — animatic</figcaption>
-    </figure>
-    <figure class="slide">
-      <div class="slide__frame"><img src="assets/thumbs/boards/coma-toes-f01.jpg" alt="Coma Toes: storyboard panel 1." fetchpriority="high" decoding="async"></div>
-      <figcaption>Coma Toes</figcaption>
-    </figure>
-    <figure class="slide">
-      <div class="slide__frame"><img src="assets/thumbs/boards/coma-toes-f02.jpg" alt="Coma Toes: storyboard panel 2." loading="lazy" decoding="async"></div>
-      <figcaption>Coma Toes</figcaption>
-    </figure>
-    <figure class="slide">
-      <div class="slide__frame"><img src="assets/thumbs/boards/coma-toes-f03.jpg" alt="Coma Toes: storyboard panel 3." loading="lazy" decoding="async"></div>
-      <figcaption>Coma Toes</figcaption>
-    </figure>
-    <figure class="slide">
-      <div class="slide__frame"><img src="assets/thumbs/boards/coma-toes-f04.jpg" alt="Coma Toes: storyboard panel 4." loading="lazy" decoding="async"></div>
-      <figcaption>Coma Toes</figcaption>
-    </figure>
-    <figure class="slide">
-      <div class="slide__frame"><img src="assets/thumbs/boards/coma-toes-f05.jpg" alt="Coma Toes: storyboard panel 5." loading="lazy" decoding="async"></div>
-      <figcaption>Coma Toes</figcaption>
-    </figure>
-    <figure class="slide">
-      <div class="slide__frame"><img src="assets/thumbs/boards/coma-toes-f06.jpg" alt="Coma Toes: storyboard panel 6." loading="lazy" decoding="async"></div>
-      <figcaption>Coma Toes</figcaption>
-    </figure>
-    <figure class="slide">
-      <div class="slide__frame"><img src="assets/thumbs/boards/coma-toes-f07.jpg" alt="Coma Toes: storyboard panel 7." loading="lazy" decoding="async"></div>
-      <figcaption>Coma Toes</figcaption>
-    </figure>
-    <figure class="slide">
-      <div class="slide__frame"><img src="assets/thumbs/boards/coma-toes-f08.jpg" alt="Coma Toes: storyboard panel 8." loading="lazy" decoding="async"></div>
-      <figcaption>Coma Toes</figcaption>
-    </figure>
+<section class="show" data-show>
+  <div class="show__head">
+    <h1 class="show__title">Coma Toes</h1>
+    <div class="show__tabs" role="tablist">
+      <button class="show__tab" type="button" role="tab">Storyboard</button>
+      <button class="show__tab" type="button" role="tab">Animatic</button>
+    </div>
   </div>
-  <div class="deck__bar">
-    <button class="deck__btn" type="button" data-deck-prev aria-label="Previous">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15,4 7,12 15,20"/></svg>
-    </button>
-    <div class="deck__dots"></div>
-    <button class="deck__btn" type="button" data-deck-next aria-label="Next">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9,4 17,12 9,20"/></svg>
-    </button>
+  <div class="view view--board" data-count="529" data-path="boards/coma-toes/">
+    <div class="view__frame">
+      <img class="view__page" src="boards/coma-toes/0001.webp" alt="Coma Toes storyboard" draggable="false" fetchpriority="high" decoding="async">
+    </div>
+    <div class="view__bar">
+      <button class="deck__btn" type="button" data-page-prev aria-label="Previous page"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15,4 7,12 15,20"/></svg></button>
+      <input class="view__scrub" type="range" min="1" max="529" value="1" step="1" aria-label="Coma Toes storyboard page">
+      <button class="deck__btn" type="button" data-page-next aria-label="Next page"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9,4 17,12 9,20"/></svg></button>
+    </div>
+  </div>
+  <div class="view view--film">
+    <div class="view__frame">
+      <div class="view__film">
+        <iframe data-src="https://www.youtube-nocookie.com/embed/oGPjcp5Oczc?rel=0" title="Coma-Toes animatic"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </div>
   </div>
 </section>
 </main>
