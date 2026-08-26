@@ -9,27 +9,41 @@ machine.
 
 Each page is rendered whole rather than lifting the drawing out of it,
 because the scene and panel numbers along the top are part of what the
-client wants read. WebP because these are flat colour and hard line —
-it lands around a tenth of the PDF page's weight and a third of JPEG's.
+client wants read — but the white margin around that is trimmed off, so
+the board fills the screen instead of a box of paper it sits inside.
+WebP because these are flat colour and hard line: it lands around a
+tenth of the PDF page's weight and a third of JPEG's.
 """
 
 import os
 from io import BytesIO
 
 import fitz
+import numpy as np
 from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "boards")
 
-DPI = 110
-QUALITY = 80
+DPI = 150
+QUALITY = 76
 
 BOARDS = [
     ("coma-toes", "Comatoes_Storyboard.pdf"),
     ("cash-trapped-1", "Cashtrapped1_Storyboard.pdf"),
     ("cash-trapped-2", "Cashtrapped2_Storyboard.pdf"),
 ]
+
+
+def trim(im):
+    """Drop the white paper margin so the board itself fills the frame."""
+    a = np.asarray(im).astype(np.int16)
+    ink = a.min(axis=2) < 245
+    rows = np.where(ink.any(axis=1))[0]
+    cols = np.where(ink.any(axis=0))[0]
+    if not len(rows) or not len(cols):
+        return im
+    return im.crop((cols[0], rows[0], cols[-1] + 1, rows[-1] + 1))
 
 
 def render(slug, pdf):
@@ -41,9 +55,9 @@ def render(slug, pdf):
     total = 0
     for n, page in enumerate(doc, 1):
         pix = page.get_pixmap(dpi=DPI)
-        im = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
+        im = trim(Image.frombytes("RGB", (pix.width, pix.height), pix.samples))
         buf = BytesIO()
-        im.save(buf, format="WEBP", quality=QUALITY, method=5)
+        im.save(buf, format="WEBP", quality=QUALITY, method=6)
         path = os.path.join(out, f"{n:04d}.webp")
         with open(path, "wb") as fh:
             fh.write(buf.getvalue())
@@ -52,7 +66,7 @@ def render(slug, pdf):
             print(f"    {slug} {n}/{len(doc)}", flush=True)
 
     print(f"  {slug:16} {len(doc)} pages  {total // 1024 // 1024} MB  "
-          f"({pix.width}x{pix.height})", flush=True)
+          f"({im.width}x{im.height})", flush=True)
     return len(doc)
 
 

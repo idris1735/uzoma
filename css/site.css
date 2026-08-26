@@ -286,37 +286,46 @@ body.is-hero {
   inset: 0;
   z-index: 5;
   display: grid;
-  place-items: center;
-  padding: 6rem var(--gutter) 4rem;
+  justify-items: center;
+  /* held to the upper half: the artist's handwritten notes run along the
+     bottom of the sheet, and two sets of writing in one place read as
+     clutter */
+  align-content: start;
+  padding: clamp(6rem, 18vh, 11rem) var(--gutter) 2rem;
   text-align: center;
   pointer-events: none;
 }
 
 .titlecard__line {
   pointer-events: auto;
-  max-width: 19ch;
+  display: block;
   font-family: var(--font-display);
   font-weight: 600;
-  /* off the smaller axis, so it grows and shrinks with the artwork
-     behind it rather than running off a short window */
-  font-size: clamp(1.875rem, min(7.2vw, 12vh), 5.5rem);
+  /* Off the smaller axis, so it grows and shrinks with the artwork
+     behind it rather than running off a short window. The third term
+     caps it so the award line always fits across in one piece — it is
+     that line's own width in ems. */
+  font-size: clamp(1.25rem, min(7.2vw, 12vh, (100vw - 2 * var(--gutter)) / 14.3), 5.5rem);
   line-height: 1.02;
   letter-spacing: -0.025em;
-  text-wrap: balance;
-  color: rgba(255, 255, 255, 0.9);
+  color: #fff;
+  opacity: 0.65;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4), 0 4px 40px rgba(0, 0, 0, 0.5);
   animation: line-in 1.4s ease 0.35s both;
-  transition: color 0.25s ease, text-shadow 0.25s ease;
+  transition: opacity 0.25s ease, text-shadow 0.25s ease;
 }
+
+/* the award line stays whole; the rest wraps under it */
+.titlecard__lead { display: block; white-space: nowrap; }
 
 .titlecard__line:hover,
 .titlecard__line:focus-visible {
-  color: #fff;
+  opacity: 1;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4), 0 4px 40px rgba(0, 0, 0, 0.5),
                0 0 34px rgba(255, 255, 255, 0.45);
 }
 
-@keyframes line-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes line-in { from { opacity: 0; } to { opacity: 0.65; } }
 
 /* ---- the header stands on the artwork, in white ---- */
 
@@ -444,6 +453,10 @@ body.is-hero {
 
 body.is-deck { height: 100dvh; overflow: hidden; }
 
+/* the page cannot scroll, so every pixel the header takes is a pixel off
+   the artwork */
+body.is-deck .head { padding: clamp(0.9rem, 2vw, 1.5rem) var(--gutter); }
+
 body.is-deck > main {
   flex: 1 1 auto;
   min-height: 0;
@@ -455,8 +468,8 @@ body.is-deck > main {
   min-height: 0;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
-  gap: clamp(0.6rem, 1.6vw, 1rem);
-  padding: clamp(0.5rem, 1.5vw, 1rem) var(--gutter) clamp(1rem, 2.5vw, 1.75rem);
+  gap: clamp(0.5rem, 1.2vw, 0.75rem);
+  padding: 0 var(--gutter) clamp(0.6rem, 1.6vw, 1rem);
 }
 
 .deck__title {
@@ -511,8 +524,8 @@ body.is-deck > main {
   flex: none;
   display: grid;
   place-items: center;
-  width: 3rem;
-  height: 3rem;
+  width: 2.5rem;
+  height: 2.5rem;
   border: 1px solid var(--rule);
   border-radius: 50%;
   background: var(--paper);
@@ -575,8 +588,8 @@ body.is-deck > main {
   min-height: 0;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
-  gap: clamp(0.6rem, 1.6vw, 1rem);
-  padding: clamp(0.5rem, 1.5vw, 1rem) var(--gutter) clamp(1rem, 2.5vw, 1.75rem);
+  gap: clamp(0.5rem, 1.2vw, 0.75rem);
+  padding: 0 var(--gutter) clamp(0.6rem, 1.6vw, 1rem);
 }
 
 .show__head {
@@ -621,7 +634,7 @@ body.is-deck > main {
   min-height: 0;
   display: none;
   grid-template-rows: minmax(0, 1fr) auto;
-  gap: 0.75rem;
+  gap: 0.4rem;
 }
 
 .view.is-on { display: grid; }
@@ -664,7 +677,7 @@ body.is-deck > main {
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: clamp(0.75rem, 2.5vw, 1.5rem);
-  max-width: 46rem;
+  max-width: 40rem;
   width: 100%;
   margin-inline: auto;
 }
@@ -715,6 +728,48 @@ body.is-deck > main {
 .reach__social .social--linkedin:hover { color: #0a66c2; }
 .reach__social .social--youtube:hover { color: #ff0000; }
 .reach__social .social--x:hover { color: #111; }
+
+/* ---- upright screens: sit the controls against the work ---- */
+
+/* A board is twice as wide as it is tall. On a phone it fills the width
+   and leaves most of the column empty, which pushes the scrub — and a
+   deck's caption — a long way from the thing it belongs to. So on those
+   screens the artwork sizes itself and the pair centres together. */
+
+@media (max-aspect-ratio: 1/1) {
+  .view--board {
+    align-content: center;
+    grid-template-rows: auto auto;
+  }
+
+  .view--board .view__frame { position: static; }
+
+  .view--board .view__page {
+    position: static;
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 62vh;
+    margin-inline: auto;
+  }
+
+  .deck.is-live .slide.is-on {
+    align-content: center;
+    grid-template-rows: auto auto;
+  }
+
+  .slide__frame { position: static; }
+
+  .slide__frame img {
+    position: static;
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 70vh;
+    margin-inline: auto;
+  }
+}
 
 /* ---------------------------------------------------------- burger --- */
 
