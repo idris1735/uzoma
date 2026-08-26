@@ -9,12 +9,16 @@
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
 <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600&f[]=satoshi@400,500&display=swap" rel="stylesheet">
+<link rel="preload" as="image" media="(min-aspect-ratio: 62/100)"
+      imagesrcset="assets/hero/dora-wide-1600.jpg 1600w, assets/hero/dora-wide-2560.jpg 2560w" imagesizes="100vw">
+<link rel="preload" as="image" media="(max-aspect-ratio: 62/100)"
+      imagesrcset="assets/hero/dora-tall-720.jpg 720w, assets/hero/dora-tall-1080.jpg 1080w" imagesizes="100vw">
 <link rel="stylesheet" href="css/site.css">
 </head>
-<body class="is-stage">
+<body class="is-hero">
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="head">
+<header class="head head--over">
   <a class="head__name" href="index.html">Uzoma Dunkwu</a>
   <nav class="head__nav" aria-label="Primary">
     <a href="about.html">About</a>
@@ -34,7 +38,7 @@
       </div>
     </div>
     <a href="https://uzomadunkwu.gumroad.com/l/ethniccharacterdesign" target="_blank" rel="noopener">Products</a>
-    <a href="about.html#contact">Contact</a>
+    <a href="contact.html">Contact</a>
   </nav>
   <input class="nav-toggle" type="checkbox" id="nav-toggle">
   <label class="nav-burger" for="nav-toggle" aria-label="Menu"><span></span><span></span></label>
@@ -42,208 +46,38 @@
 
 <main id="main">
 
-<section class="stage" aria-label="Artwork slider — forty-five sheets, controlled">
-  <div class="stage__frame">
-    <img class="stage__img" src="assets/eow/eow-15-dora.png" alt="" fetchpriority="high">
-  </div>
-  <div class="stage__caption">
-    <span class="stage__no">39 / 45</span>
-    <span class="stage__title">Shape language — the Lion team</span>
-    <span class="stage__project">Eyes of Wakanda</span>
-  </div>
-  <div class="stage__controls">
-    <button class="stage__btn" type="button" data-prev aria-label="Previous sheet">
-      <svg viewBox="0 0 24 24"><polyline points="14,5 7,12 14,19"/></svg>
-    </button>
-    <input class="stage__range" type="range" min="0" max="44" value="38" aria-label="Scrub through the sheets">
-    <button class="stage__btn" type="button" data-next aria-label="Next sheet">
-      <svg viewBox="0 0 24 24"><polyline points="10,5 17,12 10,19"/></svg>
-    </button>
+<section class="hero">
+  <h1 class="sr">Uzoma Dunkwu — visual development artist</h1>
+  <picture>
+    <source media="(max-aspect-ratio: 62/100)"
+            srcset="assets/hero/dora-tall-720.jpg 720w,
+                    assets/hero/dora-tall-1080.jpg 1080w"
+            sizes="100vw">
+    <img class="hero__img"
+         src="assets/hero/dora-wide-1600.jpg"
+         srcset="assets/hero/dora-wide-1600.jpg 1600w,
+                 assets/hero/dora-wide-2560.jpg 2560w"
+         sizes="100vw"
+         alt="Eyes of Wakanda character sheet: Shakoo, B’Risa, Koi’Fay, Y’Fett and Le’illa in head and shoulders, each beside the green geometric shape her design is built from, with the artist’s notes underneath."
+         fetchpriority="high" decoding="async">
+  </picture>
+
+  <div class="titlecard">
+    <p class="titlecard__line">
+      <span class="w" style="--i:0">Emmy</span>
+      <span class="w" style="--i:1">&amp;</span>
+      <span class="w" style="--i:2">CAA</span>
+      <span class="w" style="--i:3">Award-winning</span>
+      <span class="w" style="--i:4">Visual</span>
+      <span class="w" style="--i:5">Development</span>
+      <span class="w" style="--i:6">Artist</span>
+      <span class="w" style="--i:7">and</span>
+      <span class="w" style="--i:8">Writer/Director</span>
+      <span class="w" style="--i:9">in</span>
+      <span class="w" style="--i:10">Animation.</span>
+    </p>
   </div>
 </section>
-
-<div class="slides" hidden aria-hidden="true">
-  <button class="wall__tile" type="button" data-full="assets/eow/eow-01-lineup.png" data-title="The sheet" data-no="01">
-    <img src="assets/thumbs/eow/eow-01-lineup.jpg" alt="Eyes of Wakanda: five Lion team warriors in gold lion masks and layered violet wraps, standing in a row." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">The sheet</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/eow/eow-02-noni.png" data-title="Noni" data-no="02">
-    <img src="assets/thumbs/eow/eow-02-noni.jpg" alt="Eyes of Wakanda: Noni, a portrait bust, a fighting stance in a blue wrap, and three grey action studies." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Noni</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/eow/eow-03-noni-keys.png" data-title="Noni — costume keys" data-no="03">
-    <img src="assets/thumbs/eow/eow-03-noni-keys.jpg" alt="Eyes of Wakanda: five costume passes on Noni." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Noni — costume keys</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/iyanu/iyanu-01-ideation.jpg" data-title="The sheet" data-no="04">
-    <img src="assets/thumbs/iyanu/iyanu-01-ideation.jpg" alt="Iyanu: three young Yoruba characters beside a photograph of a carved Lamidi Fakeye figure." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">The sheet</span><span class="wall__cap-project">Iyanu</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/personal/personal-01-afro-ninja.png" data-title="Afro ninja" data-no="05">
-    <img src="assets/thumbs/personal/personal-01-afro-ninja.jpg" alt="Personal work: a hooded warrior in a blue cape with a forked blade, beside a grey action study." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Afro ninja</span><span class="wall__cap-project">Personal</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/thumbs/boards/coma-toes-f02.jpg" data-title="Coma Toes — panel 2" data-no="06">
-    <img src="assets/thumbs/boards/coma-toes-f02.jpg" alt="Coma Toes: storyboard panel 2." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Coma Toes — panel 2</span><span class="wall__cap-project">Storyboards</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/eow/eow-04-old-noni.png" data-title="Noni, older" data-no="07">
-    <img src="assets/thumbs/eow/eow-04-old-noni.jpg" alt="Eyes of Wakanda: an older Noni in an ochre cloak and violet skirt, with four white construction turnarounds." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Noni, older</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/iyanu/iyanu-02-exploration.jpg" data-title="Exploration — colour and line" data-no="08">
-    <img src="assets/thumbs/iyanu/iyanu-02-exploration.jpg" alt="Iyanu: the three leads beside their line drawings." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Exploration — colour and line</span><span class="wall__cap-project">Iyanu</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/personal/personal-02-pirate.png" data-title="Pirate boy, action poses" data-no="09">
-    <img src="assets/thumbs/personal/personal-02-pirate.jpg" alt="Personal work: pirate boy in action poses." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Pirate boy, action poses</span><span class="wall__cap-project">Personal</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/thumbs/boards/cash-trapped-a-f03.jpg" data-title="Cash Trapped I — panel 3" data-no="10">
-    <img src="assets/thumbs/boards/cash-trapped-a-f03.jpg" alt="Cash Trapped, part 1: storyboard panel 3." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Cash Trapped I — panel 3</span><span class="wall__cap-project">Storyboards</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/eow/eow-05-traveller.png" data-title="The traveller" data-no="11">
-    <img src="assets/thumbs/eow/eow-05-traveller.jpg" alt="Eyes of Wakanda: five travelling-costume variants built on grey mannequins." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">The traveller</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/iyanu/iyanu-03-exploration.jpg" data-title="Exploration — second pass" data-no="12">
-    <img src="assets/thumbs/iyanu/iyanu-03-exploration.jpg" alt="Iyanu: a second pass on the same three characters, colour beside line." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Exploration — second pass</span><span class="wall__cap-project">Iyanu</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/personal/personal-03-vampire.png" data-title="Vampire" data-no="13">
-    <img src="assets/thumbs/personal/personal-03-vampire.jpg" alt="Personal work: a vampire character study." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Vampire</span><span class="wall__cap-project">Personal</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/thumbs/boards/cash-trapped-a-f07.jpg" data-title="Cash Trapped I — panel 7" data-no="14">
-    <img src="assets/thumbs/boards/cash-trapped-a-f07.jpg" alt="Cash Trapped, part 1: storyboard panel 7." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Cash Trapped I — panel 7</span><span class="wall__cap-project">Storyboards</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/eow/eow-06-councilman.png" data-title="High councilman" data-no="15">
-    <img src="assets/thumbs/eow/eow-06-councilman.jpg" alt="Eyes of Wakanda: a high councilman with a mask study and three olive and violet draping variants." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">High councilman</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/iyanu/iyanu-04-biyi.jpg" data-title="Biyi — action" data-no="16">
-    <img src="assets/thumbs/iyanu/iyanu-04-biyi.jpg" alt="Iyanu: four line studies of Biyi in motion." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Biyi — action</span><span class="wall__cap-project">Iyanu</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/personal/personal-04-femme.png" data-title="Femme fatale" data-no="17">
-    <img src="assets/thumbs/personal/personal-04-femme.jpg" alt="Personal work: a femme fatale character design." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Femme fatale</span><span class="wall__cap-project">Personal</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/eow/eow-07-kuda.png" data-title="Kuda" data-no="18">
-    <img src="assets/thumbs/eow/eow-07-kuda.jpg" alt="Eyes of Wakanda: Kuda, a broad man in a red and blue panelled tunic, drawn twice, with a slimmer youth in violet." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Kuda</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/iyanu/iyanu-05-biyi-02.jpg" data-title="Biyi — model sheet" data-no="19">
-    <img src="assets/thumbs/iyanu/iyanu-05-biyi-02.jpg" alt="Iyanu: Biyi model sheet." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Biyi — model sheet</span><span class="wall__cap-project">Iyanu</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/personal/personal-05-hands.png" data-title="Hands" data-no="20">
-    <img src="assets/thumbs/personal/personal-05-hands.jpg" alt="Personal work: hand studies." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Hands</span><span class="wall__cap-project">Personal</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/thumbs/boards/cash-trapped-b-f02.jpg" data-title="Cash Trapped II — panel 2" data-no="21">
-    <img src="assets/thumbs/boards/cash-trapped-b-f02.jpg" alt="Cash Trapped, part 2: storyboard panel 2." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Cash Trapped II — panel 2</span><span class="wall__cap-project">Storyboards</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/eow/eow-08-tafari.png" data-title="Tafari and Kuda" data-no="22">
-    <img src="assets/thumbs/eow/eow-08-tafari.jpg" alt="Eyes of Wakanda: Tafari in violet armour with a metal vambrace, standing with a younger figure." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Tafari and Kuda</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/iyanu/iyanu-06-0621.jpg" data-title="Height chart" data-no="23">
-    <img src="assets/thumbs/iyanu/iyanu-06-0621.jpg" alt="Iyanu: height chart." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Height chart</span><span class="wall__cap-project">Iyanu</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/personal/personal-06-people.png" data-title="People" data-no="24">
-    <img src="assets/thumbs/personal/personal-06-people.jpg" alt="Personal work: studies of people." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">People</span><span class="wall__cap-project">Personal</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/eow/eow-09-lion-guard.png" data-title="Lion guards — faces" data-no="25">
-    <img src="assets/thumbs/eow/eow-09-lion-guard.jpg" alt="Eyes of Wakanda: six lion guard head studies with different hairlines, scars and headbands." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Lion guards — faces</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/iyanu/iyanu-07-0621-02.jpg" data-title="The archer" data-no="26">
-    <img src="assets/thumbs/iyanu/iyanu-07-0621-02.jpg" alt="Iyanu: the archer." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">The archer</span><span class="wall__cap-project">Iyanu</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/personal/personal-07-mammal.png" data-title="Mammal college" data-no="27">
-    <img src="assets/thumbs/personal/personal-07-mammal.jpg" alt="Personal work: mammal college studies." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Mammal college</span><span class="wall__cap-project">Personal</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/thumbs/boards/cash-trapped-b-f05.jpg" data-title="Cash Trapped II — panel 5" data-no="28">
-    <img src="assets/thumbs/boards/cash-trapped-b-f05.jpg" alt="Cash Trapped, part 2: storyboard panel 5." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Cash Trapped II — panel 5</span><span class="wall__cap-project">Storyboards</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/eow/eow-10-chainmakers.png" data-title="Lion chain makers" data-no="29">
-    <img src="assets/thumbs/eow/eow-10-chainmakers.jpg" alt="Eyes of Wakanda: five armoured chain makers in helmets and studded leather, front and back." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Lion chain makers</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/personal/personal-08-gangster.png" data-title="Female gangster" data-no="30">
-    <img src="assets/thumbs/personal/personal-08-gangster.jpg" alt="Personal work: a female gangster character design." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Female gangster</span><span class="wall__cap-project">Personal</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/eow/eow-11-harem.png" data-title="Harem captives" data-no="31">
-    <img src="assets/thumbs/eow/eow-11-harem.jpg" alt="Eyes of Wakanda: four figures in pale blue robes and gold headdresses." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Harem captives</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/personal/personal-09-sketches.jpg" data-title="Character sketches" data-no="32">
-    <img src="assets/thumbs/personal/personal-09-sketches.jpg" alt="Personal work: character sketches." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Character sketches</span><span class="wall__cap-project">Personal</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/eow/eow-12-seamstresses.png" data-title="Seamstresses" data-no="33">
-    <img src="assets/thumbs/eow/eow-12-seamstresses.jpg" alt="Eyes of Wakanda: three seamstresses in teal and gold wraps, of different ages and builds." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Seamstresses</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/personal/personal-10-dump.jpg" data-title="Style dump" data-no="34">
-    <img src="assets/thumbs/personal/personal-10-dump.jpg" alt="Personal work: a style dump sheet." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Style dump</span><span class="wall__cap-project">Personal</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/eow/eow-13-ethiopian.png" data-title="Ethiopian soldiers" data-no="35">
-    <img src="assets/thumbs/eow/eow-13-ethiopian.jpg" alt="Eyes of Wakanda: a shield bearer, a spearman in a grey robe, and a commander with a gold disc shield." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Ethiopian soldiers</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/personal/personal-11-futuristic.png" data-title="Futuristic guy" data-no="36">
-    <img src="assets/thumbs/personal/personal-11-futuristic.jpg" alt="Personal work: a futuristic character design." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Futuristic guy</span><span class="wall__cap-project">Personal</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/eow/eow-14-crowd.png" data-title="River tribe" data-no="37">
-    <img src="assets/thumbs/eow/eow-14-crowd.jpg" alt="Eyes of Wakanda: four river tribe civilians in striped and beaded wraps, one in a wide woven hat." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">River tribe</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/personal/personal-12-sketch.png" data-title="Sketches" data-no="38">
-    <img src="assets/thumbs/personal/personal-12-sketch.jpg" alt="Personal work: sketches." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Sketches</span><span class="wall__cap-project">Personal</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/eow/eow-15-dora.png" data-title="Shape language — the Lion team" data-no="39">
-    <img src="assets/thumbs/eow/eow-15-dora.jpg" alt="Eyes of Wakanda: five torsos labelled Shakoo, B'Risa, Koi'Fay, Y'Fett and Le'illa, each with a geometric primitive and handwritten design notes." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Shape language — the Lion team</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/eow/eow-16-flashback.png" data-title="Flashback — render test" data-no="40">
-    <img src="assets/thumbs/eow/eow-16-flashback.jpg" alt="Eyes of Wakanda: a rendered bald warrior bust in warm light, with the line drawing it came from." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Flashback — render test</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/thumbs/boards/coma-toes-f05.jpg" data-title="Coma Toes — panel 5" data-no="41">
-    <img src="assets/thumbs/boards/coma-toes-f05.jpg" alt="Coma Toes: storyboard panel 5." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Coma Toes — panel 5</span><span class="wall__cap-project">Storyboards</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/eow/eow-17-dora-02.png" data-title="Lion team — in character" data-no="42">
-    <img src="assets/thumbs/eow/eow-17-dora-02.jpg" alt="Eyes of Wakanda: four vignettes of the Lion team together, annotated in red handwriting." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Lion team — in character</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/eow/eow-18-crowd-02.png" data-title="Mining tribe" data-no="43">
-    <img src="assets/thumbs/eow/eow-18-crowd-02.jpg" alt="Eyes of Wakanda: four mining tribe figures in red checked cloth, beads and heavy sandals." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Mining tribe</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/thumbs/boards/coma-toes-f07.jpg" data-title="Coma Toes — panel 7" data-no="44">
-    <img src="assets/thumbs/boards/coma-toes-f07.jpg" alt="Coma Toes: storyboard panel 7." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Coma Toes — panel 7</span><span class="wall__cap-project">Storyboards</span></span>
-  </button>
-  <button class="wall__tile" type="button" data-full="assets/eow/eow-19-crowd-03.png" data-title="Wakandan caravan — merchant tribe" data-no="45">
-    <img src="assets/thumbs/eow/eow-19-crowd-03.jpg" alt="Eyes of Wakanda: four merchants in deep blue and plum robes, one veiled." loading="lazy" decoding="async">
-    <span class="wall__cap"><span class="wall__cap-title">Wakandan caravan — merchant tribe</span><span class="wall__cap-project">Eyes of Wakanda</span></span>
-  </button>
-</div>
 </main>
 
 <script src="js/site.js"></script>
