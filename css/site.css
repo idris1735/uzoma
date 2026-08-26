@@ -303,8 +303,12 @@ ul { list-style: none; }
 .foot__mail:hover { text-decoration: underline; text-underline-offset: 0.15em; }
 
 .foot__links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
-.foot__links a { color: var(--dim); }
-.foot__links a:hover { color: var(--ink); }
+.foot__links a { display: inline-flex; align-items: center; color: var(--dim); transition: color 0.2s ease; }
+.foot__links a svg { display: block; width: 1.5rem; height: 1.5rem; }
+.foot__links .social--instagram:hover { color: #e4405f; }
+.foot__links .social--linkedin:hover { color: #0a66c2; }
+.foot__links .social--youtube:hover { color: #ff0000; }
+.foot__links .social--x:hover { color: #111; }
 
 .foot__clients { width: 100%; color: var(--dim); font-size: 0.8125rem; }
 
@@ -558,8 +562,12 @@ body.is-hero {
   font-size: 0.875rem;
 }
 
-.reach__social a { color: var(--dim); }
-.reach__social a:hover { color: var(--ink); }
+.reach__social a { display: inline-flex; align-items: center; color: var(--dim); transition: color 0.2s ease; }
+.reach__social a svg { display: block; width: 1.5rem; height: 1.5rem; }
+.reach__social .social--instagram:hover { color: #e4405f; }
+.reach__social .social--linkedin:hover { color: #0a66c2; }
+.reach__social .social--youtube:hover { color: #ff0000; }
+.reach__social .social--x:hover { color: #111; }
 
 /* ---------------------------------------------------------- wall ------ */
 

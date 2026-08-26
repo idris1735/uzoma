@@ -1781,16 +1781,24 @@ ul, ol {
   gap: var(--space-sm);
 }
 .footer__social {
-  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
   color: var(--ink-dim);
   transition: color 0.3s, transform 0.3s var(--ease-out-expo);
   position: relative;
-  display: inline-block;
+}
+.footer__social svg {
+  display: block;
+  width: 1.75rem;
+  height: 1.75rem;
 }
 .footer__social:hover {
-  color: var(--accent);
   transform: translateX(4px);
 }
+.footer__social--instagram:hover { color: #e4405f; }
+.footer__social--linkedin:hover { color: #0a66c2; }
+.footer__social--youtube:hover { color: #ff0000; }
+.footer__social--x:hover { color: #e7e7e7; }
 .footer__email {
   font-size: clamp(1.5rem, 1rem + 2vw, 3rem);
   font-weight: 500;
