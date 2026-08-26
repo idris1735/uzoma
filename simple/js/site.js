@@ -1,8 +1,8 @@
 /* ============================================================
-   site.js — the one script the simple build carries.
-   A dependency-free sheet viewer: click any wall tile, view the
-   artwork full size, step through with arrows or the keyboard,
-   Escape closes. No libraries, works straight off the disk.
+   site.js — the one script the site carries.
+   The menu, and the decks that carry the work: one sheet on
+   screen, arrows and marks to step through the rest. No
+   libraries, works straight off the disk.
    ============================================================ */
 
 "use strict";
@@ -63,78 +63,72 @@
     document.querySelectorAll(".drop.is-open").forEach((d) => d.classList.remove("is-open"));
   });
 
-  const tiles = Array.from(document.querySelectorAll("[data-full]"));
-  if (!tiles.length) return;
+  /* ============================== DECKS ==============================
+     The portfolio and storyboard pages show one sheet at a time. The
+     controls only appear once this runs, so a browser without JavaScript
+     is left with the first sheet rather than a row of dead buttons. */
 
-  const lb = document.createElement("div");
-  lb.className = "lb";
-  lb.setAttribute("role", "dialog");
-  lb.setAttribute("aria-modal", "true");
-  lb.setAttribute("aria-label", "Sheet viewer");
-  lb.innerHTML = `
-    <div class="lb__bar">
-      <p class="lb__title"></p>
-      <button class="lb__btn" type="button" data-lb-close aria-label="Close viewer">
-        <svg viewBox="0 0 24 24"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
-      </button>
-    </div>
-    <div class="lb__stage"><img class="lb__img" alt=""></div>
-    <div class="lb__bar lb__bar--foot">
-      <p class="lb__count"></p>
-      <div class="lb__nav">
-        <button class="lb__btn" type="button" data-lb-prev aria-label="Previous sheet">
-          <svg viewBox="0 0 24 24"><polyline points="14,5 7,12 14,19"/></svg>
-        </button>
-        <button class="lb__btn" type="button" data-lb-next aria-label="Next sheet">
-          <svg viewBox="0 0 24 24"><polyline points="10,5 17,12 10,19"/></svg>
-        </button>
-      </div>
-    </div>`;
-  document.body.appendChild(lb);
+  document.querySelectorAll("[data-deck]").forEach((deck) => {
+    const slides = Array.from(deck.querySelectorAll(".slide"));
+    if (!slides.length) return;
 
-  const img = lb.querySelector(".lb__img");
-  const title = lb.querySelector(".lb__title");
-  const count = lb.querySelector(".lb__count");
-  let i = 0;
-  let opener = null;
+    const dots = deck.querySelector(".deck__dots");
+    const title = (deck.querySelector(".deck__title") || {}).textContent || "";
+    let at = 0;
 
-  const show = (n) => {
-    i = (n + tiles.length) % tiles.length;
-    const t = tiles[i];
-    const thumb = t.querySelector("img");
-    title.textContent = t.dataset.title || "";
-    count.textContent = `${t.dataset.no || String(i + 1).padStart(2, "0")} / ${tiles.length}`;
-    img.alt = (thumb && thumb.alt) || t.dataset.title || "";
-    img.src = t.dataset.full;
-  };
+    /* a mark per sheet: position without putting a number on the page */
+    slides.forEach((_, n) => {
+      const dot = document.createElement("button");
+      dot.className = "deck__dot";
+      dot.type = "button";
+      dot.setAttribute("aria-label", `${title}, ${n + 1} of ${slides.length}`);
+      dot.addEventListener("click", () => go(n));
+      dots.appendChild(dot);
+    });
+    const marks = Array.from(dots.children);
 
-  const open = (n, from) => {
-    opener = from || null;
-    show(n);
-    lb.classList.add("is-open");
-    document.documentElement.classList.add("is-lb");
-    lb.querySelector("[data-lb-close]").focus();
-  };
+    /* a hidden slide never fetches a lazy image, so the neighbours are
+       promoted as we arrive — stepping is then instant */
+    const warm = (n) => {
+      const im = slides[(n + slides.length) % slides.length].querySelector("img[loading]");
+      if (im) im.loading = "eager";
+    };
 
-  const close = () => {
-    lb.classList.remove("is-open");
-    document.documentElement.classList.remove("is-lb");
-    if (opener) opener.focus();
-  };
+    const go = (n) => {
+      at = (n + slides.length) % slides.length;
+      slides.forEach((s, k) => {
+        s.classList.toggle("is-on", k === at);
+        const v = s.querySelector("video");
+        if (v && k !== at) v.pause();
+      });
+      marks.forEach((m, k) => m.setAttribute("aria-current", k === at ? "true" : "false"));
+      warm(at - 1);
+      warm(at + 1);
+    };
 
-  tiles.forEach((t, n) => t.addEventListener("click", () => open(n, t)));
-  lb.querySelector("[data-lb-close]").addEventListener("click", close);
-  lb.querySelector("[data-lb-prev]").addEventListener("click", () => show(i - 1));
-  lb.querySelector("[data-lb-next]").addEventListener("click", () => show(i + 1));
-  lb.addEventListener("click", (e) => {
-    if (e.target === lb || e.target.classList.contains("lb__stage")) close();
+    deck.querySelector("[data-deck-prev]").addEventListener("click", () => go(at - 1));
+    deck.querySelector("[data-deck-next]").addEventListener("click", () => go(at + 1));
+
+    document.addEventListener("keydown", (e) => {
+      if (e.target.closest("input, textarea, video")) return;
+      if (e.key === "ArrowLeft") go(at - 1);
+      if (e.key === "ArrowRight") go(at + 1);
+    });
+
+    /* swipe, but not across a video's own controls */
+    let from = null;
+    const stage = deck.querySelector(".deck__stage");
+    stage.addEventListener("pointerdown", (e) => {
+      from = e.target.closest("video") ? null : e.clientX;
+    });
+    stage.addEventListener("pointerup", (e) => {
+      if (from === null) return;
+      const dx = e.clientX - from;
+      from = null;
+      if (Math.abs(dx) > 48) go(at + (dx < 0 ? 1 : -1));
+    });
+
+    deck.classList.add("is-live");
+    go(0);
   });
-
-  document.addEventListener("keydown", (e) => {
-    if (!lb.classList.contains("is-open")) return;
-    if (e.key === "Escape") close();
-    if (e.key === "ArrowLeft") show(i - 1);
-    if (e.key === "ArrowRight") show(i + 1);
-  });
-
 })();
