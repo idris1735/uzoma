@@ -13,10 +13,14 @@ Wakanda logo beside her. Nothing pops.
 
 The sheet is 6167 x 3135 — a 1.97 landscape, wider than most windows —
 so a bare `cover` would eat the top and bottom of it. It is sat on a
-band of its own colour instead, top and bottom, until the file is 1.60.
+band of its own colour instead, top and bottom, until the file is 1.70.
 Above that ratio the artwork spans the window edge to edge with the
 ©MARVEL mark still in frame; below it, the band holds the full height of
 the sheet and the trim comes off the right.
+
+The band is as thin as that promise allows. A window shows all of it
+when the window is the narrower shape, so every pixel of band is a pixel
+of nothing at the top and bottom of a phone.
 
 The band above is the grey of the field. The band below is the black of
 the ©MARVEL bar, carried down from the sheet's own last row so the logo
@@ -35,7 +39,7 @@ SRC = os.path.join(ROOT, "Uzoma Website Images", "Uzoma Website", "Eyes of Wakan
 OUT = os.path.join(ROOT, "assets", "hero")
 
 GREY = (108, 108, 108)   # the sheet's field, and so the page behind it
-RATIO = 1.60             # above this the whole sheet is in frame
+RATIO = 1.70             # above this the whole sheet is in frame
 WIDTHS = (2560, 1600, 1100)
 
 

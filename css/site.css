@@ -220,6 +220,24 @@ ul { list-style: none; }
 .foot__links .social--youtube:hover { color: #ff0000; }
 .foot__links .social--x:hover { color: #111; }
 
+/* the build credit, under the client list it belongs beside */
+.credit {
+  width: 100%;
+  margin-top: 0.5rem;
+  color: var(--dim);
+  text-align: center;
+  font-size: 0.75rem;
+}
+
+.credit a { color: inherit; }
+
+.credit a:hover,
+.credit a:focus-visible {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
 .foot__clients {
   width: 100%;
   margin-top: clamp(0.25rem, 1.4vw, 1.25rem);
@@ -311,12 +329,12 @@ body.is-hero {
      caps it so the award line always fits across in one piece — it is
      that line's own width in ems. */
   /* Held to the clear band across the bodies — measured off the artwork
-     at 0.412 to 0.588 of the file's height, so 0.176 of it, and three
-     lines at 0.94 leading fill that at --fit. Below 1.60 the sheet's
+     at 0.406 to 0.593 of the file's height, so 0.187 of it, and three
+     lines at 0.94 leading fill that at --fit. Below 1.70 the sheet's
      height fills the window and the band is a share of that; above it
-     the width leads instead. The two are equal at 1.60, so nothing
+     the width leads instead. The two are equal at 1.70, so nothing
      shifts as the window crosses it. */
-  --fit: 6.2vh;
+  --fit: 6.63vh;
   font-size: clamp(1.25rem, min(var(--fit), (100vw - 2 * var(--gutter)) / 14.3), 5.5rem);
   line-height: 0.94;
   letter-spacing: -0.025em;
@@ -330,8 +348,8 @@ body.is-hero {
   transition: opacity 0.25s ease, text-shadow 0.25s ease;
 }
 
-@media (min-aspect-ratio: 16/10) {
-  .titlecard__line { --fit: 3.875vw; }
+@media (min-aspect-ratio: 17/10) {
+  .titlecard__line { --fit: 3.9vw; }
 }
 
 /* the award line stays whole; the rest wraps under it */
@@ -345,30 +363,6 @@ body.is-hero {
 }
 
 @keyframes line-in { from { opacity: 0; } to { opacity: 0.5; } }
-
-/* the build credit, in the empty run of the sheet's own bar */
-.credit {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 6;
-  padding: 0 var(--gutter) clamp(0.75rem, 2vh, 1.5rem);
-  text-align: center;
-  font-size: 0.6875rem;
-  letter-spacing: 0.04em;
-  color: #fff;
-  opacity: 0.55;
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);
-  transition: opacity 0.25s ease;
-}
-
-.credit a { text-decoration: none; }
-.credit a:hover,
-.credit a:focus-visible { text-decoration: underline; text-underline-offset: 0.25em; }
-
-.credit:hover,
-.credit:focus-within { opacity: 1; }
 
 /* ---- the header stands on the artwork, in white ---- */
 
