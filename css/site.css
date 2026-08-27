@@ -256,9 +256,10 @@ ul { list-style: none; }
 
    It is anchored left, which is the direction it should give way in: a
    wide window holds the whole line-up, a narrow one closes in on Shakoo
-   and the Eyes of Wakanda logo beside her. The file carries a band of
-   the sheet's own grey top and bottom (tools/prep_hero_landing.py) so a
-   window shorter than 1.60 never crops the artwork's height. */
+   and the Eyes of Wakanda logo beside her. The file is the sheet and
+   nothing else — no band above or below it at any size — so what gives
+   way on a window narrower than 1.97 is the ©MARVEL mark at the far
+   right, which the Eyes of Wakanda page carries uncropped. */
 
 body.is-hero {
   height: 100dvh;
@@ -328,13 +329,14 @@ body.is-hero {
      behind it rather than running off a short window. The third term
      caps it so the award line always fits across in one piece — it is
      that line's own width in ems. */
-  /* Held to the clear band across the bodies — measured off the artwork
-     at 0.406 to 0.593 of the file's height, so 0.187 of it, and three
-     lines at 0.94 leading fill that at --fit. Below 1.70 the sheet's
-     height fills the window and the band is a share of that; above it
-     the width leads instead. The two are equal at 1.70, so nothing
-     shifts as the window crosses it. */
-  --fit: 6.63vh;
+  /* Held to the clear band across the bodies — the sheet's own ink runs
+     heads from 0.14, bodies from 0.392, notes from 0.646, so the band is
+     0.392 to 0.608 and its middle is the sheet's middle, which is where
+     `cover` puts the window's middle. Three lines at 0.94 leading fill
+     that 0.216 at --fit. Below 1.97 the sheet's height fills the window
+     and the band is a share of that; above it the width leads instead.
+     The two are equal at 1.97, so nothing shifts across it. */
+  --fit: 7.67vh;
   font-size: clamp(1.25rem, min(var(--fit), (100vw - 2 * var(--gutter)) / 14.3), 5.5rem);
   line-height: 0.94;
   letter-spacing: -0.025em;
@@ -348,7 +350,7 @@ body.is-hero {
   transition: opacity 0.25s ease, text-shadow 0.25s ease;
 }
 
-@media (min-aspect-ratio: 17/10) {
+@media (min-aspect-ratio: 59/30) {
   .titlecard__line { --fit: 3.9vw; }
 }
 
