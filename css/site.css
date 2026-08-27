@@ -169,7 +169,6 @@ ul { list-style: none; }
 
 .intro__line { max-width: 46ch; color: var(--dim); }
 
-
 /* ---------------------------------------------------------- text ------ */
 
 .text {
@@ -233,12 +232,15 @@ ul { list-style: none; }
 /* ---------------------------------------------------------- landing -- */
 
 /* The landing is the sheet and nothing else: full bleed, no margin, no
-   paper showing anywhere. Both hero files have the sheet's own edges
-   dragged outward to make them window-shaped (tools/prep_hero_landing.py),
-   so `cover` eats that padding instead of the artwork and there is no
-   join to find. The tall file is the left column only — Shakoo and the
-   Eyes of Wakanda logo — because a 1.97 landscape on a phone can only
-   ever be a slice of itself. */
+   paper showing anywhere. One file, so the crop moves with the window
+   rather than switching between fixed versions — drag the edge and the
+   sheet slides, it never cuts.
+
+   It is anchored left, which is the direction it should give way in: a
+   wide window holds the whole line-up, a narrow one closes in on Shakoo
+   and the Eyes of Wakanda logo beside her. The file carries a band of
+   the sheet's own grey top and bottom (tools/prep_hero_landing.py) so a
+   window shorter than 1.60 never crops the artwork's height. */
 
 body.is-hero {
   height: 100dvh;
@@ -249,27 +251,14 @@ body.is-hero {
 
 .hero { position: fixed; inset: 0; z-index: 0; }
 
-.hero picture { display: contents; }
-
-/* two layers: the outgoing crop is held on top while the new one loads
-   underneath, then faded away, so changing shape reads as a dissolve
-   rather than a cut (see the hero block in site.js) */
 .hero__img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 50%;
+  object-position: 0% 50%;
   animation: hero-in 0.9s ease both;
-}
-
-/* A phone narrower than the tall file trims from the right, where the
-   next character's arm begins, so the frame is held left and the Eyes of
-   Wakanda logo stays in it. The mid and wide files are padded evenly and
-   centre themselves. */
-@media (max-aspect-ratio: 62/100) {
-  .hero__img { object-position: 0% 50%; }
 }
 
 @keyframes hero-in { from { opacity: 0; } to { opacity: 1; } }
@@ -342,20 +331,6 @@ body.is-hero {
 }
 
 @keyframes line-in { from { opacity: 0; } to { opacity: 0.5; } }
-
-.hero__ghost {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.hero__ghost.is-holding { opacity: 1; }
-.hero__ghost.is-going { opacity: 0; transition: opacity 0.5s ease; }
 
 /* the build credit, in the empty run of the sheet's own bar */
 .credit {
@@ -489,18 +464,48 @@ body.is-hero {
 }
 
 .pair .art {
-  flex: 1 1 17rem;
-  max-width: 24rem;
+  flex: 1 1 15rem;
+  max-width: 22rem;
   padding: 0;
 }
 
 .pair .art img { max-width: 100%; max-height: 68vh; }
 
 .pair .text {
-  flex: 1 1 24rem;
-  max-width: 42rem;
+  flex: 1 1 26rem;
+  max-width: 44rem;
   margin: 0;
   padding: 0;
+}
+
+/* On a desktop the whole page is meant to sit on one screen, so the
+   writing is set a shade smaller and closer than the site's body copy,
+   and the space around it gives up its slack. It falls back to the
+   ordinary rhythm when the window is too short to hold it anyway. */
+@media (min-width: 1100px) and (min-height: 640px) {
+  .mid .intro { padding-block: clamp(0.75rem, 3vh, 3rem) 0; }
+
+  .mid .intro__title { font-size: clamp(1.5rem, 3vw, 2.5rem); }
+
+  .pair { padding-top: clamp(0.75rem, 2vh, 2rem); }
+
+  /* The pictures give the writing the width, because a wider measure is
+     fewer lines and that is most of what keeps the page on one screen.
+     Tied to the window's height as well as its own: a short window needs
+     the writing wider still. */
+  .pair .art { max-width: min(19rem, 33vh); }
+
+  .pair .text {
+    font-size: clamp(0.8125rem, 0.5vw + 0.42rem, 0.9375rem);
+    line-height: 1.42;
+    gap: 0.55em;
+  }
+
+  .mid + .foot,
+  .mid ~ .foot {
+    margin-top: clamp(0.5rem, 2.5vh, 2.5rem);
+    padding-block: clamp(0.75rem, 1.8vh, 1.5rem);
+  }
 }
 
 /* ---------------------------------------------------------- deck ------ */
@@ -664,7 +669,6 @@ body.is-deck > main {
 
 .deck__dot:hover { background: #c4c4c4; }
 .deck__dot[aria-current="true"] { background: var(--ink); }
-
 
 
 /* ---------------------------------------------------------- show ------ */
