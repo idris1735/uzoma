@@ -286,12 +286,12 @@ body.is-hero {
   inset: 0;
   z-index: 5;
   display: grid;
+  place-content: center;
   justify-items: center;
-  /* held to the upper half: the artist's handwritten notes run along the
-     bottom of the sheet, and two sets of writing in one place read as
-     clutter */
-  align-content: start;
-  padding: clamp(6rem, 18vh, 11rem) var(--gutter) 2rem;
+  /* clear of the header and clear of the bar, and centred in what is
+     left — which on this sheet is the band across the figures' bodies,
+     below the faces and above the artist's notes */
+  padding: 7rem var(--gutter) 6rem;
   text-align: center;
   pointer-events: none;
 }
@@ -316,17 +316,6 @@ body.is-hero {
      the hover would never take */
   animation: line-in 1.4s ease 0.35s backwards;
   transition: opacity 0.25s ease, text-shadow 0.25s ease;
-}
-
-/* An upright crop is one character head to foot: her name is at the top,
-   the artist's note at the bottom, and the clear ground is the middle. So
-   the line centres there rather than riding high the way it does across a
-   landscape sheet. */
-@media (max-aspect-ratio: 1/1) {
-  .titlecard {
-    align-content: center;
-    padding-block: 5.5rem;
-  }
 }
 
 /* the award line stays whole; the rest wraps under it */
@@ -481,7 +470,7 @@ body.is-deck > main {
   flex: 1;
   min-height: 0;
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-rows: auto minmax(0, 1fr);
   gap: clamp(0.5rem, 1.2vw, 0.75rem);
   padding: 0 var(--gutter) clamp(0.6rem, 1.6vw, 1rem);
 }
@@ -525,14 +514,53 @@ body.is-deck > main {
 
 .slide figcaption { font-size: 0.8125rem; color: var(--dim); }
 
+/* on the sheet, not under it: the arrows ride the edges of the stage and
+   the marks sit along its foot */
 .deck__bar {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 2;
   display: none;
   align-items: center;
-  justify-content: center;
-  gap: clamp(0.75rem, 3vw, 2rem);
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0 0.25rem 0.25rem;
+  pointer-events: none;
 }
 
 .deck.is-live .deck__bar { display: flex; }
+
+.deck__bar > * { pointer-events: auto; }
+
+.deck__btn,
+.deck__meta {
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.14);
+  backdrop-filter: blur(6px);
+}
+
+/* the sheet's own title travels with the marks, so nothing sits on the
+   artwork except this one pill */
+.deck__meta {
+  display: grid;
+  justify-items: center;
+  gap: 0.4rem;
+  min-width: 0;
+  padding: 0.5rem 0.9rem;
+  border-radius: 1.25rem;
+}
+
+.deck__cap {
+  font-size: 0.75rem;
+  color: var(--dim);
+  text-align: center;
+  max-width: 26ch;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.deck.is-live .slide figcaption { display: none; }
 
 .deck__btn {
   flex: none;
@@ -582,8 +610,12 @@ body.is-deck > main {
 .deck__dot[aria-current="true"] { background: var(--ink); }
 
 @media (max-width: 640px) {
-  .deck__btn { width: 2.75rem; height: 2.75rem; }
   .deck__dot { width: 0.75rem; }
+
+  /* a board is a thin strip on a phone; the controls have to suit it */
+  .view--board .deck__btn { width: 2rem; height: 2rem; }
+  .view--board .deck__btn svg { width: 0.875rem; height: 0.875rem; }
+  .view--board .view__bar { gap: 0.4rem; padding: 0.35rem 0.4rem; }
 }
 
 /* ---------------------------------------------------------- show ------ */
@@ -647,13 +679,33 @@ body.is-deck > main {
   grid-column: 1;
   min-height: 0;
   display: none;
-  grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-rows: minmax(0, 1fr);
   gap: 0.4rem;
 }
 
 .view.is-on { display: grid; }
 
 .view__frame { position: relative; min-height: 0; }
+
+/* Every board page is the same shape, so the frame can be held to it and
+   becomes the artwork's own box — which is what lets the controls sit on
+   the board rather than somewhere underneath it. The width is capped
+   against the window height less the chrome above, a little conservative
+   so the board never overruns its row. */
+.view--board .view__frame {
+  width: min(100%, calc((100dvh - 12.5rem) * 1552 / 735));
+  margin-inline: auto;
+  /* centre rather than stretch, so the frame's height is the board's
+     height and the controls land on it and not below it */
+  align-self: center;
+}
+
+.view--board .view__page {
+  position: static;
+  display: block;
+  width: 100%;
+  height: auto;
+}
 
 .view__page {
   position: absolute;
@@ -686,20 +738,36 @@ body.is-deck > main {
 
 .view__film iframe { width: 100%; height: 100%; border: 0; display: block; }
 
-.view__bar {
+/* on the board, not under it */
+.view--board .view__bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: clamp(0.75rem, 2.5vw, 1.5rem);
-  max-width: 40rem;
-  width: 100%;
-  margin-inline: auto;
+  gap: 0.6rem;
+  padding: 0.5rem 0.6rem;
 }
+
+/* the boards are line on white, so the controls carry their own ground */
+.view--board .deck__btn,
+.view--board .view__scrub {
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.14);
+  backdrop-filter: blur(6px);
+}
+
+.view--board .deck__btn { border-color: rgba(17, 17, 17, 0.25); }
+.view--board .deck__btn:hover { border-color: var(--ink); background: #fff; }
 
 .view__scrub {
   width: 100%;
   accent-color: var(--ink);
   cursor: pointer;
+  border-radius: 999px;
+  padding: 0.35rem 0.6rem;
 }
 
 /* ---------------------------------------------------------- contact -- */
@@ -751,21 +819,7 @@ body.is-deck > main {
    screens the artwork sizes itself and the pair centres together. */
 
 @media (max-aspect-ratio: 1/1) {
-  .view--board {
-    align-content: center;
-    grid-template-rows: auto auto;
-  }
-
-  .view--board .view__frame { position: static; }
-
-  .view--board .view__page {
-    position: static;
-    display: block;
-    width: 100%;
-    height: auto;
-    max-height: 62vh;
-    margin-inline: auto;
-  }
+  .view--board { align-content: center; }
 
   .deck.is-live .slide.is-on {
     align-content: center;

@@ -97,15 +97,18 @@ HEAD = '''<!DOCTYPE html>
   <h1 class="deck__title">{title}</h1>
   <div class="deck__stage">
 {slides}
-  </div>
-  <div class="deck__bar">
-    <button class="deck__btn" type="button" data-deck-prev aria-label="Previous">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15,4 7,12 15,20"/></svg>
-    </button>
-    <div class="deck__dots"></div>
-    <button class="deck__btn" type="button" data-deck-next aria-label="Next">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9,4 17,12 9,20"/></svg>
-    </button>
+    <div class="deck__bar">
+      <button class="deck__btn" type="button" data-deck-prev aria-label="Previous">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15,4 7,12 15,20"/></svg>
+      </button>
+      <div class="deck__meta">
+        <p class="deck__cap"></p>
+        <div class="deck__dots"></div>
+      </div>
+      <button class="deck__btn" type="button" data-deck-next aria-label="Next">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9,4 17,12 9,20"/></svg>
+      </button>
+    </div>
   </div>
 </section>
 </main>
@@ -216,12 +219,11 @@ def board_view(slug, count, label):
     return f'''  <div class="view view--board" data-count="{count}" data-path="boards/{slug}/">
     <div class="view__frame">
       <img class="view__page" src="boards/{slug}/0001.webp" alt="{label}" draggable="false" fetchpriority="high" decoding="async">
-    </div>
-    <div class="view__bar">
-      <button class="deck__btn" type="button" data-page-prev aria-label="Previous page">{ARROW_L}</button>
-      <input class="view__scrub" type="range" min="1" max="{count}" value="1" step="1" aria-label="{label} page">
-      <button class="deck__btn" type="button" data-page-next aria-label="Next page">{ARROW_R}</button>
-    </div>
+      <div class="view__bar">
+        <button class="deck__btn" type="button" data-page-prev aria-label="Previous page">{ARROW_L}</button>
+        <input class="view__scrub" type="range" min="1" max="{count}" value="1" step="1" aria-label="{label} page">
+        <button class="deck__btn" type="button" data-page-next aria-label="Next page">{ARROW_R}</button>
+      </div>
   </div>'''
 
 

@@ -73,6 +73,7 @@
     if (!slides.length) return;
 
     const dots = deck.querySelector(".deck__dots");
+    const cap = deck.querySelector(".deck__cap");
     const title = (deck.querySelector(".deck__title") || {}).textContent || "";
     let at = 0;
 
@@ -102,6 +103,10 @@
         if (v && k !== at) v.pause();
       });
       marks.forEach((m, k) => m.setAttribute("aria-current", k === at ? "true" : "false"));
+      if (cap) {
+        const fc = slides[at].querySelector("figcaption");
+        cap.textContent = fc ? fc.textContent : "";
+      }
       warm(at - 1);
       warm(at + 1);
     };
