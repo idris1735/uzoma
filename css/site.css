@@ -306,7 +306,7 @@ body.is-hero {
      caps it so the award line always fits across in one piece — it is
      that line's own width in ems. */
   font-size: clamp(1.25rem, min(7.2vw, 12vh, (100vw - 2 * var(--gutter)) / 14.3), 5.5rem);
-  line-height: 1.02;
+  line-height: 0.94;
   letter-spacing: -0.025em;
   color: #fff;
   opacity: 0.5;
@@ -348,6 +348,8 @@ body.is-hero {
 }
 
 .credit a { text-decoration: none; }
+.credit a:hover,
+.credit a:focus-visible { text-decoration: underline; text-underline-offset: 0.25em; }
 
 .credit:hover,
 .credit:focus-within { opacity: 1; }
