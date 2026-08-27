@@ -330,6 +330,28 @@ body.is-hero {
 
 @keyframes line-in { from { opacity: 0; } to { opacity: 0.5; } }
 
+/* the build credit, in the empty run of the sheet's own bar */
+.credit {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 6;
+  padding: 0 var(--gutter) clamp(0.75rem, 2vh, 1.5rem);
+  text-align: center;
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  color: #fff;
+  opacity: 0.55;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);
+  transition: opacity 0.25s ease;
+}
+
+.credit a { text-decoration: none; }
+
+.credit:hover,
+.credit:focus-within { opacity: 1; }
+
 /* ---- the header stands on the artwork, in white ---- */
 
 .head--over {

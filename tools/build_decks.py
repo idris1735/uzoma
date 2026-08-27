@@ -11,7 +11,10 @@ so the artist's own titles survive the rewrite. Nothing here is invented.
 
 The storyboard pages are a different shape: a tab for each thing there
 is to look at, which is a board to page through (rendered by
-prep_boards.py) or an animatic on YouTube.
+prep_boards.py) or an animatic on YouTube. The players use the plain
+youtube.com embed rather than the nocookie one — the privacy-enhanced
+host is blocked by filters that leave the ordinary one alone, and the
+client needs these to play everywhere.
 """
 
 import os
@@ -224,6 +227,7 @@ def board_view(slug, count, label):
         <input class="view__scrub" type="range" min="1" max="{count}" value="1" step="1" aria-label="{label} page">
         <button class="deck__btn" type="button" data-page-next aria-label="Next page">{ARROW_R}</button>
       </div>
+    </div>
   </div>'''
 
 
@@ -231,7 +235,7 @@ def film_view(video, label):
     return f'''  <div class="view view--film">
     <div class="view__frame">
       <div class="view__film">
-        <iframe data-src="https://www.youtube-nocookie.com/embed/{video}?rel=0" title="{label}"
+        <iframe data-src="https://www.youtube.com/embed/{video}?rel=0" title="{label}"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
