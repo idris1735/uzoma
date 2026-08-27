@@ -13,10 +13,16 @@ Wakanda logo beside her. Nothing pops.
 
 The sheet is 6167 x 3135 — a 1.97 landscape, wider than most windows —
 so a bare `cover` would eat the top and bottom of it. It is sat on a
-band of its own flat grey instead, top and bottom, until the file is
-1.60. Above that ratio the artwork spans the window edge to edge with
-the ©MARVEL mark still in frame; below it, the grey holds the full
-height of the sheet and the trim comes off the right.
+band of its own colour instead, top and bottom, until the file is 1.60.
+Above that ratio the artwork spans the window edge to edge with the
+©MARVEL mark still in frame; below it, the band holds the full height of
+the sheet and the trim comes off the right.
+
+The band above is the grey of the field. The band below is the black of
+the ©MARVEL bar, carried down from the sheet's own last row so the logo
+plate comes with it — on a phone that band is on screen, and grey there
+would read as a strip of empty page under the artwork rather than as
+part of it.
 """
 
 import os
@@ -42,7 +48,9 @@ def main():
     y = (h - sh) // 2
     canvas = Image.new("RGB", (sw, h), GREY)
     canvas.paste(sheet, (0, y))
-    print(f"sheet {sw}x{sh} -> canvas {sw}x{h} ratio {sw / h:.3f}  grey band {y}")
+    canvas.paste(sheet.crop((0, sh - 1, sw, sh)).resize((sw, h - (y + sh))), (0, y + sh))
+    print(f"sheet {sw}x{sh} -> canvas {sw}x{h} ratio {sw / h:.3f}  "
+          f"grey above {y}, bar carried down {h - (y + sh)}")
 
     for w in WIDTHS:
         out = os.path.join(OUT, f"dora-{w}.jpg")

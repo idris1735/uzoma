@@ -293,7 +293,10 @@ body.is-hero {
   /* clear of the header and clear of the bar, and centred in what is
      left — which on this sheet is the band across the figures' bodies,
      below the faces and above the artist's notes */
-  padding: 7rem var(--gutter) 6rem;
+  /* even, so the line lands on the exact middle of the window — which is
+     where the sheet's own middle lands too, and the band across the
+     figures' bodies is centred on it */
+  padding: 6.5rem var(--gutter);
   text-align: center;
   pointer-events: none;
 }
@@ -307,7 +310,14 @@ body.is-hero {
      behind it rather than running off a short window. The third term
      caps it so the award line always fits across in one piece — it is
      that line's own width in ems. */
-  font-size: clamp(1.25rem, min(7.2vw, 12vh, (100vw - 2 * var(--gutter)) / 14.3), 5.5rem);
+  /* Held to the clear band across the bodies — measured off the artwork
+     at 0.412 to 0.588 of the file's height, so 0.176 of it, and three
+     lines at 0.94 leading fill that at --fit. Below 1.60 the sheet's
+     height fills the window and the band is a share of that; above it
+     the width leads instead. The two are equal at 1.60, so nothing
+     shifts as the window crosses it. */
+  --fit: 6.2vh;
+  font-size: clamp(1.25rem, min(var(--fit), (100vw - 2 * var(--gutter)) / 14.3), 5.5rem);
   line-height: 0.94;
   letter-spacing: -0.025em;
   color: #fff;
@@ -318,6 +328,10 @@ body.is-hero {
      the hover would never take */
   animation: line-in 1.4s ease 0.35s backwards;
   transition: opacity 0.25s ease, text-shadow 0.25s ease;
+}
+
+@media (min-aspect-ratio: 16/10) {
+  .titlecard__line { --fit: 3.875vw; }
 }
 
 /* the award line stays whole; the rest wraps under it */
