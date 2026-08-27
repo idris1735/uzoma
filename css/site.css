@@ -221,15 +221,13 @@ ul { list-style: none; }
 .foot__links .social--youtube:hover { color: #ff0000; }
 .foot__links .social--x:hover { color: #111; }
 
-.foot__clients { width: 100%; color: var(--dim); font-size: 0.8125rem; }
-
-@media (min-width: 1100px) {
-  .foot__clients {
-    margin-top: 1.25rem;
-    text-align: center;
-    font-size: clamp(0.9375rem, 1.15vw, 1.25rem);
-    line-height: 1.5;
-  }
+.foot__clients {
+  width: 100%;
+  margin-top: clamp(0.25rem, 1.4vw, 1.25rem);
+  color: var(--dim);
+  text-align: center;
+  font-size: clamp(0.8125rem, 0.55rem + 0.6vw, 1.25rem);
+  line-height: 1.5;
 }
 
 /* ---------------------------------------------------------- landing -- */
@@ -253,6 +251,9 @@ body.is-hero {
 
 .hero picture { display: contents; }
 
+/* two layers: the outgoing crop is held on top while the new one loads
+   underneath, then faded away, so changing shape reads as a dissolve
+   rather than a cut (see the hero block in site.js) */
 .hero__img {
   position: absolute;
   inset: 0;
@@ -341,6 +342,20 @@ body.is-hero {
 }
 
 @keyframes line-in { from { opacity: 0; } to { opacity: 0.5; } }
+
+.hero__ghost {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hero__ghost.is-holding { opacity: 1; }
+.hero__ghost.is-going { opacity: 0; transition: opacity 0.5s ease; }
 
 /* the build credit, in the empty run of the sheet's own bar */
 .credit {
@@ -442,8 +457,6 @@ body.is-hero {
   max-width: none;
 }
 
-.pair { width: 100%; display: grid; justify-items: center; }
-
 /* the footer already carries a --gap above it; a second one below the
    last paragraph opens a hole */
 .mid .text {
@@ -462,26 +475,32 @@ body.is-hero {
   max-height: 62vh;
 }
 
-/* wide enough for three columns and a readable measure between them:
-   the Emmy card, the writing, the award in his hand */
-@media (min-width: 1100px) {
-  .pair {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(1.75rem, 3.5vw, 4rem);
-    padding: clamp(2.5rem, 5vw, 4rem) var(--gutter) 0;
-  }
+/* Three across where there is room: the Emmy card, the writing, the award
+   in his hand. Wrapping rather than a breakpoint — the columns give way
+   one at a time as the window narrows, and shrink smoothly in between,
+   instead of the whole layout changing shape at one width. */
+.pair {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.75rem, 3.5vw, 4rem);
+  padding: clamp(1.5rem, 5vw, 4rem) var(--gutter) 0;
+}
 
-  .pair .art { flex: 0 1 22rem; padding: 0; }
+.pair .art {
+  flex: 1 1 17rem;
+  max-width: 24rem;
+  padding: 0;
+}
 
-  .pair .art img { max-width: 100%; max-height: 68vh; }
+.pair .art img { max-width: 100%; max-height: 68vh; }
 
-  .pair .text {
-    flex: 0 1 34rem;
-    margin: 0;
-    padding: 0;
-  }
+.pair .text {
+  flex: 1 1 24rem;
+  max-width: 42rem;
+  margin: 0;
+  padding: 0;
 }
 
 /* ---------------------------------------------------------- deck ------ */
@@ -634,7 +653,7 @@ body.is-deck > main {
 }
 
 .deck__dot {
-  width: 1.25rem;
+  width: clamp(0.75rem, 1.7vw, 1.25rem);
   height: 3px;
   padding: 0;
   border: 0;
@@ -646,14 +665,7 @@ body.is-deck > main {
 .deck__dot:hover { background: #c4c4c4; }
 .deck__dot[aria-current="true"] { background: var(--ink); }
 
-@media (max-width: 640px) {
-  .deck__dot { width: 0.75rem; }
 
-  /* a board is a thin strip on a phone; the controls have to suit it */
-  .view--board .deck__btn { width: 2rem; height: 2rem; }
-  .view--board .deck__btn svg { width: 0.875rem; height: 0.875rem; }
-  .view--board .view__bar { gap: 0.4rem; padding: 0.35rem 0.4rem; }
-}
 
 /* ---------------------------------------------------------- show ------ */
 
@@ -784,8 +796,8 @@ body.is-deck > main {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.5rem 0.6rem;
+  gap: clamp(0.4rem, 1vw, 0.6rem);
+  padding: clamp(0.35rem, 0.9vw, 0.5rem) clamp(0.4rem, 1vw, 0.6rem);
 }
 
 /* the boards are line on white, so the controls carry their own ground */
@@ -796,7 +808,16 @@ body.is-deck > main {
   backdrop-filter: blur(6px);
 }
 
-.view--board .deck__btn { border-color: rgba(17, 17, 17, 0.25); }
+.view--board .deck__btn {
+  border-color: rgba(17, 17, 17, 0.25);
+  width: clamp(2rem, 3.4vw, 2.5rem);
+  height: clamp(2rem, 3.4vw, 2.5rem);
+}
+
+.view--board .deck__btn svg {
+  width: clamp(0.875rem, 1.7vw, 1.25rem);
+  height: clamp(0.875rem, 1.7vw, 1.25rem);
+}
 .view--board .deck__btn:hover { border-color: var(--ink); background: #fff; }
 
 .view__scrub {
@@ -847,34 +868,6 @@ body.is-deck > main {
 .reach__social .social--linkedin:hover { color: #0a66c2; }
 .reach__social .social--youtube:hover { color: #ff0000; }
 .reach__social .social--x:hover { color: #111; }
-
-/* ---- upright screens: sit the controls against the work ---- */
-
-/* A board is twice as wide as it is tall. On a phone it fills the width
-   and leaves most of the column empty, which pushes the scrub — and a
-   deck's caption — a long way from the thing it belongs to. So on those
-   screens the artwork sizes itself and the pair centres together. */
-
-@media (max-aspect-ratio: 1/1) {
-  .view--board { align-content: center; }
-
-  .deck.is-live .slide.is-on {
-    align-content: center;
-    grid-template-rows: auto auto;
-  }
-
-  .slide__frame { position: static; }
-
-  .slide__frame img {
-    position: static;
-    display: block;
-    width: auto;
-    height: auto;
-    max-width: 100%;
-    max-height: 70vh;
-    margin-inline: auto;
-  }
-}
 
 /* ---------------------------------------------------------- burger --- */
 

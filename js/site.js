@@ -63,6 +63,63 @@
     document.querySelectorAll(".drop.is-open").forEach((d) => d.classList.remove("is-open"));
   });
 
+  /* ============================== HERO ===============================
+     The landing sheet comes in three crops and the window's shape picks
+     one. Dragging a window across a boundary would otherwise cut from
+     one crop to another mid-drag; this holds the outgoing frame on top
+     while the incoming one loads underneath, then fades it away.
+
+     The <picture> element does the choosing until this runs, so a
+     browser without JavaScript still gets the right crop — the sources
+     are read off it and then removed, and the choosing happens here. */
+
+  const pic = document.querySelector(".hero picture");
+  if (pic) {
+    const img = pic.querySelector("img");
+    const bands = Array.from(pic.querySelectorAll("source")).map((s) => ({
+      mq: window.matchMedia(s.media),
+      srcset: s.srcset,
+    }));
+    bands.push({ mq: null, srcset: img.getAttribute("srcset") });
+    pic.querySelectorAll("source").forEach((s) => s.remove());
+
+    const ghost = document.createElement("img");
+    ghost.className = "hero__ghost";
+    ghost.alt = "";
+    ghost.setAttribute("aria-hidden", "true");
+    pic.parentNode.insertBefore(ghost, pic.nextSibling);
+
+    const pick = () => bands.find((b) => !b.mq || b.mq.matches);
+    let band = pick();
+    /* the sources are gone, so the choosing has to happen here from the
+       first frame too — the file is already decoded, so this is a no-op
+       on screen */
+    img.srcset = band.srcset;
+
+    const swap = () => {
+      const next = pick();
+      if (next === band) return;
+
+      /* the outgoing frame is already decoded, so this covers the change
+         in the same paint rather than a frame later */
+      ghost.src = img.currentSrc;
+      ghost.classList.remove("is-going");
+      ghost.classList.add("is-holding");
+
+      band = next;
+      img.srcset = band.srcset;
+
+      const release = () => {
+        ghost.classList.remove("is-holding");
+        ghost.classList.add("is-going");
+      };
+      if (img.decode) img.decode().then(release, release);
+      else setTimeout(release, 120);
+    };
+
+    bands.forEach((b) => b.mq && b.mq.addEventListener("change", swap));
+  }
+
   /* ============================== DECKS ==============================
      The portfolio and storyboard pages show one sheet at a time. The
      controls only appear once this runs, so a browser without JavaScript
