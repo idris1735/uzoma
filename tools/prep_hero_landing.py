@@ -34,11 +34,14 @@ OUT = os.path.join(ROOT, "assets", "hero")
 
 GREY = (108, 108, 108)   # the sheet's field, and so the page behind it
 
-WIDE_MIN, WIDE_MAX = 1.60, 2.05      # window ratios the wide file must survive
+WIDE_MIN, WIDE_MAX = 1.15, 2.05      # window ratios the wide file must survive
+MID_MIN, MID_MAX = 0.62, 1.15        # and the upright tablet the mid file must
+MID_CUT = 3440                       # the grey gutter between Koi'Fay and Y'Fett
 TALL_MIN = 0.50                      # below this a phone trims the right edge instead
 TALL_CUT = 0.27                      # how much of the sheet the phone keeps
 
 WIDE_WIDTHS = (2560, 1600)
+MID_WIDTHS = (1280, 860)
 TALL_WIDTHS = (1080, 720)
 
 
@@ -79,6 +82,13 @@ def main():
     x, y = (w - sw) // 2, (h - sh) // 2
     print(f"wide  {w}x{h} ratio {w/h:.3f}  pad {x} x {y}")
     save(pad(sheet, w, h, x, y), "dora-wide", WIDE_WIDTHS)
+
+    mid = sheet.crop((0, 0, MID_CUT, sh))
+    w = round(sh * MID_MAX)
+    h = round(MID_CUT / MID_MIN)
+    x, y = (w - MID_CUT) // 2, (h - sh) // 2
+    print(f"mid   {w}x{h} ratio {w/h:.3f}  pad {x} x {y}  (keeps {MID_CUT} of {sw})")
+    save(pad(mid, w, h, x, y), "dora-mid", MID_WIDTHS)
 
     cut = round(sw * TALL_CUT)
     left = sheet.crop((0, 0, cut, sh))

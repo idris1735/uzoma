@@ -188,6 +188,8 @@ ul { list-style: none; }
 }
 
 .text p em { font-style: italic; }
+/* the client's write-up sets the two award citations in bold */
+.text p strong { font-weight: 700; }
 
 /* ---------------------------------------------------------- footer ---- */
 
@@ -221,6 +223,15 @@ ul { list-style: none; }
 
 .foot__clients { width: 100%; color: var(--dim); font-size: 0.8125rem; }
 
+@media (min-width: 1100px) {
+  .foot__clients {
+    margin-top: 1.25rem;
+    text-align: center;
+    font-size: clamp(0.9375rem, 1.15vw, 1.25rem);
+    line-height: 1.5;
+  }
+}
+
 /* ---------------------------------------------------------- landing -- */
 
 /* The landing is the sheet and nothing else: full bleed, no margin, no
@@ -252,10 +263,11 @@ body.is-hero {
   animation: hero-in 0.9s ease both;
 }
 
-/* upright — a phone narrower than the tall file, or a tablet stood up on
-   the wide one. Either way the frame is held left so the Eyes of Wakanda
-   logo stays in it and the trim comes off the far edge. */
-@media (max-aspect-ratio: 1/1) {
+/* A phone narrower than the tall file trims from the right, where the
+   next character's arm begins, so the frame is held left and the Eyes of
+   Wakanda logo stays in it. The mid and wide files are padded evenly and
+   centre themselves. */
+@media (max-aspect-ratio: 62/100) {
   .hero__img { object-position: 0% 50%; }
 }
 
@@ -439,33 +451,34 @@ body.is-hero {
   padding-block: clamp(2.5rem, 6vw, 4.5rem) 0;
 }
 
-.award {
+.art {
   padding: clamp(2rem, 5vw, 3.5rem) var(--gutter) 0;
 }
 
-.award img {
+.art img {
   width: auto;
   height: auto;
   max-width: min(78vw, 26rem);
   max-height: 62vh;
 }
 
-/* wide enough for both columns to keep a readable measure */
+/* wide enough for three columns and a readable measure between them:
+   the Emmy card, the writing, the award in his hand */
 @media (min-width: 1100px) {
   .pair {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: clamp(2.5rem, 4.5vw, 5rem);
+    gap: clamp(1.75rem, 3.5vw, 4rem);
     padding: clamp(2.5rem, 5vw, 4rem) var(--gutter) 0;
   }
 
-  .pair .award { flex: 0 1 24rem; padding: 0; }
+  .pair .art { flex: 0 1 22rem; padding: 0; }
 
-  .pair .award img { max-width: 100%; max-height: 70vh; }
+  .pair .art img { max-width: 100%; max-height: 68vh; }
 
   .pair .text {
-    flex: 0 1 40rem;
+    flex: 0 1 34rem;
     margin: 0;
     padding: 0;
   }

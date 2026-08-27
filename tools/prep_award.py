@@ -1,9 +1,12 @@
 """
-The CAA award photograph for the about page.
+The two pictures on the about page.
 
-The source is the raw cut-out: a hand and trophy lifted off a violet
-background with a loose lasso, so a violet blob still surrounds the
-subject and the outline itself is contaminated where the two blended.
+The Emmy card is a flat 1080 square and needs nothing but resizing.
+
+The award photograph is the awkward one. Its source is a raw cut-out: a
+hand and trophy lifted off a violet background with a loose lasso, so a
+violet blob still surrounds the subject and the outline itself is
+contaminated where the two blended.
 
 Keying the violet is only half of it — the ring of half-violet pixels
 along the edge is what shows up as a purple halo on a white page. So the
@@ -19,8 +22,10 @@ from PIL import Image, ImageFilter
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "CAA_Award.png")
+EMMY = os.path.join(ROOT, "EOW_1080x1080-SOCIAL-EMMY-KAGLASS-EMW+COS.jpg")
 OUT = os.path.join(ROOT, "assets", "misc")
 WIDTHS = (1180, 780)
+EMMY_WIDTHS = (1080, 720)
 
 
 def mask(im):
@@ -34,7 +39,20 @@ def mask(im):
     return m.filter(ImageFilter.GaussianBlur(1.2))
 
 
+def save(im, stem, widths):
+    for w in widths:
+        h = round(w * im.height / im.width)
+        out = os.path.join(OUT, f"{stem}-{w}.jpg")
+        im.resize((w, h), Image.LANCZOS).save(
+            out, "JPEG", quality=86, optimize=True, progressive=True)
+        print(f"  {os.path.basename(out):22} {w}x{h}  {os.path.getsize(out)//1024} KB")
+
+
 def main():
+    emmy = Image.open(EMMY).convert("RGB")
+    print(f"emmy card {emmy.size}")
+    save(emmy, "eow-emmy", EMMY_WIDTHS)
+
     im = Image.open(SRC).convert("RGBA")
     m = mask(im)
     box = m.point(lambda v: 255 if v > 8 else 0).getbbox()
@@ -43,13 +61,7 @@ def main():
 
     flat = Image.new("RGB", im.size, (255, 255, 255))
     flat.paste(im.convert("RGB"), mask=m)
-
-    for w in WIDTHS:
-        h = round(w * flat.height / flat.width)
-        out = os.path.join(OUT, f"caa-award-{w}.jpg")
-        flat.resize((w, h), Image.LANCZOS).save(
-            out, "JPEG", quality=86, optimize=True, progressive=True)
-        print(f"  {os.path.basename(out):22} {w}x{h}  {os.path.getsize(out)//1024} KB")
+    save(flat, "caa-award", WIDTHS)
 
 
 main()
