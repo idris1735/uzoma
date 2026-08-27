@@ -309,10 +309,24 @@ body.is-hero {
   line-height: 1.02;
   letter-spacing: -0.025em;
   color: #fff;
-  opacity: 0.65;
+  opacity: 0.5;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4), 0 4px 40px rgba(0, 0, 0, 0.5);
-  animation: line-in 1.4s ease 0.35s both;
+  /* backwards, not both: a filled animation beats a :hover rule in the
+     cascade, so forwards-filling this would pin the opacity at rest and
+     the hover would never take */
+  animation: line-in 1.4s ease 0.35s backwards;
   transition: opacity 0.25s ease, text-shadow 0.25s ease;
+}
+
+/* An upright crop is one character head to foot: her name is at the top,
+   the artist's note at the bottom, and the clear ground is the middle. So
+   the line centres there rather than riding high the way it does across a
+   landscape sheet. */
+@media (max-aspect-ratio: 1/1) {
+  .titlecard {
+    align-content: center;
+    padding-block: 5.5rem;
+  }
 }
 
 /* the award line stays whole; the rest wraps under it */
@@ -325,7 +339,7 @@ body.is-hero {
                0 0 34px rgba(255, 255, 255, 0.45);
 }
 
-@keyframes line-in { from { opacity: 0; } to { opacity: 0.65; } }
+@keyframes line-in { from { opacity: 0; } to { opacity: 0.5; } }
 
 /* ---- the header stands on the artwork, in white ---- */
 
