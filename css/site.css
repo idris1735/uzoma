@@ -330,13 +330,13 @@ body.is-hero {
      caps it so the award line always fits across in one piece — it is
      that line's own width in ems. */
   /* Held to the clear band across the bodies — the sheet's own ink runs
-     heads from 0.14, bodies from 0.392, notes from 0.646, so the band is
-     0.392 to 0.608 and its middle is the sheet's middle, which is where
-     `cover` puts the window's middle. Three lines at 0.94 leading fill
-     that 0.216 at --fit. Below 1.97 the sheet's height fills the window
+     bodies from 0.384, figures end at 0.603, notes start at 0.645. So
+     the band is 0.384 to 0.603 and its middle is the sheet's middle,
+     which is where `cover` puts the window's middle. Three lines at 0.94
+     leading fill that 0.219 at --fit. Below 1.97 the height fills
      and the band is a share of that; above it the width leads instead.
      The two are equal at 1.97, so nothing shifts across it. */
-  --fit: 7.67vh;
+  --fit: 7.77vh;
   font-size: clamp(1.25rem, min(var(--fit), (100vw - 2 * var(--gutter)) / 14.3), 5.5rem);
   line-height: 0.94;
   letter-spacing: -0.025em;
@@ -351,7 +351,7 @@ body.is-hero {
 }
 
 @media (min-aspect-ratio: 59/30) {
-  .titlecard__line { --fit: 3.9vw; }
+  .titlecard__line { --fit: 3.95vw; }
 }
 
 /* the award line stays whole; the rest wraps under it */
@@ -499,11 +499,27 @@ body.is-hero {
 
   .pair { padding-top: clamp(0.75rem, 2vh, 2rem); }
 
-  /* The pictures give the writing the width, because a wider measure is
-     fewer lines and that is most of what keeps the page on one screen.
-     Tied to the window's height as well as its own: a short window needs
-     the writing wider still. */
-  .pair .art { max-width: min(19rem, 33vh); }
+  /* The Emmy card is square and the award is upright, so sizing them by
+     width left the square one short. They are sized by height instead —
+     one height for both, each width following its own shape — which is
+     what makes them level. The writing takes the width that leaves, and
+     a wider measure is fewer lines, which is most of what keeps the page
+     on one screen. */
+  .pair { --art-h: clamp(12rem, 43vh, 26rem); }
+
+  .pair .art {
+    flex: 0 0 auto;
+    max-width: none;
+    display: grid;
+    place-items: center;
+  }
+
+  .pair .art img {
+    height: var(--art-h);
+    width: auto;
+    max-width: 100%;
+    max-height: none;
+  }
 
   .pair .text {
     font-size: clamp(0.8125rem, 0.5vw + 0.42rem, 0.9375rem);

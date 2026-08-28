@@ -14,9 +14,10 @@ narrower than that, so on most windows the height fills and the trim
 comes off the width. It is anchored left, which is the direction it
 should give way in: a wide window holds the whole line-up, a narrow one
 closes in on Shakoo and the Eyes of Wakanda logo beside her. What goes
-first, on anything narrower than 1.97, is the ©MARVEL mark at the far
-right — the whole sheet including that mark is on the Eyes of Wakanda
-page, uncropped.
+first, on anything narrower than 1.97, is the right edge — and this cut
+of the sheet has the ©MARVEL mark brought in to 0.91 of the width for
+that reason, so it survives down to 1.79, which is under every ordinary
+browser window. The whole sheet is on the Eyes of Wakanda page anyway.
 """
 
 import os
@@ -24,8 +25,11 @@ import os
 from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# the client's homepage cut of the sheet: same artwork, but the logo is
+# larger and the ©MARVEL mark has been brought in from the right edge to
+# 0.91 of the width, so an ordinary window's crop no longer takes it
 SRC = os.path.join(ROOT, "Uzoma Website Images", "Uzoma Website", "Eyes of Wakanda",
-                   "StyleExploration_Dora_Concept_080321_UDunkwu _v001.png")
+                   "UzomaDunkwu_Homepage.png")
 OUT = os.path.join(ROOT, "assets", "hero")
 
 WIDTHS = (2560, 1600, 1100)
