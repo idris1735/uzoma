@@ -1,4 +1,4 @@
 {
-  "buildCommand": "python3 tools/build_site.py",
+  "buildCommand": "pip3 install --break-system-packages --quiet -r requirements.txt && python3 tools/build_site.py",
   "outputDirectory": "."
 }
