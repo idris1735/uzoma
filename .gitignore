@@ -7,3 +7,6 @@ __pycache__/
 *.pyc
 tmp_*.jpg
 _probe_a.jpg
+
+# --- CMS backend deps (installed by Vercel's own build step) ---
+node_modules/

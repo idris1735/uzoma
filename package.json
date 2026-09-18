@@ -1,0 +1,8 @@
+{
+  "name": "uzomadunkwu-com",
+  "private": true,
+  "description": "uzomadunkwu.com — static site with a small CMS API (api/) that lets the client edit content without touching code.",
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}

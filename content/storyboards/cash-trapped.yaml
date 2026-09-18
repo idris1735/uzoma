@@ -1,0 +1,21 @@
+title: Cash Trapped
+desc: Cash Trapped — storyboards and animatics by Uzoma Dunkwu.
+views:
+  - kind: board
+    label: Part 1 storyboard
+    ref: cash-trapped-1
+    count: 575
+    alt: Cash Trapped, part 1 storyboard
+  - kind: film
+    label: Part 1 animatic
+    ref: VWYWppKey5c
+    alt: Cash-trapped animatic, part 1
+  - kind: board
+    label: Part 2 storyboard
+    ref: cash-trapped-2
+    count: 631
+    alt: Cash Trapped, part 2 storyboard
+  - kind: film
+    label: Part 2 animatic
+    ref: wxuEH9HT5Pc
+    alt: Cash-trapped animatic, part 2

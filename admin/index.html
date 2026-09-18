@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Site admin — Uzoma Dunkwu</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root {
+    --ink: #111; --dim: #767676; --rule: #e2e2e2; --paper: #fff;
+    --accent: #111; --danger: #b3261e; --ok: #1c7a3d;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; background: #f6f6f4; color: var(--ink);
+    font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  a { color: inherit; }
+  button { font: inherit; cursor: pointer; }
+  input, textarea {
+    font: inherit; width: 100%; padding: 0.5rem 0.6rem;
+    border: 1px solid var(--rule); border-radius: 4px; background: #fff;
+  }
+  input:focus, textarea:focus { outline: 2px solid var(--ink); outline-offset: -1px; }
+  label { display: block; font-size: 0.8125rem; color: var(--dim); margin-bottom: 0.25rem; }
+  .field { margin-bottom: 1rem; }
+  .hint { font-size: 0.75rem; color: var(--dim); margin-top: 0.25rem; }
+
+  /* ---- login ---- */
+  #login { max-width: 22rem; margin: 15vh auto; padding: 0 1.5rem; }
+  #login h1 { font-size: 1.25rem; margin: 0 0 1.5rem; }
+  #login button { width: 100%; padding: 0.65rem; background: var(--ink); color: #fff; border: 0; border-radius: 4px; margin-top: 0.5rem; }
+  #login-error { color: var(--danger); font-size: 0.875rem; margin-top: 0.75rem; min-height: 1.2em; }
+
+  /* ---- app shell ---- */
+  #app { display: none; }
+  #app.on { display: flex; min-height: 100vh; }
+  nav#sidebar {
+    width: 15rem; flex: none; background: #fff; border-right: 1px solid var(--rule);
+    padding: 1.25rem 0; position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  }
+  nav#sidebar h1 { font-size: 0.9375rem; margin: 0 1.25rem 1rem; }
+  nav#sidebar button.nav-item {
+    display: block; width: 100%; text-align: left; background: none; border: 0;
+    padding: 0.6rem 1.25rem; color: var(--dim); border-left: 3px solid transparent;
+  }
+  nav#sidebar button.nav-item:hover { background: #f6f6f4; }
+  nav#sidebar button.nav-item.active { color: var(--ink); border-left-color: var(--ink); background: #f6f6f4; font-weight: 600; }
+  #logout { margin: 1rem 1.25rem 0; font-size: 0.8125rem; color: var(--dim); background: none; border: 0; padding: 0; text-decoration: underline; }
+  main#panel { flex: 1; padding: 2rem 2.5rem 6rem; max-width: 44rem; }
+  main#panel h2 { font-size: 1.375rem; margin: 0 0 1.5rem; }
+
+  fieldset { border: 1px solid var(--rule); border-radius: 6px; padding: 1rem; margin: 0 0 1rem; }
+  legend { padding: 0 0.4rem; font-size: 0.8125rem; color: var(--dim); }
+  .locked { color: var(--dim); }
+  .locked input { background: #f2f2f0; color: var(--dim); }
+  .row { display: flex; gap: 0.5rem; align-items: flex-start; }
+  .row > .field { flex: 1; }
+  .item-actions { display: flex; gap: 0.35rem; flex: none; padding-top: 1.6rem; }
+  .item-actions button {
+    width: 1.75rem; height: 1.75rem; border: 1px solid var(--rule); background: #fff;
+    border-radius: 4px; color: var(--dim);
+  }
+  .item-actions button:hover { color: var(--ink); }
+  .add-btn {
+    padding: 0.5rem 0.9rem; border: 1px dashed var(--rule); background: none;
+    border-radius: 4px; color: var(--dim); font-size: 0.875rem;
+  }
+  .add-btn:hover { color: var(--ink); border-color: var(--ink); }
+  .save-bar {
+    position: sticky; bottom: 0; margin-top: 2rem; padding: 1rem 0; background: #f6f6f4;
+    display: flex; align-items: center; gap: 1rem; border-top: 1px solid var(--rule);
+  }
+  .save-bar button { padding: 0.6rem 1.4rem; background: var(--ink); color: #fff; border: 0; border-radius: 4px; }
+  .save-bar button:disabled { opacity: 0.5; cursor: default; }
+  #status { font-size: 0.875rem; }
+  #status.err { color: var(--danger); }
+  #status.ok { color: var(--ok); }
+  .thumb { max-width: 8rem; max-height: 6rem; display: block; margin: 0.4rem 0; border: 1px solid var(--rule); border-radius: 4px; }
+  .upload-row { display: flex; align-items: center; gap: 0.75rem; }
+</style>
+</head>
+<body>
+
+<div id="login">
+  <h1>Site admin</h1>
+  <div class="field"><label for="u">Username</label><input id="u" autocomplete="username"></div>
+  <div class="field"><label for="p">Password</label><input id="p" type="password" autocomplete="current-password"></div>
+  <button id="login-btn">Log in</button>
+  <p id="login-error"></p>
+</div>
+
+<div id="app">
+  <nav id="sidebar">
+    <h1>Uzoma Dunkwu</h1>
+    <div id="nav-items"></div>
+    <button id="logout">Log out</button>
+  </nav>
+  <main id="panel"></main>
+</div>
+
+<script>
+(() => {
+  let schema = null;
+  let currentType = null;
+  let currentData = null;
+  let currentSha = null;
+
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const el = (tag, attrs = {}, children = []) => {
+    const node = document.createElement(tag);
+    Object.entries(attrs).forEach(([k, v]) => {
+      if (k === "text") node.textContent = v;
+      // a <textarea> has no `value` attribute — its content is a child
+      // text node — so this must be a property set to work on both
+      else if (k === "value") node.value = v;
+      else if (k.startsWith("on")) node.addEventListener(k.slice(2), v);
+      else node.setAttribute(k, v);
+    });
+    children.forEach((c) => node.appendChild(c));
+    return node;
+  };
+
+  async function api(path, options) {
+    const res = await fetch(path, {
+      ...options,
+      headers: { "Content-Type": "application/json", ...(options && options.headers) },
+    });
+    const body = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(body.error || `${res.status} ${res.statusText}`);
+    return body;
+  }
+
+  // ------------------------------------------------------------- login --
+
+  $("#login-btn").addEventListener("click", async () => {
+    $("#login-error").textContent = "";
+    try {
+      await api("/api/cms-login", {
+        method: "POST",
+        body: JSON.stringify({ username: $("#u").value, password: $("#p").value }),
+      });
+      boot();
+    } catch (err) {
+      $("#login-error").textContent = err.message;
+    }
+  });
+
+  $("#logout").addEventListener("click", async () => {
+    await api("/api/cms-logout", { method: "POST" }).catch(() => {});
+    location.reload();
+  });
+
+  async function boot() {
+    try {
+      schema = await api("/api/cms-schema");
+    } catch {
+      return; // not logged in yet — stay on the login screen
+    }
+    $("#login").style.display = "none";
+    $("#app").classList.add("on");
+    const nav = $("#nav-items");
+    nav.innerHTML = "";
+    Object.entries(schema).forEach(([key, def]) => {
+      nav.appendChild(el("button", {
+        class: "nav-item", text: def.label, onclick: () => selectType(key),
+      }));
+    });
+    const first = Object.keys(schema)[0];
+    if (first) selectType(first);
+  }
+
+  async function selectType(key) {
+    currentType = key;
+    document.querySelectorAll(".nav-item").forEach((b) => {
+      b.classList.toggle("active", b.textContent === schema[key].label);
+    });
+    const panel = $("#panel");
+    panel.innerHTML = "<p>Loading…</p>";
+    const { data, sha } = await api(`/api/cms-content?type=${encodeURIComponent(key)}`);
+    currentData = data;
+    currentSha = sha;
+    renderForm();
+  }
+
+  // -------------------------------------------------------------- form --
+
+  function renderForm() {
+    const def = schema[currentType];
+    const panel = $("#panel");
+    panel.innerHTML = "";
+    panel.appendChild(el("h2", { text: def.label }));
+
+    def.fields.forEach((field) => {
+      panel.appendChild(renderField(field, currentData));
+    });
+
+    (def.images || []).forEach((img) => {
+      panel.appendChild(renderImageUpload(img));
+    });
+
+    const bar = el("div", { class: "save-bar" });
+    const saveBtn = el("button", { text: "Save" });
+    const status = el("span", { id: "status" });
+    saveBtn.addEventListener("click", async () => {
+      saveBtn.disabled = true;
+      status.className = "";
+      status.textContent = "Saving…";
+      try {
+        const result = await api("/api/cms-save", {
+          method: "POST",
+          body: JSON.stringify({ type: currentType, data: currentData, sha: currentSha }),
+        });
+        currentSha = result.sha;
+        status.className = "ok";
+        status.textContent = "Saved. Live in a minute or two once it redeploys.";
+      } catch (err) {
+        status.className = "err";
+        status.textContent = err.message;
+      }
+      saveBtn.disabled = false;
+    });
+    bar.appendChild(saveBtn);
+    bar.appendChild(status);
+    panel.appendChild(bar);
+  }
+
+  function renderField(field, data) {
+    const value = data[field.key];
+    if (field.type === "text" || field.type === "date" || field.type === "markdown-lite") {
+      const wrap = el("div", { class: "field" });
+      wrap.appendChild(el("label", { text: field.label }));
+      const input = el("input", { value: value || "", type: field.type === "date" ? "date" : "text" });
+      input.addEventListener("input", () => { data[field.key] = input.value; });
+      wrap.appendChild(input);
+      if (field.type === "markdown-lite") {
+        wrap.appendChild(el("p", { class: "hint", text: "**bold**, *italic*, ***bold italic*** are supported." }));
+      }
+      return wrap;
+    }
+
+    if (field.type === "list-text" || field.type === "list-markdown") {
+      const list = Array.isArray(value) ? value.slice() : [];
+      data[field.key] = list;
+      const fs = el("fieldset");
+      fs.appendChild(el("legend", { text: field.label }));
+      const itemsBox = el("div");
+      const redraw = () => {
+        itemsBox.innerHTML = "";
+        list.forEach((v, i) => itemsBox.appendChild(renderStringRow(list, i, redraw, field.type === "list-markdown")));
+      };
+      redraw();
+      fs.appendChild(itemsBox);
+      if (field.addable) {
+        fs.appendChild(el("button", {
+          class: "add-btn", text: `+ Add ${field.label.toLowerCase().replace(/s$/, "")}`,
+          onclick: () => { list.push(""); redraw(); },
+        }));
+      }
+      return fs;
+    }
+
+    if (field.type === "list-group") {
+      const list = Array.isArray(value) ? value : [];
+      data[field.key] = list;
+      const fs = el("fieldset");
+      fs.appendChild(el("legend", { text: field.label }));
+      const itemsBox = el("div");
+      const redraw = () => {
+        itemsBox.innerHTML = "";
+        list.forEach((item, i) => itemsBox.appendChild(renderGroupItem(field, list, i, redraw)));
+      };
+      redraw();
+      fs.appendChild(itemsBox);
+      if (field.addable) {
+        fs.appendChild(el("button", {
+          class: "add-btn", text: "+ Add",
+          onclick: () => {
+            const blank = {};
+            field.itemFields.forEach((f) => { blank[f.key] = ""; });
+            list.push(blank);
+            redraw();
+          },
+        }));
+      }
+      return fs;
+    }
+
+    return el("div");
+  }
+
+  function renderStringRow(list, i, redraw, multiline) {
+    const row = el("div", { class: "row field" });
+    const input = el(multiline ? "textarea" : "input", { value: list[i] });
+    if (multiline) input.rows = 2;
+    input.addEventListener("input", () => { list[i] = input.value; });
+    row.appendChild(el("div", { class: "field" }, [input]));
+    row.appendChild(moveDeleteButtons(list, i, redraw));
+    return row;
+  }
+
+  function renderGroupItem(field, list, i, redraw) {
+    const fs = el("fieldset");
+    fs.appendChild(el("legend", { text: `#${i + 1}` }));
+    const row = el("div", { class: "row" });
+    const fieldsBox = el("div", { style: "flex:1" });
+    field.itemFields.forEach((f) => {
+      const wrap = el("div", { class: `field${f.locked ? " locked" : ""}` });
+      wrap.appendChild(el("label", { text: f.label + (f.locked ? " (fixed)" : "") }));
+      const input = el("input", { value: list[i][f.key] ?? "" });
+      if (f.locked) input.disabled = true;
+      else input.addEventListener("input", () => { list[i][f.key] = input.value; });
+      wrap.appendChild(input);
+      fieldsBox.appendChild(wrap);
+    });
+    if (field.imageField) {
+      fieldsBox.appendChild(renderSlideImagePicker(list[i], field.imageField));
+    }
+    row.appendChild(fieldsBox);
+    if (field.addable) row.appendChild(moveDeleteButtons(list, i, redraw));
+    fs.appendChild(row);
+    return fs;
+  }
+
+  function moveDeleteButtons(list, i, redraw) {
+    const box = el("div", { class: "item-actions" });
+    box.appendChild(el("button", {
+      title: "Move up", text: "↑", onclick: () => {
+        if (i === 0) return;
+        [list[i - 1], list[i]] = [list[i], list[i - 1]];
+        redraw();
+      },
+    }));
+    box.appendChild(el("button", {
+      title: "Move down", text: "↓", onclick: () => {
+        if (i === list.length - 1) return;
+        [list[i + 1], list[i]] = [list[i], list[i + 1]];
+        redraw();
+      },
+    }));
+    box.appendChild(el("button", {
+      title: "Remove", text: "✕", onclick: () => { list.splice(i, 1); redraw(); },
+    }));
+    return box;
+  }
+
+  function readAsDataUrl(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function renderSlideImagePicker(item, imageKey) {
+    const wrap = el("div", { class: "field" });
+    wrap.appendChild(el("label", { text: "Replace image" }));
+    if (item[imageKey]) wrap.appendChild(el("img", { class: "thumb", src: `../${item[imageKey]}` }));
+    const input = el("input", { type: "file", accept: "image/*" });
+    input.addEventListener("change", async () => {
+      const file = input.files[0];
+      if (!file) return;
+      const dataUrl = await readAsDataUrl(file);
+      const { path } = await api("/api/cms-upload", {
+        method: "POST",
+        body: JSON.stringify({ type: currentType, slideUpload: true, filename: file.name, dataUrl }),
+      });
+      item[imageKey] = path;
+      renderForm();
+    });
+    wrap.appendChild(input);
+    return wrap;
+  }
+
+  function renderImageUpload(imgSpec) {
+    const fs = el("fieldset");
+    fs.appendChild(el("legend", { text: imgSpec.label }));
+    const row = el("div", { class: "upload-row" });
+    const input = el("input", { type: "file", accept: "image/*" });
+    const note = el("span", { class: "hint", text: "" });
+    input.addEventListener("change", async () => {
+      const file = input.files[0];
+      if (!file) return;
+      note.textContent = "Uploading…";
+      try {
+        const dataUrl = await readAsDataUrl(file);
+        await api("/api/cms-upload", {
+          method: "POST",
+          body: JSON.stringify({ type: currentType, imageKey: imgSpec.key, filename: file.name, dataUrl }),
+        });
+        note.textContent = "Uploaded — takes effect on the next deploy.";
+      } catch (err) {
+        note.textContent = err.message;
+      }
+    });
+    row.appendChild(input);
+    row.appendChild(note);
+    fs.appendChild(row);
+    return fs;
+  }
+
+  boot();
+})();
+</script>
+</body>
+</html>

@@ -899,6 +899,52 @@ body.is-deck > main {
 .reach__social .social--youtube:hover { color: #ff0000; }
 .reach__social .social--x:hover { color: #111; }
 
+/* ---------------------------------------------------------- press ----- */
+
+/* A plain sourced list — outlet, headline, date — each row linking out to
+   the piece itself. No thumbnails: none were supplied, and a stock icon
+   per outlet would be inventing detail the client didn't give us. */
+
+.press {
+  display: grid;
+  width: 100%;
+  max-width: 40rem;
+  padding: clamp(2rem, 5vw, 3.5rem) var(--gutter) 0;
+  list-style: none;
+}
+
+.press__item {
+  display: grid;
+  gap: 0.4rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--rule);
+  text-align: left;
+}
+
+.press__item:last-child { border-bottom: 1px solid var(--rule); }
+
+.press__outlet {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.press__headline {
+  font-size: clamp(1rem, 1.6vw, 1.125rem);
+  line-height: 1.4;
+}
+
+.press__headline:hover,
+.press__headline:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.press__meta { font-size: 0.8125rem; color: var(--dim); }
+
 /* ---------------------------------------------------------- burger --- */
 
 .nav-toggle { position: absolute; opacity: 0; pointer-events: none; }
